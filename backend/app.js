@@ -1,7 +1,11 @@
 import express from 'express';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: './config.env' });
+import {
+  createEmployee,
+  deleteEmployee,
+  editEmployee,
+  getAllEmployees,
+  getEmployee,
+} from './controller/employeeController.js';
 
 const app = express();
 
@@ -12,11 +16,11 @@ app.get('/', (req, res) => {
   return res.status(200).send({ message: 'WELCOME TO EL AMAGROS EL' });
 });
 
-app.get('/employees', (req, res) => {
-  console.log(req);
-});
+app.get('/employees', getAllEmployees);
+app.post('/employees', createEmployee);
 
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
+app.get('/employees/:id', getEmployee);
+app.patch('/employees/:id', editEmployee);
+app.delete('/employees/:id', deleteEmployee);
+
+export default app;
