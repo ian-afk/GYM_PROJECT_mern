@@ -1,6 +1,7 @@
 import express from 'express';
 import employeeRouter from './routes/employeeRoutes.js';
 import trainerRouter from './routes/trainerRoutes.js';
+import gymbranchRouter from './routes/gymbranchRoute.js';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: './config.env' });
@@ -16,5 +17,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/employees', employeeRouter);
 app.use('/api/trainers', trainerRouter);
+app.use('/api/gymbranches', gymbranchRouter);
 
 export default app;
