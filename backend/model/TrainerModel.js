@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const trainerSchema = new mongoose.Schema(
   {
-    emp_id: {},
     experties: {
       type: String,
       required: [true, 'Trainer experties is required '],
@@ -14,6 +13,8 @@ const trainerSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// trainerSchema.pre('save')
 
 const Trainer = mongoose.model('Trainer', trainerSchema);
 
