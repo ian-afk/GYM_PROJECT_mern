@@ -1,4 +1,4 @@
-import Trainer from '../model/TrainerModel.js';
+import Trainer from '../models/TrainerModel.js';
 
 export const createTrainer = async (req, res) => {
   try {

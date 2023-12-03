@@ -1,4 +1,4 @@
-import GymBranches from '../model/GymbranchModel.js';
+import GymBranches from '../models/GymbranchModel.js';
 
 export const createGym = async (req, res) => {
   try {
