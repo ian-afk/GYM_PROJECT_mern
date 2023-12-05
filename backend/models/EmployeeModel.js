@@ -55,5 +55,12 @@ const employeeSchema = new mongoose.Schema(
   }
 );
 
+// QUERY MIDDLEWARE
+
+employeeSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
 const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee;
