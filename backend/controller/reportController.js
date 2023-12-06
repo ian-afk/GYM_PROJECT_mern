@@ -1,91 +1,52 @@
 import Report from '../models/ReportModel.js';
+import catchAsync from '../utils/catchAsync.js';
 
-export const createReport = async (req, res) => {
-  try {
-    const newReport = await Report.create(req.body);
+export const createReport = catchAsync(async (req, res, next) => {
+  const newReport = await Report.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      message: 'Report created successfully',
-      report: newReport,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({
-      status: 'error',
-      message: error,
-    });
-  }
-};
+  res.status(201).json({
+    status: 'success',
+    message: 'Report created successfully',
+    report: newReport,
+  });
+});
 
-export const getAllReports = async (req, res) => {
-  try {
-    const reports = await Report.find();
+export const getAllReports = catchAsync(async (req, res, next) => {
+  const reports = await Report.find();
 
-    res.status(200).json({
-      status: 'success',
-      totalResult: reports.length,
-      reports,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({
-      status: 'error',
-      message: error,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    totalResult: reports.length,
+    reports,
+  });
+});
 
-export const getReport = async (req, res) => {
-  try {
-    const report = await Report.findById(req.params.id);
+export const getReport = catchAsync(async (req, res, next) => {
+  const report = await Report.findById(req.params.id);
 
-    res.status(200).json({
-      status: 'success',
-      report,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({
-      status: 'error',
-      message: error,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    report,
+  });
+});
 
-export const editReport = async (req, res) => {
-  try {
-    const report = await Report.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    res.status(200).json({
-      status: 'success',
-      message: 'Report updated successfully',
-      report,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({
-      status: 'error',
-      message: error,
-    });
-  }
-};
+export const editReport = catchAsync(async (req, res, next) => {
+  const report = await Report.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    status: 'success',
+    message: 'Report updated successfully',
+    report,
+  });
+});
 
-export const deleteReport = async (req, res) => {
-  try {
-    await Report.findByIdAndDelete(req.params.id);
+export const deleteReport = catchAsync(async (req, res, next) => {
+  await Report.findByIdAndDelete(req.params.id);
 
-    res.status(200).json({
-      status: 'success',
-      message: 'Report updated successfully',
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(404).json({
-      status: 'error',
-      message: error,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    message: 'Report updated successfully',
+  });
+});
