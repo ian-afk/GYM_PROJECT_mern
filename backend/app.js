@@ -7,6 +7,8 @@ import membershipRouter from './routes/membershipRoutes.js';
 import paymentRouter from './routes/paymentRoutes.js';
 import clientRouter from './routes/clientRoutes.js';
 import reportRouter from './routes/reportRoutes.js';
+import AppError from './utils/appError.js';
+import globalErrorHandler from './controller/errorController.js';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 
@@ -31,10 +33,9 @@ app.use('/api/clients', clientRouter);
 app.use('/api/reports', reportRouter);
 
 app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find ${req.originalUrl} on this server`,
-  });
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
+// MIDDLEWARE that catch all error
+app.use(globalErrorHandler);
 export default app;
