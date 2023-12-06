@@ -24,6 +24,9 @@ export const getAllMembership = catchAsync(async (req, res, next) => {
 export const getMembership = catchAsync(async (req, res, next) => {
   const membership = await Membership.findById(req.params.id);
 
+  if (!membership) {
+    return next(new AppError('No membership found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     membership,
@@ -40,6 +43,9 @@ export const editMembership = catchAsync(async (req, res, next) => {
     }
   );
 
+  if (!membership) {
+    return next(new AppError('No membership found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     message: 'Membership updated successfully',
@@ -48,7 +54,11 @@ export const editMembership = catchAsync(async (req, res, next) => {
 });
 
 export const deleteMembership = catchAsync(async (req, res, next) => {
-  await Membership.findByIdAndDelete(req.params.id);
+  const membership = await Membership.findByIdAndDelete(req.params.id);
+
+  if (!membership) {
+    return next(new AppError('No membership found with that ID ', 404));
+  }
 
   res.status(200).json({
     status: 'success',

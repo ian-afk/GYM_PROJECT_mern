@@ -1,4 +1,5 @@
 import Client from '../models/ClientModel.js';
+import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const createClient = catchAsync(async (req, res, next) => {
@@ -23,6 +24,10 @@ export const getAllClient = catchAsync(async (req, res, next) => {
 
 export const getClient = catchAsync(async (req, res, next) => {
   const client = await Client.findById(req.params.id);
+
+  if (!client) {
+    return next(new AppError('No client found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     client,
@@ -35,6 +40,9 @@ export const editClient = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
+  if (!client) {
+    return next(new AppError('No client found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     message: 'Client updated successfully',
@@ -43,8 +51,11 @@ export const editClient = catchAsync(async (req, res, next) => {
 });
 
 export const deleteClient = catchAsync(async (req, res, next) => {
-  await Client.findByIdAndDelete(req.params.id);
+  const client = await Client.findByIdAndDelete(req.params.id);
 
+  if (!client) {
+    return next(new AppError('No client found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     message: 'Client deleted successfully',

@@ -24,6 +24,10 @@ export const getAllReports = catchAsync(async (req, res, next) => {
 export const getReport = catchAsync(async (req, res, next) => {
   const report = await Report.findById(req.params.id);
 
+  if (!report) {
+    return next(new AppError('No report found with that ID ', 404));
+  }
+
   res.status(200).json({
     status: 'success',
     report,
@@ -35,6 +39,11 @@ export const editReport = catchAsync(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
+
+  if (!report) {
+    return next(new AppError('No report found with that ID ', 404));
+  }
+
   res.status(200).json({
     status: 'success',
     message: 'Report updated successfully',
@@ -43,7 +52,11 @@ export const editReport = catchAsync(async (req, res, next) => {
 });
 
 export const deleteReport = catchAsync(async (req, res, next) => {
-  await Report.findByIdAndDelete(req.params.id);
+  const report = await Report.findByIdAndDelete(req.params.id);
+
+  if (!report) {
+    return next(new AppError('No report found with that ID ', 404));
+  }
 
   res.status(200).json({
     status: 'success',

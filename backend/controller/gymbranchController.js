@@ -1,4 +1,5 @@
 import GymBranches from '../models/GymbranchModel.js';
+import AppError from '../utils/appError.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const createGym = catchAsync(async (req, res, next) => {
@@ -25,6 +26,9 @@ export const getAllGymBranches = catchAsync(async (req, res, next) => {
 export const getGymBranch = catchAsync(async (req, res, next) => {
   const gymbranch = await GymBranches.findById(req.params.id);
 
+  if (!gymbranch) {
+    return next(new AppError('No gymbranch found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     gymbranch,
@@ -41,6 +45,9 @@ export const editGymBranch = catchAsync(async (req, res, next) => {
     }
   );
 
+  if (!gymbranch) {
+    return next(new AppError('No gymbranch found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     message: 'Gym branch successfully updated',
@@ -49,8 +56,11 @@ export const editGymBranch = catchAsync(async (req, res, next) => {
 });
 
 export const deleteGymBranch = catchAsync(async (req, res, next) => {
-  await GymBranches.findByIdAndDelete(req.params.id);
+  const gymbranch = await GymBranches.findByIdAndDelete(req.params.id);
 
+  if (!gymbranch) {
+    return next(new AppError('No gymbranch found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     message: 'Gymbranch deleted successfully',

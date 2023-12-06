@@ -24,6 +24,9 @@ export const getAllPayments = catchAsync(async (req, res, next) => {
 export const getPayment = catchAsync(async (req, res, next) => {
   const payment = await Payments.findById(req.params.id);
 
+  if (!payment) {
+    return next(new AppError('No payment found with that ID ', 404));
+  }
   res.status(200).json({
     status: 'success',
     payment,
@@ -36,6 +39,10 @@ export const editPayment = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
+  if (!payment) {
+    return next(new AppError('No payment found with that ID ', 404));
+  }
+
   res.status(200).json({
     status: 'success',
     message: 'Payment updated successfully',
@@ -44,7 +51,12 @@ export const editPayment = catchAsync(async (req, res, next) => {
 });
 
 export const deletePayment = catchAsync(async (req, res, next) => {
-  await Payments.findByIdAndDelete(req.params.id);
+  const payment = await Payments.findByIdAndDelete(req.params.id);
+
+  if (!payment) {
+    return next(new AppError('No payment found with that ID ', 404));
+  }
+
   res.status(201).json({
     status: 'success',
     message: 'Payment deleted Successfully',
