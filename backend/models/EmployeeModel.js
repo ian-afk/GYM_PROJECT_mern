@@ -1,22 +1,32 @@
 import mongoose from 'mongoose';
+import validator from 'validator';
 
 const employeeSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
       required: [true, 'Employee firstName required'],
+      trim: true,
+      maxlength: [50, 'A firstName must have less or equal than 50 characters'],
+      validate: [validator.isAlpha, 'First name must only contains character'],
     },
     lastName: {
       type: String,
       required: [true, 'Employee lastName required'],
+      trim: true,
+      maxlength: [50, 'A last name must have less or equal than 50 characters'],
+      validate: [validator.isAlpha, 'last name must only contains character'],
     },
     age: {
       type: Number,
       required: [true, 'Employee age is required'],
+      min: [18, 'Age of employee must be above 18'],
     },
     dob: {
       type: Date,
       required: [true, 'Employee dob is required'],
+      min: '1980-01-01',
+      max: '3000-01-01',
     },
     gender: {
       type: String,
@@ -57,10 +67,15 @@ const employeeSchema = new mongoose.Schema(
 
 // QUERY MIDDLEWARE
 
-employeeSchema.pre('find', function (next) {
+employeeSchema.pre(/^find/, function (next) {
   this.find({ isDeleted: { $ne: true } });
   next();
 });
+
+// employeeSchema.post(/^find/, function (docs, next) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds`);
+//   next();
+// });
 
 const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee;
