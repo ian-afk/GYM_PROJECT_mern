@@ -1,4 +1,9 @@
 import express from 'express';
+import AppError from './utils/appError.js';
+import globalErrorHandler from './controller/errorController.js';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+
 import employeeRouter from './routes/employeeRoutes.js';
 import trainerRouter from './routes/trainerRoutes.js';
 import gymbranchRouter from './routes/gymbranchRoute.js';
@@ -7,10 +12,7 @@ import membershipRouter from './routes/membershipRoutes.js';
 import paymentRouter from './routes/paymentRoutes.js';
 import clientRouter from './routes/clientRoutes.js';
 import reportRouter from './routes/reportRoutes.js';
-import AppError from './utils/appError.js';
-import globalErrorHandler from './controller/errorController.js';
-import dotenv from 'dotenv';
-import morgan from 'morgan';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config({ path: './config.env' });
 
@@ -23,6 +25,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.use('/api/users', userRouter);
 app.use('/api/employees', employeeRouter);
 app.use('/api/trainers', trainerRouter);
 app.use('/api/gymbranches', gymbranchRouter);
