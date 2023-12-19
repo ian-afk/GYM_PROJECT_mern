@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-import bycrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -41,10 +42,17 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
-  this.password = await bycrypt.hash(this.password, 12);
+  this.password = await bcrypt.hash(this.password, 12);
 
   this.passwordConfirm = undefined;
 });
+
+userSchema.methods.correctPassword = async function (
+  inputPassword,
+  userPassword
+) {
+  return await bcrypt.compare(inputPassword, userPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 
