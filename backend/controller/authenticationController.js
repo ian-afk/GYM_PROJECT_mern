@@ -1,3 +1,4 @@
+import { promisify } from 'util';
 import User from '../models/UserModel.js';
 import catchAsync from '../utils/catchAsync.js';
 import AppError from '../utils/appError.js';
@@ -50,4 +51,31 @@ export const login = catchAsync(async (req, res, next) => {
     message: 'Successfully login',
     token,
   });
+});
+
+export const protect = catchAsync(async (req, res, next) => {
+  let token;
+
+  // Check if token exists
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  if (!token) {
+    return next(
+      new AppError('You are not login! Please login to get access', 401)
+    );
+  }
+
+  // Validate token
+
+  const decode = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET_TOKEN
+  );
+
+  next();
 });
