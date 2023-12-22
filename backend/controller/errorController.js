@@ -16,6 +16,16 @@ const handleValidationFields = (err) => {
   return new AppError(message, 400);
 };
 
+const handleInvalidToken = () => {
+  const message = `Invalid token. Please log in again!`;
+  return new AppError(message, 401);
+};
+
+const handleExpireToken = () => {
+  const message = `You're logged out! Please login.`;
+  return new AppError(message, 401);
+};
+
 const sendErrorDev = (err, req, res) => {
   return res.status(err.statusCode).json({
     status: err.status,
@@ -26,7 +36,6 @@ const sendErrorDev = (err, req, res) => {
 };
 
 const sendErrorProd = (err, req, res) => {
-  console.log(err.isOperational);
   if (err.isOperational) {
     return res.status(err.statusCode).json({
       status: err.status,
@@ -55,6 +64,8 @@ export default (err, req, res, next) => {
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
     if (error.name === 'ValidationError') error = handleValidationFields(error);
+    if (error.name === 'JsonWebTokenError') error = handleInvalidToken();
+    if (error.name === 'TokenExpiredError') error = handleExpireToken();
     sendErrorProd(error, req, res);
   }
 };

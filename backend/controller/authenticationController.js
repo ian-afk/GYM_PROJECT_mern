@@ -77,5 +77,20 @@ export const protect = catchAsync(async (req, res, next) => {
     process.env.JWT_SECRET_TOKEN
   );
 
+  // Check if user still exists
+  const currentUser = await User.findById(decode.id);
+  if (!currentUser) {
+    return next(
+      new AppError('The user beloging to this token does no longer exists', 401)
+    );
+  }
+
+  // user changed password
+  if (currentUser.changedPasswordAt(decode.iat)) {
+    return next(
+      new AppError('User recently changed password! Please login again.', 401)
+    );
+  }
+
   next();
 });
