@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Employee from './EmployeeModel.js';
 
 const gymbranchSchema = new mongoose.Schema(
   {
@@ -31,7 +32,7 @@ const gymbranchSchema = new mongoose.Schema(
       address: String,
       description: String,
     },
-    guides: Array,
+    employees: Array,
     isDeleted: {
       type: Boolean,
       default: 0,
@@ -45,6 +46,16 @@ const gymbranchSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// EMBEDDING APPROACH -- only works for saving and not updating.
+// gymbranchSchema.pre('save', async function (next) {
+//   const employeePromises = this.employees.map(
+//     async (id) => await Employee.findById(id)
+//   );
+//   this.employees = await Promise.all(employeePromises);
+
+//   next();
+// });
 
 const GymBranch = mongoose.model('gymbranches', gymbranchSchema);
 
