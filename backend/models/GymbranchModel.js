@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Employee from './EmployeeModel.js';
 
 const gymbranchSchema = new mongoose.Schema(
   {
@@ -32,7 +31,12 @@ const gymbranchSchema = new mongoose.Schema(
       address: String,
       description: String,
     },
-    employees: Array,
+    employees: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Employee',
+      },
+    ],
     isDeleted: {
       type: Boolean,
       default: 0,
@@ -46,6 +50,14 @@ const gymbranchSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+gymbranchSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'employees',
+    select: '-__v -isActive -isDeleted -createdAt -updatedAt',
+  });
+  next();
+});
 
 // EMBEDDING APPROACH -- only works for saving and not updating.
 // gymbranchSchema.pre('save', async function (next) {
