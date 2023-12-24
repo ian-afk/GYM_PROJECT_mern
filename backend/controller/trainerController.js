@@ -22,14 +22,17 @@ export const getAllTrainers = catchAsync(async (req, res, next) => {
 });
 
 export const getTrainer = catchAsync(async (req, res, next) => {
-  const trainer = await Trainer.findById(req.params.id);
+  const trainer = await Trainer.findById(req.params.id).populate('schedules');
 
   if (!trainer) {
     return next(new AppError('No trainer found with that ID ', 404));
   }
   res.status(200).json({
     status: 'success',
-    trainer,
+    trainer: {
+      ...trainer._doc,
+      ...trainer.$$populatedVirtuals,
+    },
   });
 });
 

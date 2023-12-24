@@ -43,9 +43,21 @@ const clientSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
 
-const Client = mongoose.model('client', clientSchema);
+// Virtual Populate
+
+clientSchema.virtual('schedules', {
+  ref: 'Schedule',
+  foreignField: 'clients',
+  localField: '_id',
+});
+
+const Client = mongoose.model('Client', clientSchema);
 
 export default Client;

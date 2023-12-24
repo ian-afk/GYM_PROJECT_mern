@@ -17,6 +17,14 @@ const scheduleSchema = new mongoose.Schema(
       type: Date,
       required: [true, 'timeEnd is required'],
     },
+    clients: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Client',
+    },
+    trainer: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Trainer',
+    },
     createdBy: String,
     updatedBy: String,
     isDeleted: {
@@ -24,7 +32,12 @@ const scheduleSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  {
+    // To show the output of data that is not existing in Database
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
 
 const Schedule = mongoose.model('Schedule', scheduleSchema);

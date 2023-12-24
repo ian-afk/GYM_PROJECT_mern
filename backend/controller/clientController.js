@@ -23,14 +23,17 @@ export const getAllClient = catchAsync(async (req, res, next) => {
 });
 
 export const getClient = catchAsync(async (req, res, next) => {
-  const client = await Client.findById(req.params.id);
+  const client = await Client.findById(req.params.id).populate('schedules');
 
   if (!client) {
     return next(new AppError('No client found with that ID ', 404));
   }
   res.status(200).json({
     status: 'success',
-    client,
+    client: {
+      ...client._doc,
+      ...client.$$populatedVirtuals,
+    },
   });
 });
 
