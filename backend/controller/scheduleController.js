@@ -22,7 +22,23 @@ export const getAllSchedules = catchAsync(async (req, res, next) => {
 });
 
 export const getSchedule = catchAsync(async (req, res, next) => {
-  const schedule = await Schedule.findById(req.params.id);
+  const schedule = await Schedule.findById(req.params.id)
+    .populate({
+      path: 'trainer',
+      select: 'experties _id',
+    })
+    .populate({
+      path: 'clients',
+      select: 'firstName lastName _id',
+    });
+
+  // this.populate({
+  //   path: 'trainer',
+  //   select: 'experties _id',
+  // }).populate({
+  //   path: 'clients',
+  //   select: 'firstName _id',
+  // });
 
   if (!schedule) {
     return next(new AppError('No schedule found with that ID ', 404));

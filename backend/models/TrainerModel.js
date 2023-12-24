@@ -6,6 +6,11 @@ const trainerSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Trainer experties is required '],
     },
+    employee: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Employee',
+      required: [true, 'Trainer Must be an existing employee'],
+    },
     isDeleted: {
       type: Boolean,
       defualt: 0,
@@ -26,6 +31,13 @@ trainerSchema.virtual('schedules', {
   localField: '_id',
 });
 
+trainerSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'employee',
+    select: 'firstName lastName',
+  });
+  next();
+});
 const Trainer = mongoose.model('Trainer', trainerSchema);
 
 export default Trainer;
