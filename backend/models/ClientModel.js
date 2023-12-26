@@ -58,6 +58,9 @@ clientSchema.virtual('schedules', {
   localField: '_id',
 });
 
+clientSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
 const Client = mongoose.model('Client', clientSchema);
 
 export default Client;

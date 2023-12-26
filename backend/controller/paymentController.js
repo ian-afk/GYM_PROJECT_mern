@@ -23,14 +23,17 @@ export const getAllPayments = catchAsync(async (req, res, next) => {
 });
 
 export const getPayment = catchAsync(async (req, res, next) => {
-  const payment = await Payments.findById(req.params.id);
-
+  const payment = await Payments.findById(req.params.id).populate('client');
+  const fullName = await payment.client.fullName;
   if (!payment) {
     return next(new AppError('No payment found with that ID ', 404));
   }
   res.status(200).json({
     status: 'success',
-    payment,
+    payment: {
+      clientName: fullName,
+      ...payment._doc,
+    },
   });
 });
 
