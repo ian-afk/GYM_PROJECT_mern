@@ -2,10 +2,13 @@ import mongoose from 'mongoose';
 
 const paymentSchema = new mongoose.Schema(
   {
-    // clientId
-    // date
-    amount: Number,
     items: String,
+    amount: Number,
+    client: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Client',
+      required: [true, 'Payment should have Client'],
+    },
   },
   {
     timestamps: true,
