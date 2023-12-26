@@ -13,6 +13,10 @@ const membershipSchema = new mongoose.Schema(
         message: 'Subscription must only be pro, delux, or junior',
       },
     },
+    client: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Client',
+    },
     createdBy: String,
     updatedBy: String,
 
@@ -25,6 +29,15 @@ const membershipSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+membershipSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'client',
+    select: 'firstName lastName email',
+  });
+
+  next();
+});
 
 const Membership = mongoose.model('membership', membershipSchema);
 
