@@ -12,7 +12,10 @@ export const createSchedule = catchAsync(async (req, res, next) => {
 });
 
 export const getAllSchedules = catchAsync(async (req, res, next) => {
-  const schedules = await Schedule.find();
+  const schedules = await Schedule.find().populate({
+    path: 'trainer',
+    select: 'experties _id',
+  });
 
   res.status(200).json({
     status: 'success',
