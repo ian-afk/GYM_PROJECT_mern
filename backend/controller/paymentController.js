@@ -1,5 +1,6 @@
 import Payments from '../models/paymentModel.js';
 import catchAsync from '../utils/catchAsync.js';
+import AppError from '../utils/appError.js';
 
 export const createPayment = catchAsync(async (req, res, next) => {
   const newPayment = await Payments.create(req.body);
