@@ -33,10 +33,21 @@ function Nav() {
   );
 }
 
+function LoginLogout() {
+  return (
+    <ul>
+      <li>Login</li>
+      <li>Register</li>
+      <li>Logout</li>
+    </ul>
+  );
+}
+
 function Home() {
   return (
     <>
       <Nav />
+      <LoginLogout />
       <h1>El amagros EL</h1>
       <Main />
     </>
