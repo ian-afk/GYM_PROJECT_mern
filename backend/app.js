@@ -3,6 +3,7 @@ import AppError from './utils/appError.js';
 import globalErrorHandler from './controller/errorController.js';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import employeeRouter from './routes/employeeRoutes.js';
 import trainerRouter from './routes/trainerRoutes.js';
@@ -19,7 +20,7 @@ dotenv.config({ path: './config.env' });
 const app = express();
 
 app.use(express.json());
-
+app.use(cors());
 // middleawre
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
