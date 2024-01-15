@@ -1,12 +1,18 @@
 import './home.css';
-// import Home from './pages/Home/Home';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home/Home';
 
 import EmployeeList from './pages/Employee/EmployeeList';
 export default function App() {
   return (
     <>
       {/* <Home /> */}
-      <EmployeeList />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/employees" element={<EmployeeList />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
