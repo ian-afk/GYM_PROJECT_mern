@@ -10,7 +10,7 @@ import { protect } from '../controller/authenticationController.js';
 
 const router = express.Router();
 
-router.route('/').get(protect, getAllEmployees).post(createEmployee);
+router.route('/').get(getAllEmployees).post(createEmployee);
 router
   .route('/:id')
   .get(getEmployee)
