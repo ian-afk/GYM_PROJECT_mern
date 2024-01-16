@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function EmployeeList() {
   const [employees, setEmployees] = useState([]);
@@ -51,7 +52,9 @@ export default function EmployeeList() {
                 <td>{emp.age}</td>
                 <td>{emp.address}</td>
 
-                <td>View</td>
+                <td>
+                  <Link to={`/employees/${emp._id}`}>View</Link>
+                </td>
               </tr>
             ))}
           </tbody>
