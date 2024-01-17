@@ -65,6 +65,11 @@ export default function EmployeeView() {
       body: JSON.stringify({
         firstName: employee.firstName,
         lastName: employee.lastName,
+        gender: employee.gender,
+        age: employee.age,
+        dob: employee.dob,
+        address: employee.address,
+        email: employee.email,
       }),
     };
 
@@ -72,6 +77,7 @@ export default function EmployeeView() {
     fetch(url, request)
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         setInit(json.employee);
         setDisabled(true);
       });
@@ -99,11 +105,40 @@ export default function EmployeeView() {
             onChange={handleChange}
             disabled={disabled}
           />
-          <button type="submit">Save</button>
-          <button type="button" onClick={handleEdit}>
-            {disabled ? 'Edit' : 'Cancel'}
-          </button>
-          {disabled && <Link to={'/employees'}>Cancel</Link>}
+          <br />
+          <input
+            type="number"
+            name="age"
+            value={employee.age}
+            onChange={handleChange}
+            disabled={disabled}
+          />
+
+          <select
+            value={employee.gender}
+            name="gender"
+            onChange={handleChange}
+            disabled={disabled}
+          >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <br />
+          <input
+            type="text"
+            value={employee.address}
+            name="address"
+            onChange={handleChange}
+            disabled={disabled}
+          />
+
+          {!disabled && <button type="submit">Save</button>}
+          <>
+            <button type="button" onClick={handleEdit}>
+              {disabled ? 'Edit' : 'Cancel'}
+            </button>
+            <Link to={'/employees'}>Back to list</Link>
+          </>
         </form>
       )}
     </>

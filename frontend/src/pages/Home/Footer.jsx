@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <foote>
+    <footer>
       <p>
         © Copyright 2023 El Amagros EL, Inc.All rights reserved. Various
         trademarks held by their respective owners. <u>elAmagrosel.com</u>{' '}
@@ -17,6 +17,6 @@ export default function Footer() {
           <li>Cookie Preferencess</li>
         </ul>
       </nav>
-    </foote>
+    </footer>
   );
 }

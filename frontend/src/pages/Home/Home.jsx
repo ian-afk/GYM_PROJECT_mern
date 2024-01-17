@@ -6,7 +6,6 @@ import Footer from './Footer';
 export default function Home() {
   return (
     <>
-      <Nav />
       <Loginout />
       <h1>El amagros EL</h1>
       <Header />

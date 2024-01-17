@@ -27,6 +27,7 @@ export default function EmployeeList() {
   return (
     <>
       <h1>Employee List</h1>
+      <Link to={'/employees/create'}>Create Employee</Link>
       {loading ? (
         <p>Loading...</p>
       ) : (
