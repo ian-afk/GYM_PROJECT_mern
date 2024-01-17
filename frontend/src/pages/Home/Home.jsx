@@ -1,5 +1,4 @@
 import Header from './Header';
-import Nav from '../../components/Nav';
 import Loginout from '../../components/Loginout';
 import Footer from './Footer';
 

@@ -106,14 +106,24 @@ export default function EmployeeView() {
             disabled={disabled}
           />
           <br />
+          <label>Birth date</label>
+          <input
+            type="date"
+            name="dob"
+            value={employee.dob}
+            onChange={handleChange}
+          />
+          <label>Age</label>
           <input
             type="number"
             name="age"
+            min={18}
+            max={50}
             value={employee.age}
             onChange={handleChange}
-            disabled={disabled}
           />
-
+          <br />
+          <label>Gender</label>
           <select
             value={employee.gender}
             name="gender"
@@ -124,6 +134,7 @@ export default function EmployeeView() {
             <option value="female">Female</option>
           </select>
           <br />
+          <label>Address</label>
           <input
             type="text"
             value={employee.address}
@@ -131,6 +142,15 @@ export default function EmployeeView() {
             onChange={handleChange}
             disabled={disabled}
           />
+          <br />
+          <label>Email</label>
+          <input
+            type="text"
+            name="email"
+            value={employee.email}
+            onChange={handleChange}
+            disabled={disabled}
+          ></input>
 
           {!disabled && <button type="submit">Save</button>}
           <>
