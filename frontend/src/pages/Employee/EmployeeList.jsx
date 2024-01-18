@@ -24,6 +24,24 @@ export default function EmployeeList() {
       .catch((err) => console.log(err));
   }, []);
 
+  function handleDelete(id) {
+    const confirmed = window.confirm('Are you sure you want to delete?');
+
+    if (confirmed) {
+      const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
+      const request = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      fetch(url, request)
+        .then((res) => res.json())
+        .then(() => alert('Successfully deleted'));
+      setEmployees((prev) => prev.filter((item) => item._id !== id));
+    }
+  }
   return (
     <>
       <h1>Employee List</h1>
@@ -55,6 +73,7 @@ export default function EmployeeList() {
 
                 <td>
                   <Link to={`/employees/${emp._id}`}>View</Link>
+                  <button onClick={() => handleDelete(emp._id)}>Delete</button>
                 </td>
               </tr>
             ))}

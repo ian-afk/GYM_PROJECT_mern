@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export default function EmployeeView() {
   const { id } = useParams();
@@ -15,7 +15,7 @@ export default function EmployeeView() {
   });
   const [init, setInit] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   useState(() => {
     const controller = new AbortController();
     const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
@@ -83,6 +83,26 @@ export default function EmployeeView() {
         setInit(json.employee);
         setDisabled(true);
       });
+  }
+
+  function handleDelete(id) {
+    const confirmed = window.confirm('Are you sure you want to delete?');
+
+    if (confirmed) {
+      const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
+      const request = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      fetch(url, request)
+        .then((res) => res.json())
+        .then(() => alert('Successfully deleted'));
+    }
+
+    navigate('/employees');
   }
   return (
     <>
@@ -161,6 +181,11 @@ export default function EmployeeView() {
             <button type="button" onClick={handleEdit}>
               {disabled ? 'Edit' : 'Cancel'}
             </button>
+            {disabled && (
+              <button type="button" onClick={() => handleDelete(employee._id)}>
+                Delete
+              </button>
+            )}
             <Link to={'/employees'}>Back to list</Link>
           </>
         </form>
