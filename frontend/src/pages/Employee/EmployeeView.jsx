@@ -30,8 +30,10 @@ export default function EmployeeView() {
     fetch(url, request)
       .then((res) => res.json())
       .then((json) => {
+        const newEmployee = json.employee;
+        newEmployee.dob = newEmployee.dob.slice(0, 10);
         console.log(json);
-        setEmployee(json.employee);
+        setEmployee(newEmployee);
         setInit(json.employee);
         setLoading(false);
       })
@@ -112,6 +114,7 @@ export default function EmployeeView() {
             name="dob"
             value={employee.dob}
             onChange={handleChange}
+            disabled={disabled}
           />
           <label>Age</label>
           <input
@@ -121,6 +124,7 @@ export default function EmployeeView() {
             max={50}
             value={employee.age}
             onChange={handleChange}
+            disabled={disabled}
           />
           <br />
           <label>Gender</label>

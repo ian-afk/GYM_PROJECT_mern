@@ -36,9 +36,9 @@ export default function EmployeeList() {
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
+              <th>Age</th>
               <th>DOB</th>
               <th>Gender</th>
-              <th>Age</th>
               <th>Address</th>
               <th>Action</th>
             </tr>
@@ -48,9 +48,9 @@ export default function EmployeeList() {
               <tr key={emp._id}>
                 <td>{emp.firstName}</td>
                 <td>{emp.lastName}</td>
-                <td>{emp.dob}</td>
-                <td>{emp.gender}</td>
                 <td>{emp.age}</td>
+                <td>{emp.dob.slice(0, 10)}</td>
+                <td>{emp.gender}</td>
                 <td>{emp.address}</td>
 
                 <td>

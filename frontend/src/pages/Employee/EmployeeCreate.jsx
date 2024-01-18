@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function EmployeeCreate() {
   const [employee, setEmployee] = useState({
@@ -11,6 +11,8 @@ export default function EmployeeCreate() {
     address: '',
     email: '',
   });
+
+  const navigate = useNavigate();
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -40,7 +42,10 @@ export default function EmployeeCreate() {
     };
 
     fetch(url, request).then((res) =>
-      res.json().then((json) => console.log(json))
+      res.json().then((json) => {
+        console.log(json);
+        navigate(`/employees/${json.data.employee._id}`);
+      })
     );
   }
   return (
@@ -83,7 +88,7 @@ export default function EmployeeCreate() {
           <option value="female">Female</option>
         </select>
         <br />
-        <labe>Address</labe>
+        <label>Address</label>
         <input
           type="text"
           value={employee.address}
@@ -91,7 +96,7 @@ export default function EmployeeCreate() {
           onChange={handleChange}
         />
         <br />
-        <labe>Email</labe>
+        <label>Email</label>
         <input
           type="text"
           value={employee.email}
