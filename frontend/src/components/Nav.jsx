@@ -14,7 +14,9 @@ export default function Nav() {
             <li>
               <Link to={'/employees'}>Employees</Link>
             </li>
-            <li>Client</li>
+            <li>
+              <Link to={'/clients'}>Clients</Link>
+            </li>
             <li>Gym branches</li>
             <li>Members</li>
             <li>Payments</li>

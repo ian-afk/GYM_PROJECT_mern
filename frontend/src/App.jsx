@@ -7,6 +7,7 @@ import EmployeeView from './pages/Employee/EmployeeView';
 import Nav from './components/Nav';
 import NotFound from './components/NotFoundPage';
 import EmployeeCreate from './pages/Employee/EmployeeCreate';
+import ClientList from './pages/client/ClientList';
 export default function App() {
   return (
     <>
@@ -20,6 +21,8 @@ export default function App() {
           <Route path="/employees" element={<EmployeeList />}></Route>
           <Route path="/employees/:id" element={<EmployeeView />}></Route>
           <Route path="/employees/create" element={<EmployeeCreate />}></Route>
+
+          <Route path="/clients" element={<ClientList />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
