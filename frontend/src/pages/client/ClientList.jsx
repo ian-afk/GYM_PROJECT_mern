@@ -32,6 +32,7 @@ export default function ClientList() {
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +41,9 @@ export default function ClientList() {
               <tr key={client._id}>
                 <td>{client.firstName}</td>
                 <td>{client.lastName}</td>
+                <td>
+                  <Link to={'/clients/:id'}>View</Link>
+                </td>
               </tr>
             );
           })}
