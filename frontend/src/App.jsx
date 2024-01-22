@@ -1,7 +1,5 @@
 import './home.css';
 import {
-  BrowserRouter,
-  Routes,
   Route,
   createBrowserRouter,
   Outlet,
@@ -16,6 +14,8 @@ import Nav from './components/Nav';
 import NotFound from './components/NotFoundPage';
 import EmployeeCreate from './pages/Employee/EmployeeCreate';
 import ClientList from './pages/client/ClientList';
+import ClientView from './pages/client/ClientView';
+import ClientCreate from './pages/client/ClientCreate';
 export default function App() {
   const AppLayout = () => (
     <>
@@ -34,6 +34,8 @@ export default function App() {
         <Route path="/employees/create" element={<EmployeeCreate />}></Route>
 
         <Route path="/clients" element={<ClientList />}></Route>
+        <Route path="/clients/:id" element={<ClientView />}></Route>
+        <Route path="/clients/create" element={<ClientCreate />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )

@@ -1,90 +1,88 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function EmployeeCreate() {
-  const [employee, setEmployee] = useState({
+export default function ClientCreate() {
+  const [client, setClient] = useState({
     firstName: '',
     lastName: '',
     age: 0,
-    dob: '',
     gender: '',
     address: '',
+    contactNo: '',
     email: '',
   });
 
   const navigate = useNavigate();
+
   function handleChange(e) {
     const { name, value } = e.target;
 
-    setEmployee((prev) => {
-      return { ...prev, [name]: value };
-    });
+    setClient((prev) => ({ ...prev, [name]: value }));
   }
+
   function handleSubmit(e) {
     e.preventDefault();
-    const controller = new AbortController();
-    const url = `${import.meta.env.VITE_API_URL}/employees`;
+    const url = `${import.meta.env.VITE_API_URL}/clients`;
     const request = {
-      signal: controller.signal,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstName: employee.firstName,
-        lastName: employee.lastName,
-        gender: employee.gender,
-        age: employee.age,
-        dob: employee.dob,
-        address: employee.address,
-        email: employee.email,
+        firstName: client.firstName,
+        lastName: client.lastName,
+        age: client.age,
+        gender: client.gender,
+        address: client.address,
+        email: client.email,
+        contactNo: client.contactNo,
       }),
     };
-
-    fetch(url, request).then((res) =>
-      res.json().then((json) => {
-        console.log(json);
-
-        navigate(`/employees/${json.data.employee._id}`);
-      })
-    );
+    fetch(url, request)
+      .then((res) => res.json())
+      .then((json) => {
+        navigate(`/clients/${json.client._id}`);
+      });
   }
   return (
     <>
-      <h1>Create Employee</h1>
+      <h1>Create Cliente</h1>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
         <input
           type="text"
           name="firstName"
-          value={employee.firstName}
+          value={client.firstName}
           onChange={handleChange}
         />
+        <br />
         <label>Last Name</label>
         <input
           type="text"
           name="lastName"
-          value={employee.lastName}
+          value={client.lastName}
           onChange={handleChange}
         />
         <br />
-        <input
-          type="date"
-          name="dob"
-          value={employee.dob}
-          onChange={handleChange}
-        />
         <label>Age</label>
         <input
           type="number"
           name="age"
-          min={18}
-          max={50}
-          value={employee.age}
+          value={client.age}
           onChange={handleChange}
         />
+        <br />
         <label>Gender</label>
-        <select value={employee.gender} name="gender" onChange={handleChange}>
+        <select
+          value={client.gender}
+          name="gender"
+          onChange={handleChange}
+          required
+          defaultValue=""
+        >
+          <option value="" selected>
+            Select gender
+          </option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
@@ -92,21 +90,28 @@ export default function EmployeeCreate() {
         <label>Address</label>
         <input
           type="text"
-          value={employee.address}
+          value={client.address}
           name="address"
+          onChange={handleChange}
+        />
+        <br />
+        <label>Contact No</label>
+        <input
+          type="text"
+          value={client.contactNo}
+          name="contactNo"
           onChange={handleChange}
         />
         <br />
         <label>Email</label>
         <input
           type="text"
-          value={employee.email}
           name="email"
+          value={client.email}
           onChange={handleChange}
         />
-
-        <button type="submit">Create</button>
-        <Link to={'/employees'}>Back to List</Link>
+        <button type="submit">Save</button>
+        <Link to={'/clients'}>Back to list</Link>
       </form>
     </>
   );

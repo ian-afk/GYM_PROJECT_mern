@@ -99,10 +99,11 @@ export default function EmployeeView() {
 
       fetch(url, request)
         .then((res) => res.json())
-        .then(() => alert('Successfully deleted'));
+        .then(() => {
+          alert('Successfully deleted');
+          navigate('/employees');
+        });
     }
-
-    navigate('/employees');
   }
   return (
     <>
@@ -174,7 +175,7 @@ export default function EmployeeView() {
             value={employee.email}
             onChange={handleChange}
             disabled={disabled}
-          ></input>
+          />
 
           {!disabled && <button type="submit">Save</button>}
           <>
