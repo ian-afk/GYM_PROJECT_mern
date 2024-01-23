@@ -78,11 +78,8 @@ export default function ClientCreate() {
           name="gender"
           onChange={handleChange}
           required
-          defaultValue=""
         >
-          <option value="" selected>
-            Select gender
-          </option>
+          <option value="">Select gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>

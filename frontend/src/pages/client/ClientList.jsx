@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 export default function ClientList() {
   const [clients, setClients] = useState([]);
-  const [initClient, setInitClients] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,10 +20,28 @@ export default function ClientList() {
       .then((json) => {
         console.log(json);
         setClients(json.clients);
-
         setLoading(false);
       });
   }, []);
+
+  function handleDelete(id) {
+    const confirm = window.confirm('Are you sure you want to delete?');
+
+    if (confirm) {
+      const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
+      const request = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      fetch(url, request).then((res) => res.json());
+      setClients((client) => {
+        return client.filter((el) => el._id !== id);
+      });
+    }
+  }
   return (
     <>
       <h1>Client list</h1>
@@ -49,6 +66,9 @@ export default function ClientList() {
                     <td>{client.lastName}</td>
                     <td>
                       <Link to={`/clients/${client._id}`}>View</Link>
+                      <button onClick={() => handleDelete(client._id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );

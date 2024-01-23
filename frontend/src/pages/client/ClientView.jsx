@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 export default function ClientView() {
   const [client, setClient] = useState({
     firstName: '',
     lastName: '',
-    age: '',
+    age: 0,
     gender: '',
     address: '',
     email: '',
@@ -13,6 +13,7 @@ export default function ClientView() {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
@@ -27,7 +28,6 @@ export default function ClientView() {
     fetch(url, request)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setClient(json.client);
         setInit(json.client);
         setLoading(false);
@@ -47,9 +47,51 @@ export default function ClientView() {
     setClient(init);
   }
 
-  function handleDelete() {}
+  function handleDelete(id) {
+    const confirm = window.confirm('Are you sure you want to delete?');
+    if (confirm) {
+      const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
+      const request = {
+        method: 'DELETE',
+        header: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      fetch(url, request)
+        .then((res) => res.json())
+        .then(() => {
+          alert('Successfully deleted');
+          navigate(`/clients`);
+        });
+    }
+  }
   function handleSubmit(e) {
     e.preventDefault();
+
+    const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
+    const request = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: client.firstName,
+        lastName: client.lastName,
+        age: client.age,
+        gender: client.gender,
+        address: client.address,
+        email: client.email,
+      }),
+    };
+    console.log(url);
+    fetch(url, request)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setDisabled(true);
+        setInit(json.client);
+      });
   }
   return (
     <>
@@ -93,13 +135,11 @@ export default function ClientView() {
             onChange={handleChange}
             disabled={disabled}
             required
-            defaultValue=""
+            defaultValue={client.gender}
           >
-            <option value="" selected>
-              Select gender
-            </option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value={client.gender}>{client.gender.toUpperCase()}</option>
+            <option value="male">MALE</option>
+            <option value="female">FEMALe</option>
           </select>
           <br />
           <label>Address</label>
@@ -120,7 +160,7 @@ export default function ClientView() {
             disabled={disabled}
           />
           {!disabled && <button type="submit">Save</button>}
-          <button type="button" onClick={() => handleEdit(client._id)}>
+          <button type="button" onClick={() => handleEdit()}>
             {disabled ? 'Edit' : 'Cancel'}
           </button>
           {disabled && (
