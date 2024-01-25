@@ -41,7 +41,7 @@ export default function TrainerList() {
               <td>{trainer.employee.lastName}</td>
               <td>{trainer.experties}</td>
               <td>
-                <Link to={`/employees/${trainer.employee._id}`}>View</Link>
+                <Link to={`/trainers/${trainer._id}`}>View</Link>
               </td>
             </tr>
           ))}

@@ -17,6 +17,7 @@ import ClientList from './pages/client/ClientList';
 import ClientView from './pages/client/ClientView';
 import ClientCreate from './pages/client/ClientCreate';
 import TrainerList from './pages/trainer/TrainerList';
+import TrainerView from './pages/trainer/TrainerView';
 export default function App() {
   const AppLayout = () => (
     <>
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/clients/create" element={<ClientCreate />}></Route>
 
         <Route path="/trainers" element={<TrainerList />}></Route>
+        <Route path="/trainers/:id" element={<TrainerView />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )
