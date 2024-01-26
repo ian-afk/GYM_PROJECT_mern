@@ -20,11 +20,13 @@ export default function Nav() {
             <li>
               <Link to={'/trainers'}>Trainers</Link>
             </li>
+            <li>
+              <Link to={'/schedules'}>Schedules</Link>
+            </li>
             <li>Gym branches</li>
             <li>Members</li>
             <li>Payments</li>
             <li>Generate Report</li>
-            <li>Schedules</li>
           </ul>
         </li>
         <li>About us</li>
