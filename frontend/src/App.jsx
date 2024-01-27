@@ -20,6 +20,9 @@ import TrainerList from './pages/trainer/TrainerList';
 import TrainerView from './pages/trainer/TrainerView';
 import TrainerCreate from './pages/trainer/TrainerCreate';
 import ScheduleList from './pages/schedule/ScheduleList';
+import ScheduleCreate from './pages/schedule/ScheduleCreate';
+import ScheduleView from './pages/schedule/ScheduleView';
+
 export default function App() {
   const AppLayout = () => (
     <>
@@ -46,6 +49,8 @@ export default function App() {
         <Route path="/trainers/create" element={<TrainerCreate />}></Route>
 
         <Route path="/schedules" element={<ScheduleList />}></Route>
+        <Route path="/schedules/:id" element={<ScheduleView />}></Route>
+        <Route path="/schedules/create" element={<ScheduleCreate />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )

@@ -24,9 +24,32 @@ export default function ScheduleList() {
         setLoading(false);
       });
   }, []);
+
+  function handleDelete(id) {
+    const confirmed = window.confirm('Are you sure you want to delete?');
+    if (confirmed) {
+      const newUrl = url(id);
+      const request = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(newUrl, request)
+        .then((res) => res.json())
+        .then(() => {
+          setSchedules((prev) =>
+            prev.filter((sched) => {
+              return sched._id !== id;
+            })
+          );
+        });
+    }
+  }
   return (
     <>
       <h1>Schedule List</h1>
+      <Link to={'/schedules/create'}>Create Schedule</Link>
       {loading ? (
         <h3>Loading...</h3>
       ) : (
@@ -49,6 +72,9 @@ export default function ScheduleList() {
                 <td>{sched.timeEnd.slice(11)}</td>
                 <td>
                   <Link to={`/schedules/${sched._id}`}>View</Link>
+                  <button type="button" onClick={() => handleDelete(sched._id)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
