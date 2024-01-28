@@ -52,6 +52,38 @@ export default function Main() {
             </div>
           </div>
         </section>
+        <section className="section-features">
+          <div>
+            <div className="col-1-of-4">
+              <h3>Lifestyle</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
+                aperiam. Eum nulla, reiciendis velit
+              </p>
+            </div>
+            <div className="col-1-of-4">
+              <h3>Body Building</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
+                aperiam. Eum nulla, reiciendis velit
+              </p>
+            </div>
+            <div className="col-1-of-4">
+              <h3>Weight Lifting</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
+                aperiam. Eum nulla, reiciendis velit
+              </p>
+            </div>
+            <div className="col-1-of-4">
+              <h3>Sports</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
+                aperiam. Eum nulla, reiciendis velit
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
