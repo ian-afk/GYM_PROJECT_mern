@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import LinkButtonComponent from '../../components/LinkButtonComponent';
 
 export default function EmployeeView() {
   const { id } = useParams();
@@ -187,7 +188,9 @@ export default function EmployeeView() {
                 Delete
               </button>
             )}
-            <Link to={'/employees'}>Back to list</Link>
+            <LinkButtonComponent path={'/employees'}>
+              Back to list
+            </LinkButtonComponent>
           </>
         </form>
       )}

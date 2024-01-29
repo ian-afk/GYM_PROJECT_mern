@@ -85,35 +85,39 @@ export default function ScheduleView() {
   return (
     <>
       <h2>Schedule Details</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Date</label>
-        <input
-          type="date"
-          name="startDate"
-          value={schedule.startDate.slice(0, 10)}
-          onChange={handleChange}
-          disabled={isDisabled}
-        />
-        <br />
-        <label>From</label>
-        <input
-          type="text"
-          name="timeStart"
-          onChange={handleChange}
-          value={schedule.timeStart}
-          disabled={isDisabled}
-        />
-        <br />
-        <label>To</label>
-        <input
-          type="text"
-          name="timeEnd"
-          onChange={handleChange}
-          value={schedule.timeEnd}
-          disabled={isDisabled}
-        />
-        <br />
-        {/* <label>Trainer</label>
+      {loading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <>
+          <form onSubmit={handleSubmit}>
+            <label>Date</label>
+            <input
+              type="date"
+              name="startDate"
+              value={schedule.startDate.slice(0, 10)}
+              onChange={handleChange}
+              disabled={isDisabled}
+            />
+            <br />
+            <label>From</label>
+            <input
+              type="text"
+              name="timeStart"
+              onChange={handleChange}
+              value={schedule.timeStart}
+              disabled={isDisabled}
+            />
+            <br />
+            <label>To</label>
+            <input
+              type="text"
+              name="timeEnd"
+              onChange={handleChange}
+              value={schedule.timeEnd}
+              disabled={isDisabled}
+            />
+            <br />
+            {/* <label>Trainer</label>
         <select
           name="trainer"
           onChange={handleChange}
@@ -122,30 +126,32 @@ export default function ScheduleView() {
         >
           <option value={schedule.trainer}>{schedule.trainer}</option>
         </select> */}
-        {!isDisabled && <button type="submit">Save</button>}
-        <button type="button" onClick={() => handleEdit()}>
-          {isDisabled ? 'Edit' : 'Cancel'}
-        </button>
-        {isDisabled && (
-          <button type="button" onClick={handleDelete}>
-            Delete
-          </button>
-        )}
-        <Link to={'/schedules'}>Back to list</Link>
-      </form>
-      <hr />
-      <table>
-        <thead>
-          <tr>
-            <th>Clients Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Client test</td>
-          </tr>
-        </tbody>
-      </table>
+            {!isDisabled && <button type="submit">Save</button>}
+            <button type="button" onClick={() => handleEdit()}>
+              {isDisabled ? 'Edit' : 'Cancel'}
+            </button>
+            {isDisabled && (
+              <button type="button" onClick={handleDelete}>
+                Delete
+              </button>
+            )}
+            <Link to={'/schedules'}>Back to list</Link>
+          </form>
+          <hr />
+          <table>
+            <thead>
+              <tr>
+                <th>Clients Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Client test</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
     </>
   );
 }

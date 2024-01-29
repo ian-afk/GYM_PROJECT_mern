@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import LinkButtonComponent from '../../components/LinkButtonComponent';
 export default function ClientView() {
   const [client, setClient] = useState({
     firstName: '',
@@ -168,7 +169,9 @@ export default function ClientView() {
               Delete
             </button>
           )}
-          <Link to={'/clients'}>Back to list</Link>
+          <LinkButtonComponent path={'/clients'}>
+            Back to list
+          </LinkButtonComponent>
         </form>
       )}
     </>

@@ -53,7 +53,7 @@ export default function Main() {
           </div>
         </section>
         <section className="section-features">
-          <div>
+          <div className="row">
             <div className="col-1-of-4">
               <h3>Lifestyle</h3>
               <p>
