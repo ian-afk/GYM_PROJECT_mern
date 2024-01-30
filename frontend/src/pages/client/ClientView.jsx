@@ -17,22 +17,23 @@ export default function ClientView() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    async function getClient() {
+      const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
+      const request = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      setLoading(true);
+      const res = await fetch(url, request);
+      const json = await res.json();
 
-    setLoading(true);
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        setClient(json.client);
-        setInit(json.client);
-        setLoading(false);
-      });
+      setClient(json.client);
+      setInit(json.client);
+      setLoading(false);
+    }
+    getClient();
   }, []);
 
   function handleChange(e) {

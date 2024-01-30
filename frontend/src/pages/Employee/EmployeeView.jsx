@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
 
 export default function EmployeeView() {
@@ -18,27 +18,39 @@ export default function EmployeeView() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useState(() => {
-    const controller = new AbortController();
-    const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
-    const request = {
-      signal: controller.signal,
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    setLoading(true);
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
+    async function getEmployee() {
+      try {
+        const controller = new AbortController();
+        const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
+        const request = {
+          signal: controller.signal,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+
+        setLoading(true);
+        const res = await fetch(url, request);
+
+        if (!res.ok)
+          throw new Error('Something went wrong while fetching employee');
+
+        const json = await res.json();
+
         const newEmployee = json.employee;
         newEmployee.dob = newEmployee.dob.slice(0, 10);
         console.log(json);
         setEmployee(newEmployee);
         setInit(json.employee);
         setLoading(false);
-      })
-      .catch((err) => console.log(err));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getEmployee();
   }, []);
 
   function handleChange(e) {

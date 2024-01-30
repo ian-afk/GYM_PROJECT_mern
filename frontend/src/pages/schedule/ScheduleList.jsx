@@ -8,21 +8,23 @@ export default function ScheduleList() {
   const url = (path = '') =>
     `${import.meta.env.VITE_API_URL}/schedules/${path}`;
   useEffect(() => {
-    const newUrl = url();
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    async function getAllSchedules() {
+      const newUrl = url();
+      const request = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
 
-    setLoading(true);
-    fetch(newUrl, request)
-      .then((res) => res.json())
-      .then((json) => {
-        setSchedules(json.schedules);
-        setLoading(false);
-      });
+      setLoading(true);
+      const res = await fetch(newUrl, request);
+      const json = await res.json();
+
+      setSchedules(json.schedules);
+      setLoading(false);
+    }
+    getAllSchedules();
   }, []);
 
   function handleDelete(id) {

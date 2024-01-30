@@ -6,22 +6,27 @@ export default function EmployeeList() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_URL}/employees`;
-    const request = {
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json',
-      },
-    };
-    setLoading(true);
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
+    async function getAllEmployees() {
+      try {
+        const url = `${import.meta.env.VITE_API_URL}/employees`;
+        const request = {
+          method: 'GET',
+          header: {
+            'Content-Type': 'application/json',
+          },
+        };
+        setLoading(true);
+        const res = await fetch(url, request);
+        const json = await res.json();
+
         setEmployees(json.employees);
         setLoading(false);
-      })
-      .catch((err) => console.log(err));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getAllEmployees();
   }, []);
 
   function handleDelete(id) {

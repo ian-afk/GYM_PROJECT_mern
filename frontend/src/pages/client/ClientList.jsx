@@ -6,22 +6,23 @@ export default function ClientList() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_URL}/clients`;
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    async function getAllClients() {
+      const url = `${import.meta.env.VITE_API_URL}/clients`;
+      const request = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
 
-    setLoading(true);
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setClients(json.clients);
-        setLoading(false);
-      });
+      setLoading(true);
+      const res = await fetch(url, request);
+      const json = await res.json();
+
+      setClients(json.clients);
+      setLoading(false);
+    }
+    getAllClients();
   }, []);
 
   function handleDelete(id) {

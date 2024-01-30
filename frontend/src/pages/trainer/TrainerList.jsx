@@ -7,21 +7,27 @@ export default function TrainerList() {
   const url = (id = '') => `${import.meta.env.VITE_API_URL}/trainers/${id}`;
 
   useEffect(() => {
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    const newUrl = url();
-    console.log(newUrl);
-    setLoading(true);
-    fetch(newUrl, request)
-      .then((res) => res.json())
-      .then((json) => {
+    async function getAllTrainers() {
+      try {
+        const request = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        const newUrl = url();
+
+        setLoading(true);
+        const res = await fetch(newUrl, request);
+        const json = await res.json();
+
         setTrainers(json.trainers);
         setLoading(false);
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAllTrainers();
   }, []);
 
   function handleDelete(id) {

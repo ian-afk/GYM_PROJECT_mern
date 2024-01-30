@@ -18,21 +18,23 @@ export default function ScheduleView() {
   const url = (path = '') =>
     `${import.meta.env.VITE_API_URL}/schedules/${path}`;
   useEffect(() => {
-    const newUrl = url(id);
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    setLoading(true);
-    fetch(newUrl, request)
-      .then((res) => res.json())
-      .then((json) => {
-        setSchedule(json.schedule);
-        setInit(json.schedule);
-        setLoading(false);
-      });
+    async function getSchedule() {
+      const newUrl = url(id);
+      const request = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      setLoading(true);
+      const res = await fetch(newUrl, request);
+      const json = await res.json();
+
+      setSchedule(json.schedule);
+      setInit(json.schedule);
+      setLoading(false);
+    }
+    getSchedule();
   }, []);
 
   function handleChange(e) {

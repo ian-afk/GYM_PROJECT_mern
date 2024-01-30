@@ -13,24 +13,29 @@ export default function TrainerView() {
   const navigate = useNavigate();
   const url = `${import.meta.env.VITE_API_URL}/trainers/${id}`;
   useEffect(() => {
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    async function getTrainer() {
+      try {
+        const request = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
 
-    setLoading(true);
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
+        setLoading(true);
+        const res = await fetch(url, request);
+        const json = await res.json();
+
         const newTrainer = json.trainer;
         newTrainer.fullName = `${newTrainer.employee.firstName} ${newTrainer.employee.lastName}`;
         setTrainer(newTrainer);
         setInit(newTrainer);
         setLoading(false);
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getTrainer();
   }, []);
 
   function handleEdit() {
