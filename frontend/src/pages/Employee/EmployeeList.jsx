@@ -1,39 +1,23 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAPIList } from '../../hooks/useAPIList';
 
 export default function EmployeeList() {
-  const [employees, setEmployees] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [employees, setEmployees] = useState([]);
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function getAllEmployees() {
-      try {
-        const url = `${import.meta.env.VITE_API_URL}/employees`;
-        const request = {
-          method: 'GET',
-          header: {
-            'Content-Type': 'application/json',
-          },
-        };
-        setLoading(true);
-        const res = await fetch(url, request);
-        const json = await res.json();
-
-        setEmployees(json.employees);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    getAllEmployees();
-  }, []);
+  const path = `employees`;
+  const {
+    data: employees,
+    setData: setEmployees,
+    isLoading,
+    url,
+  } = useAPIList(path);
 
   function handleDelete(id) {
     const confirmed = window.confirm('Are you sure you want to delete?');
 
     if (confirmed) {
-      const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
+      const empUrl = `${url}/${id}`;
       const request = {
         method: 'DELETE',
         headers: {
@@ -41,7 +25,7 @@ export default function EmployeeList() {
         },
       };
 
-      fetch(url, request)
+      fetch(empUrl, request)
         .then((res) => res.json())
         .then(() => alert('Successfully deleted'));
       setEmployees((prev) => prev.filter((item) => item._id !== id));
@@ -51,7 +35,7 @@ export default function EmployeeList() {
     <>
       <h1>Employee List</h1>
       <Link to={'/employees/create'}>Create Employee</Link>
-      {loading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <table>
