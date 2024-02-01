@@ -1,35 +1,19 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAPIList } from '../../hooks/useAPIList';
 
 export default function ClientList() {
-  const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function getAllClients() {
-      const url = `${import.meta.env.VITE_API_URL}/clients`;
-      const request = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      setLoading(true);
-      const res = await fetch(url, request);
-      const json = await res.json();
-
-      setClients(json.clients);
-      setLoading(false);
-    }
-    getAllClients();
-  }, []);
-
+  const path = `clients`;
+  const {
+    data: clients,
+    setData: setClients,
+    isLoading,
+    url,
+  } = useAPIList(path);
   function handleDelete(id) {
     const confirm = window.confirm('Are you sure you want to delete?');
 
     if (confirm) {
-      const url = `${import.meta.env.VITE_API_URL}/clients/${id}`;
+      const clientUrl = `${url}/${id}`;
       const request = {
         method: 'DELETE',
         headers: {
@@ -37,7 +21,7 @@ export default function ClientList() {
         },
       };
 
-      fetch(url, request).then((res) => res.json());
+      fetch(clientUrl, request).then((res) => res.json());
       setClients((client) => {
         return client.filter((el) => el._id !== id);
       });
@@ -46,7 +30,7 @@ export default function ClientList() {
   return (
     <>
       <h1>Client list</h1>
-      {loading ? (
+      {isLoading ? (
         <h3>Loading...</h3>
       ) : (
         <>

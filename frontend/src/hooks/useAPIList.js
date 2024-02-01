@@ -19,7 +19,7 @@ export function useAPIList(path) {
         const res = await fetch(url, request);
         const json = await res.json();
 
-        setData(json.employees);
+        setData(json[path]);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

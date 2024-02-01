@@ -1,43 +1,26 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAPIList } from '../../hooks/useAPIList';
 
 export default function ScheduleList() {
-  const [schedules, setSchedules] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const url = (path = '') =>
-    `${import.meta.env.VITE_API_URL}/schedules/${path}`;
-  useEffect(() => {
-    async function getAllSchedules() {
-      const newUrl = url();
-      const request = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      setLoading(true);
-      const res = await fetch(newUrl, request);
-      const json = await res.json();
-
-      setSchedules(json.schedules);
-      setLoading(false);
-    }
-    getAllSchedules();
-  }, []);
+  const path = `schedules`;
+  const {
+    data: schedules,
+    setData: setSchedules,
+    isLoading,
+    url,
+  } = useAPIList(path);
 
   function handleDelete(id) {
     const confirmed = window.confirm('Are you sure you want to delete?');
     if (confirmed) {
-      const newUrl = url(id);
+      const schedUrl = `${url}/${id}`;
       const request = {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
       };
-      fetch(newUrl, request)
+      fetch(schedUrl, request)
         .then((res) => res.json())
         .then(() => {
           setSchedules((prev) =>
@@ -52,7 +35,7 @@ export default function ScheduleList() {
     <>
       <h1>Schedule List</h1>
       <Link to={'/schedules/create'}>Create Schedule</Link>
-      {loading ? (
+      {isLoading ? (
         <h3>Loading...</h3>
       ) : (
         <table>

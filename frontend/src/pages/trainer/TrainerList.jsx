@@ -1,38 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAPIList } from '../../hooks/useAPIList';
 
 export default function TrainerList() {
-  const [loading, setLoading] = useState(false);
-  const [trainers, setTrainers] = useState([]);
-  const url = (id = '') => `${import.meta.env.VITE_API_URL}/trainers/${id}`;
-
-  useEffect(() => {
-    async function getAllTrainers() {
-      try {
-        const request = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-        const newUrl = url();
-
-        setLoading(true);
-        const res = await fetch(newUrl, request);
-        const json = await res.json();
-
-        setTrainers(json.trainers);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getAllTrainers();
-  }, []);
+  const path = `trainers`;
+  const {
+    data: trainers,
+    setData: setTrainers,
+    isLoading,
+    url,
+  } = useAPIList(path);
 
   function handleDelete(id) {
     const confirm = window.confirm('Are you sure you want to delete?');
-    const newUrl = url(id);
+    const trainerUrl = `${url}/${id}`;
     if (confirm) {
       const request = {
         method: 'DELETE',
@@ -41,7 +22,7 @@ export default function TrainerList() {
         },
       };
 
-      fetch(newUrl, request)
+      fetch(trainerUrl, request)
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
@@ -52,7 +33,7 @@ export default function TrainerList() {
   return (
     <>
       <h1>Trainer List</h1>
-      {loading ? (
+      {isLoading ? (
         <h2>Loading...</h2>
       ) : (
         <>

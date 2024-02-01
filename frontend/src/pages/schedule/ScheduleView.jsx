@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import LinkButtonComponent from '../../components/LinkButtonComponent';
 
 export default function ScheduleView() {
   const [schedule, setSchedule] = useState({
@@ -137,7 +138,9 @@ export default function ScheduleView() {
                 Delete
               </button>
             )}
-            <Link to={'/schedules'}>Back to list</Link>
+            <LinkButtonComponent path={'/schedules'}>
+              Back to list
+            </LinkButtonComponent>
           </form>
           <hr />
           <table>

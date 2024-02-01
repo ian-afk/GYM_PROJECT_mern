@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import LinkButtonComponent from '../../components/LinkButtonComponent';
 
 export default function TrainerView() {
   const [loading, setLoading] = useState(false);
@@ -115,7 +116,9 @@ export default function TrainerView() {
               Delete
             </button>
           )}
-          <Link to="/trainers">Back to list</Link>
+          <LinkButtonComponent path="/trainers">
+            Back to list
+          </LinkButtonComponent>
         </form>
       )}
     </>
