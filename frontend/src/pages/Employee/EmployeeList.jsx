@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAPIList } from '../../hooks/useAPIList';
-
+import RequestOptions from '../../utils/requestClass';
 export default function EmployeeList() {
   // const [employees, setEmployees] = useState([]);
   // const [loading, setLoading] = useState(false);
@@ -18,16 +18,14 @@ export default function EmployeeList() {
 
     if (confirmed) {
       const empUrl = `${url}/${id}`;
-      const request = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
+      const request = new RequestOptions('DELETE');
 
-      fetch(empUrl, request)
+      fetch(empUrl, request.options)
         .then((res) => res.json())
-        .then(() => alert('Successfully deleted'));
+        .then((json) => {
+          console.log(json);
+          alert(`${json.message}`);
+        });
       setEmployees((prev) => prev.filter((item) => item._id !== id));
     }
   }

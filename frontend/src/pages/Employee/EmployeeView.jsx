@@ -1,57 +1,61 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
+import useAPIView from '../../hooks/useAPIView';
+import RequestOptions from '../../utils/requestClass';
 
 export default function EmployeeView() {
-  const { id } = useParams();
   const [disabled, setDisabled] = useState(true);
-  const [employee, setEmployee] = useState({
-    firstName: '',
-    lastName: '',
-    age: 0,
-    dob: '',
-    gender: '',
-    address: '',
-    email: '',
-  });
-  const [init, setInit] = useState({});
-  const [loading, setLoading] = useState(false);
+  // const [employee, setEmployee] = useState({});
+  // const [init, setInit] = useState({});
+  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  useState(() => {
-    async function getEmployee() {
-      try {
-        const controller = new AbortController();
-        const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
-        const request = {
-          signal: controller.signal,
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
+  const { id } = useParams();
 
-        setLoading(true);
-        const res = await fetch(url, request);
+  const path = `employees/${id}`;
+  const {
+    data: employee,
+    setData: setEmployee,
+    init,
+    setInit,
+    isLoading,
+    url,
+  } = useAPIView(path);
+  // useEffect(() => {
+  //   async function getEmployee() {
+  //     try {
+  //       const controller = new AbortController();
+  //       const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
+  //       const request = {
+  //         signal: controller.signal,
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       };
 
-        if (!res.ok)
-          throw new Error('Something went wrong while fetching employee');
+  //       setLoading(true);
+  //       const res = await fetch(url, request);
 
-        const json = await res.json();
+  //       if (!res.ok)
+  //         throw new Error('Something went wrong while fetching employee');
 
-        const newEmployee = json.employee;
-        newEmployee.dob = newEmployee.dob.slice(0, 10);
-        console.log(json);
-        setEmployee(newEmployee);
-        setInit(json.employee);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getEmployee();
-  }, []);
+  //       const json = await res.json();
+
+  //       const newEmployee = json.employee;
+  //       newEmployee.dob = newEmployee.dob.slice(0, 10);
+  //       console.log(json);
+  //       setEmployee(newEmployee);
+  //       setInit(json.employee);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   getEmployee();
+  // }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -62,6 +66,7 @@ export default function EmployeeView() {
   }
 
   function handleEdit() {
+    console.log(init);
     setDisabled(!disabled);
     setEmployee(init);
   }
@@ -69,33 +74,30 @@ export default function EmployeeView() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const controller = new AbortController();
-    const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
-    const request = {
-      signal: controller.signal,
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        firstName: employee.firstName,
-        lastName: employee.lastName,
-        gender: employee.gender,
-        age: employee.age,
-        dob: employee.dob,
-        address: employee.address,
-        email: employee.email,
-      }),
+    const body = {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      gender: employee.gender,
+      age: employee.age,
+      dob: employee.birthDate,
+      address: employee.address,
+      email: employee.email,
     };
+    const request = new RequestOptions('PATCH', '', body);
+    const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
 
-    console.log(url);
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setInit(json.employee);
-        setDisabled(true);
-      });
+    async function postEmployee() {
+      console.log(url);
+
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
+
+      console.log(json);
+      setInit(json.employees);
+      setDisabled(true);
+    }
+
+    postEmployee();
   }
 
   function handleDelete(id) {
@@ -118,10 +120,11 @@ export default function EmployeeView() {
         });
     }
   }
+
   return (
     <>
       <h1>Employee Details</h1>
-      {loading ? (
+      {isLoading ? (
         <h3>Loading...</h3>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -145,8 +148,8 @@ export default function EmployeeView() {
           <label>Birth date</label>
           <input
             type="date"
-            name="dob"
-            value={employee.dob}
+            name="birthDate"
+            value={employee.birthDate}
             onChange={handleChange}
             disabled={disabled}
           />

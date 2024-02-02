@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import RequestOptions from '../utils/requestClass';
 
 export function useAPIList(path) {
   const [data, setData] = useState([]);
@@ -9,14 +10,9 @@ export function useAPIList(path) {
   useEffect(() => {
     async function getAllData() {
       try {
-        const request = {
-          method: 'GET',
-          header: {
-            'Content-Type': 'application/json',
-          },
-        };
+        const request = new RequestOptions('GET');
         setIsLoading(true);
-        const res = await fetch(url, request);
+        const res = await fetch(url, request.options);
         const json = await res.json();
 
         setData(json[path]);

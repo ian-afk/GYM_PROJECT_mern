@@ -62,8 +62,21 @@ const employeeSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
   }
 );
+employeeSchema.virtual('birthDate').get(function () {
+  function formatDate(date) {
+    const m = date.getMonth() + 1 + '';
+    const d = date.getDay() + '';
+    const y = date.getFullYear();
+    const month = m.length > 1 ? `${m}` : `0${m}`;
+    const day = d.length > 1 ? `${d}` : `0${d}`;
+    return `${y}-${month}-${day}`;
+  }
+  const birthDate = formatDate(this.dob);
+  return birthDate;
+});
 
 // QUERY MIDDLEWARE
 

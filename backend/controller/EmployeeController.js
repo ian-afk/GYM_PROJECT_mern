@@ -8,7 +8,7 @@ export const createEmployee = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     data: {
-      employee: newEmployee,
+      employees: newEmployee,
     },
   });
 });
@@ -31,7 +31,7 @@ export const getEmployee = catchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     status: 'success',
-    employee,
+    employees: employee,
   });
 });
 
@@ -46,13 +46,13 @@ export const editEmployee = catchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     status: 'success',
-    employee,
+    employees: employee,
   });
 });
 
 export const deleteEmployee = catchAsync(async (req, res, next) => {
-  const employee = await Employee.findByIdAndDelete(req.params.id);
-  if (!employee) {
+  const employees = await Employee.findByIdAndDelete(req.params.id);
+  if (!employees) {
     return next(new AppError('No employee found with that ID ', 404));
   }
 

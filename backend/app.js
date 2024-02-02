@@ -14,6 +14,7 @@ import paymentRouter from './routes/paymentRoutes.js';
 import clientRouter from './routes/clientRoutes.js';
 import reportRouter from './routes/reportRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import shopRouter from './routes/shopRoutes.js';
 
 dotenv.config({ path: './config.env' });
 
@@ -35,6 +36,7 @@ app.use('/api/memberships', membershipRouter);
 app.use('/api/payments', paymentRouter);
 app.use('/api/clients', clientRouter);
 app.use('/api/reports', reportRouter);
+app.use('/api/shops', shopRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
