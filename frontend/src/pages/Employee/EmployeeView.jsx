@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
 import useAPIView from '../../hooks/useAPIView';
@@ -97,27 +97,29 @@ export default function EmployeeView() {
       setDisabled(true);
     }
 
-    postEmployee();
+    function isModified(init, current) {
+      return JSON.stringify(init) === JSON.stringify(current);
+    }
+
+    if (!isModified(init, employee)) {
+      postEmployee();
+    } else {
+      alert('Employee is not modified');
+    }
   }
 
-  function handleDelete(id) {
+  function handleDelete() {
     const confirmed = window.confirm('Are you sure you want to delete?');
+    const request = new RequestOptions('DELETE');
+    async function deleteEmp() {
+      const res = await fetch(url, request.options);
+      const json = await res.json();
 
+      alert(json.message);
+      navigate('/employees');
+    }
     if (confirmed) {
-      const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
-      const request = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      fetch(url, request)
-        .then((res) => res.json())
-        .then(() => {
-          alert('Successfully deleted');
-          navigate('/employees');
-        });
+      deleteEmp();
     }
   }
 

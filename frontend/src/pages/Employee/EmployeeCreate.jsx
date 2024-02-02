@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import RequestOptions from '../../utils/requestClass';
 
 export default function EmployeeCreate() {
   const [employee, setEmployee] = useState({
@@ -22,32 +23,28 @@ export default function EmployeeCreate() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    const controller = new AbortController();
+
     const url = `${import.meta.env.VITE_API_URL}/employees`;
-    const request = {
-      signal: controller.signal,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        firstName: employee.firstName,
-        lastName: employee.lastName,
-        gender: employee.gender,
-        age: employee.age,
-        dob: employee.dob,
-        address: employee.address,
-        email: employee.email,
-      }),
+    const body = {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      gender: employee.gender,
+      age: employee.age,
+      dob: employee.dob,
+      address: employee.address,
+      email: employee.email,
     };
+    const request = new RequestOptions('POST', '', body);
 
-    fetch(url, request).then((res) =>
-      res.json().then((json) => {
-        console.log(json);
+    async function createEmployee() {
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
 
-        navigate(`/employees/${json.data.employee._id}`);
-      })
-    );
+      console.log(json);
+      navigate(`/employees/${json.data.employees._id}`);
+    }
+
+    createEmployee();
   }
   return (
     <>
