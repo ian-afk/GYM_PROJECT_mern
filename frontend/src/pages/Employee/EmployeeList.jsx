@@ -16,17 +16,17 @@ export default function EmployeeList() {
   function handleDelete(id) {
     const confirmed = window.confirm('Are you sure you want to delete?');
 
-    if (confirmed) {
-      const empUrl = `${url}/${id}`;
-      const request = new RequestOptions('DELETE');
+    const empUrl = `${url}/${id}`;
+    const request = new RequestOptions('DELETE');
 
-      fetch(empUrl, request.options)
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          alert(`${json.message}`);
-        });
+    async function deleteEmployee() {
+      const res = await fetch(empUrl, request.options);
+      const json = await res.json();
       setEmployees((prev) => prev.filter((item) => item._id !== id));
+      alert(json.message);
+    }
+    if (confirmed) {
+      deleteEmployee();
     }
   }
   return (
