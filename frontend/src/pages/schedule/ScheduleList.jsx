@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAPIList } from '../../hooks/useAPIList';
+import RequestOptions from '../../utils/requestClass';
 
 export default function ScheduleList() {
   const path = `schedules`;
@@ -12,23 +13,23 @@ export default function ScheduleList() {
 
   function handleDelete(id) {
     const confirmed = window.confirm('Are you sure you want to delete?');
+    const schedUrl = `${url}/${id}`;
+    const request = new RequestOptions('DELETE');
+
+    async function deleteSchedule() {
+      const res = await fetch(schedUrl, request.options);
+      const json = await res.json();
+
+      setSchedules((prev) =>
+        prev.filter((sched) => {
+          return sched._id !== id;
+        })
+      );
+
+      alert(json.message);
+    }
     if (confirmed) {
-      const schedUrl = `${url}/${id}`;
-      const request = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      fetch(schedUrl, request)
-        .then((res) => res.json())
-        .then(() => {
-          setSchedules((prev) =>
-            prev.filter((sched) => {
-              return sched._id !== id;
-            })
-          );
-        });
+      deleteSchedule();
     }
   }
   return (

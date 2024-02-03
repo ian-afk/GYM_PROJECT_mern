@@ -7,7 +7,7 @@ export const createSchedule = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     message: 'Schedule successfully created',
-    schedule: newSchedule,
+    schedules: newSchedule,
   });
 });
 
@@ -49,7 +49,7 @@ export const getSchedule = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    schedule,
+    schedules: schedule,
   });
 });
 
@@ -66,7 +66,7 @@ export const editSchedule = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     message: 'schedule updated successfully',
-    schedule,
+    schedules: schedule,
   });
 });
 

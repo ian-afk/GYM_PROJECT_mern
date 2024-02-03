@@ -32,13 +32,21 @@ const scheduleSchema = new mongoose.Schema(
       default: 0,
     },
   },
-  { timestamps: true },
-  {
-    // To show the output of data that is not existing in Database
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+
+scheduleSchema.virtual('dateStart').get(function () {
+  function formatDate(date) {
+    const m = date.getMonth() + 1 + '';
+    const d = date.getDate() + '';
+    const y = date.getFullYear();
+    const month = m.length > 1 ? `${m}` : `0${m}`;
+    const day = d.length > 1 ? `${d}` : `0${d}`;
+    return `${y}-${month}-${day}`;
+  }
+  const dateStart = formatDate(this.startDate);
+  return dateStart;
+});
 
 const Schedule = mongoose.model('Schedule', scheduleSchema);
 

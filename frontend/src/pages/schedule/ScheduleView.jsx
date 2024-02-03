@@ -1,42 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
+import useAPIView from '../../hooks/useAPIView';
+import RequestOptions from '../../utils/requestClass';
 
 export default function ScheduleView() {
-  const [schedule, setSchedule] = useState({
-    startDate: '',
-    timeStart: '',
-    timeEnd: '',
-    trainer: '',
-    client: '',
-  });
-  const [init, setInit] = useState({});
-  const [loading, setLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-
   const { id } = useParams();
   const navigate = useNavigate();
-  const url = (path = '') =>
-    `${import.meta.env.VITE_API_URL}/schedules/${path}`;
-  useEffect(() => {
-    async function getSchedule() {
-      const newUrl = url(id);
-      const request = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      setLoading(true);
-      const res = await fetch(newUrl, request);
-      const json = await res.json();
 
-      setSchedule(json.schedule);
-      setInit(json.schedule);
-      setLoading(false);
-    }
-    getSchedule();
-  }, []);
+  const path = `schedules/${id}`;
+  const {
+    data: schedule,
+    setData: setSchedule,
+    init,
+    setInit,
+    isLoading,
+    url,
+  } = useAPIView(path);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -50,45 +31,48 @@ export default function ScheduleView() {
 
   function handleDelete() {
     const confirmed = window.confirm('Are you sure you want to delete?');
+
+    const request = new RequestOptions('DELETE');
+    async function deleteSchedule() {
+      const res = await fetch(url, request.options);
+      const json = await res.json();
+
+      alert(json.message);
+      navigate(`/schedules`);
+    }
     if (confirmed) {
-      const newUrl = url(id);
-      const request = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      fetch(newUrl, request)
-        .then((res) => res.json())
-        .then(navigate(`/schedules`));
+      deleteSchedule();
     }
   }
   function handleSubmit(e) {
     e.preventDefault();
-    const newUrl = url(id);
-    const request = {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        startDate: schedule.startDate,
-        timeStart: schedule.timeStart,
-        timeEnd: schedule.timeEnd,
-      }),
+    const body = {
+      startDate: schedule.dateStart,
+      timeStart: schedule.timeStart,
+      timeEnd: schedule.timeEnd,
     };
+    const request = new RequestOptions('PATCH', '', body);
 
-    fetch(newUrl, request)
-      .then((res) => res.json())
-      .then((json) => {
-        setSchedule(json.schedule);
-        setIsDisabled(true);
-      });
+    async function postSchedule() {
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
+
+      setInit(json.schedules);
+      setSchedule(json.schedules);
+      setIsDisabled(true);
+    }
+
+    if (!isModified(init, schedule)) postSchedule();
+    else alert('Schedule is not modified');
+
+    function isModified(init, current) {
+      return JSON.stringify(init) === JSON.stringify(current);
+    }
   }
   return (
     <>
       <h2>Schedule Details</h2>
-      {loading ? (
+      {isLoading ? (
         <h3>Loading...</h3>
       ) : (
         <>
@@ -96,8 +80,8 @@ export default function ScheduleView() {
             <label>Date</label>
             <input
               type="date"
-              name="startDate"
-              value={schedule.startDate.slice(0, 10)}
+              name="dateStart"
+              value={schedule.dateStart}
               onChange={handleChange}
               disabled={isDisabled}
             />

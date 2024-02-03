@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import RequestOptions from '../../utils/requestClass';
 
 export default function ScheduleCreate() {
   const [schedule, setSchedule] = useState({
@@ -11,7 +12,6 @@ export default function ScheduleCreate() {
   });
   const navigate = useNavigate();
 
-  const url = (path = '') => `${import.meta.env.VITE_API_URL}/${path}`;
   useEffect(() => {}, []);
 
   function handleChange(e) {
@@ -22,24 +22,23 @@ export default function ScheduleCreate() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newUrl = url('schedules');
-    const request = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        startDate: schedule.startDate,
-        timeStart: schedule.timeStart,
-        timeEnd: schedule.timeEnd,
-      }),
+
+    const url = `${import.meta.env.VITE_API_URL}/schedules`;
+    const body = {
+      startDate: schedule.startDate,
+      timeStart: schedule.timeStart,
+      timeEnd: schedule.timeEnd,
     };
-    fetch(newUrl, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        navigate(`/schedules/${json.schedule._id}`);
-      });
+    const request = new RequestOptions('POST', '', body);
+
+    async function postSchedule() {
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
+
+      navigate(`/schedules/${json.schedules._id}`);
+    }
+
+    postSchedule();
   }
   return (
     <>
