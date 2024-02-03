@@ -1,43 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
+import useAPIView from '../../hooks/useAPIView';
+import RequestOptions from '../../utils/requestClass';
 
 export default function TrainerView() {
-  const [loading, setLoading] = useState(false);
-  const [trainer, setTrainer] = useState({
-    experties: '',
-    fullName: '',
-  });
-  const [init, setInit] = useState({});
   const [isDisabled, setIsDisabled] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
-  const url = `${import.meta.env.VITE_API_URL}/trainers/${id}`;
-  useEffect(() => {
-    async function getTrainer() {
-      try {
-        const request = {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
 
-        setLoading(true);
-        const res = await fetch(url, request);
-        const json = await res.json();
-
-        const newTrainer = json.trainer;
-        newTrainer.fullName = `${newTrainer.employee.firstName} ${newTrainer.employee.lastName}`;
-        setTrainer(newTrainer);
-        setInit(newTrainer);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getTrainer();
-  }, []);
+  const path = `trainers/${id}`;
+  const {
+    data: trainer,
+    setData: setTrainer,
+    init,
+    setInit,
+    isLoading,
+    url,
+  } = useAPIView(path);
 
   function handleEdit() {
     setIsDisabled(!isDisabled);
@@ -46,53 +26,56 @@ export default function TrainerView() {
   function handleDelete() {
     const confirm = window.confirm('Are you sure you want to delete?');
 
-    if (confirm) {
-      const request = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
+    const request = new RequestOptions('DELETE');
+    async function deleteTrainer() {
+      const res = await fetch(url, request.options);
+      const json = await res.json();
 
-      fetch(url, request)
-        .then((res) => res.json())
-        .then(() => {
-          navigate('/trainers');
-        });
+      alert(json.message);
+      navigate('/trainers');
+    }
+    if (confirm) {
+      deleteTrainer();
     }
   }
   function handleSubmit(e) {
     e.preventDefault();
-    const request = {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        experties: trainer.experties,
-      }),
-    };
 
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        const newTrainer = json.trainer;
-        newTrainer.fullName = `${newTrainer.employee.firstName} ${newTrainer.employee.lastName}`;
-        setTrainer(newTrainer);
-        setInit(newTrainer);
-        setIsDisabled(!isDisabled);
-      });
+    const body = {
+      experties: trainer.experties,
+    };
+    const request = new RequestOptions('PATCH', '', body);
+
+    async function postTrainer() {
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
+      console.log(json);
+
+      setTrainer(json.trainers);
+      setInit(json.trainers);
+      setIsDisabled(!isDisabled);
+    }
+
+    if (!isModified(init, trainer)) postTrainer();
+    else alert('Trainer is not modified');
+
+    function isModified(init, current) {
+      return JSON.stringify(init) === JSON.stringify(current);
+    }
   }
   return (
     <>
       <h1>Trainer Details</h1>
-      {loading ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <form onSubmit={handleSubmit}>
-          <label>Trainer's Name</label>
-          <input type="text" disabled value={trainer.fullName} />
+          <label>Trainer</label>
+          <input
+            type="text"
+            disabled
+            value={trainer?.employees?.[0]?.fullName ?? ''}
+          />
           <br />
           <label>Experties</label>
           <input

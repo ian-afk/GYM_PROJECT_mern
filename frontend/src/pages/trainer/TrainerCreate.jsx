@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import RequestOptions from '../../utils/requestClass';
 
 export default function TrainerCreate() {
   const [trainer, setTrainer] = useState({
@@ -14,19 +15,15 @@ export default function TrainerCreate() {
   }
   useEffect(() => {
     const url = setUrl('employees');
-    const request = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    const request = new RequestOptions('GET');
 
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.employees);
-        setEmployees(json.employees);
-      });
+    async function getEmployees() {
+      const res = await fetch(url, request.options);
+      const json = await res.json();
+      setEmployees(json.employees);
+    }
+
+    getEmployees();
   }, []);
 
   function handleChange(e) {
@@ -37,28 +34,25 @@ export default function TrainerCreate() {
   function handleSubmit(e) {
     e.preventDefault();
     const url = setUrl('trainers');
-    const request = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        employee: trainer.employee,
-        experties: trainer.experties,
-      }),
+    const body = {
+      employee: trainer.employee,
+      experties: trainer.experties,
     };
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        navigate(`/trainers/${json.data.trainer._id}`);
-      });
+    const request = new RequestOptions('POST', '', body);
+    async function postTrainer() {
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
+
+      navigate(`/trainers/${json.data.trainers._id}`);
+    }
+
+    postTrainer();
   }
   return (
     <>
       <h1>Create Trainer</h1>
       <form onSubmit={handleSubmit}>
-        <label>Trainer's Name</label>
+        <label>Trainer</label>
         <select name="employee" onChange={handleChange}>
           <option value="">Select Trainer</option>
           {employees.map((emp) => (
