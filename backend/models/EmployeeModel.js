@@ -74,8 +74,13 @@ employeeSchema.virtual('birthDate').get(function () {
     const day = d.length > 1 ? `${d}` : `0${d}`;
     return `${y}-${month}-${day}`;
   }
+
   const birthDate = formatDate(this.dob);
   return birthDate;
+});
+
+employeeSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
 });
 
 // QUERY MIDDLEWARE

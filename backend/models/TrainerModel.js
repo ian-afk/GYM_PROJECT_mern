@@ -16,11 +16,7 @@ const trainerSchema = new mongoose.Schema(
       defualt: 0,
     },
   },
-  { timestamps: true },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 // trainerSchema.pre('save')
@@ -31,13 +27,19 @@ trainerSchema.virtual('schedules', {
   localField: '_id',
 });
 
-trainerSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'employee',
-    select: 'firstName lastName',
-  });
-  next();
+trainerSchema.virtual('employees', {
+  ref: 'Employee',
+  foreignField: '_id',
+  localField: 'employee',
 });
+
+// trainerSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'employee',
+//     select: 'firstName lastName',
+//   });
+//   next();
+// });
 const Trainer = mongoose.model('Trainer', trainerSchema);
 
 export default Trainer;
