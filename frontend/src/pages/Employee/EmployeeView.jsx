@@ -6,9 +6,6 @@ import RequestOptions from '../../utils/requestClass';
 
 export default function EmployeeView() {
   const [disabled, setDisabled] = useState(true);
-  // const [employee, setEmployee] = useState({});
-  // const [init, setInit] = useState({});
-  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -21,41 +18,6 @@ export default function EmployeeView() {
     isLoading,
     url,
   } = useAPIView(path);
-  // useEffect(() => {
-  //   async function getEmployee() {
-  //     try {
-  //       const controller = new AbortController();
-  //       const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
-  //       const request = {
-  //         signal: controller.signal,
-  //         method: 'GET',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       };
-
-  //       setLoading(true);
-  //       const res = await fetch(url, request);
-
-  //       if (!res.ok)
-  //         throw new Error('Something went wrong while fetching employee');
-
-  //       const json = await res.json();
-
-  //       const newEmployee = json.employee;
-  //       newEmployee.dob = newEmployee.dob.slice(0, 10);
-  //       console.log(json);
-  //       setEmployee(newEmployee);
-  //       setInit(json.employee);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  //   getEmployee();
-  // }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -66,7 +28,6 @@ export default function EmployeeView() {
   }
 
   function handleEdit() {
-    console.log(init);
     setDisabled(!disabled);
     setEmployee(init);
   }
@@ -111,6 +72,7 @@ export default function EmployeeView() {
   function handleDelete() {
     const confirmed = window.confirm('Are you sure you want to delete?');
     const request = new RequestOptions('DELETE');
+
     async function deleteEmp() {
       const res = await fetch(url, request.options);
       const json = await res.json();
@@ -118,6 +80,7 @@ export default function EmployeeView() {
       alert(json.message);
       navigate('/employees');
     }
+
     if (confirmed) {
       deleteEmp();
     }

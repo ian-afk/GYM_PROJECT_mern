@@ -8,7 +8,7 @@ export const createClient = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     message: 'Client created successfully',
-    client: newClient,
+    clients: newClient,
   });
 });
 
@@ -30,7 +30,7 @@ export const getClient = catchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     status: 'success',
-    client: {
+    clients: {
       ...client._doc,
       ...client.$$populatedVirtuals,
     },
@@ -49,7 +49,7 @@ export const editClient = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     message: 'Client updated successfully',
-    client,
+    clients: client,
   });
 });
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import RequestOptions from '../../utils/requestClass';
 
 export default function ClientCreate() {
   const [client, setClient] = useState({
@@ -23,26 +24,26 @@ export default function ClientCreate() {
   function handleSubmit(e) {
     e.preventDefault();
     const url = `${import.meta.env.VITE_API_URL}/clients`;
-    const request = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        firstName: client.firstName,
-        lastName: client.lastName,
-        age: client.age,
-        gender: client.gender,
-        address: client.address,
-        email: client.email,
-        contactNo: client.contactNo,
-      }),
+    const body = {
+      firstName: client.firstName,
+      lastName: client.lastName,
+      age: client.age,
+      gender: client.gender,
+      address: client.address,
+      email: client.email,
+      contactNo: client.contactNo,
     };
-    fetch(url, request)
-      .then((res) => res.json())
-      .then((json) => {
-        navigate(`/clients/${json.client._id}`);
-      });
+
+    const request = new RequestOptions('POST', '', body);
+
+    async function postClient() {
+      const res = await fetch(url, request.postOptions);
+      const json = await res.json();
+
+      navigate(`/clients/${json.clients._id}`);
+    }
+
+    postClient();
   }
   return (
     <>

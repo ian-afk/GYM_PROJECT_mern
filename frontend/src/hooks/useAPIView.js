@@ -18,8 +18,6 @@ export function useAPIView(path) {
 
         const res = await fetch(url, request.options);
         const json = await res.json();
-
-        console.log(json[newPath]);
         console.log(json);
         setData(json[newPath]);
         setInit(json[newPath]);

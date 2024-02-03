@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAPIList } from '../../hooks/useAPIList';
+import RequestOptions from '../../utils/requestClass';
 
 export default function ClientList() {
   const path = `clients`;
@@ -9,22 +10,25 @@ export default function ClientList() {
     isLoading,
     url,
   } = useAPIList(path);
+
   function handleDelete(id) {
     const confirm = window.confirm('Are you sure you want to delete?');
 
-    if (confirm) {
-      const clientUrl = `${url}/${id}`;
-      const request = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
+    const request = new RequestOptions('DELETE');
+    const clientUrl = `${url}/${id}`;
 
-      fetch(clientUrl, request).then((res) => res.json());
+    async function deleteClient() {
+      const res = await fetch(clientUrl, request.options);
+      const json = await res.json();
+
       setClients((client) => {
         return client.filter((el) => el._id !== id);
       });
+
+      alert(json.message);
+    }
+    if (confirm) {
+      deleteClient();
     }
   }
   return (
