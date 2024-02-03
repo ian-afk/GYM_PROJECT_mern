@@ -22,6 +22,8 @@ import TrainerCreate from './pages/trainer/TrainerCreate';
 import ScheduleList from './pages/schedule/ScheduleList';
 import ScheduleCreate from './pages/schedule/ScheduleCreate';
 import ScheduleView from './pages/schedule/ScheduleView';
+import GymList from './pages/gymbranches/GymList';
+import GymView from './pages/gymbranches/GymView';
 
 export default function App() {
   const AppLayout = () => (
@@ -51,6 +53,9 @@ export default function App() {
         <Route path="/schedules" element={<ScheduleList />}></Route>
         <Route path="/schedules/:id" element={<ScheduleView />}></Route>
         <Route path="/schedules/create" element={<ScheduleCreate />}></Route>
+
+        <Route path="/gymbranches" element={<GymList />}></Route>
+        <Route path="/gymbranches/:id" element={<GymView />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )
