@@ -9,7 +9,7 @@ export const createGym = catchAsync(async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     message: 'Gymbranch Created Succesfully',
-    gymbranch,
+    gymbranches: gymbranch,
   });
 });
 
@@ -31,7 +31,7 @@ export const getGymBranch = catchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     status: 'success',
-    gymbranch,
+    gymbranches: gymbranch,
   });
 });
 
@@ -51,7 +51,7 @@ export const editGymBranch = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     message: 'Gym branch successfully updated',
-    gymbranch,
+    gymbranches: gymbranch,
   });
 });
 

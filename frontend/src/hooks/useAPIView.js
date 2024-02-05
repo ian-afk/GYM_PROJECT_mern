@@ -8,7 +8,7 @@ export function useAPIView(path) {
 
   const url = `${import.meta.env.VITE_API_URL}/${path}`;
   const newPath = path.split('/')[0];
-
+  console.log(url);
   useEffect(() => {
     const controller = new AbortController();
     async function getData() {
