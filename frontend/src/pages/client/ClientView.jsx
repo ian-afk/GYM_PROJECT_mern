@@ -125,7 +125,7 @@ export default function ClientView() {
           <input
             type="text"
             value={client.address}
-            name="address"
+            name="gymLocation.address"
             onChange={handleChange}
             disabled={disabled}
           />

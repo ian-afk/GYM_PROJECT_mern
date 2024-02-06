@@ -14,6 +14,7 @@ export default function GymList() {
   return (
     <>
       <h1>List of Gym branches</h1>
+      <Link to={`/gymbranches/create`}>Add Gym Branches</Link>
       {isLoading ? (
         <h3>Loading...</h3>
       ) : (
