@@ -26,9 +26,9 @@ export default function Nav() {
             <li>
               <Link to={'/gymbranches'}>Gym branches</Link>
             </li>
-            <li>Members</li>
+            {/* <li>Members</li>
             <li>Payments</li>
-            <li>Generate Report</li>
+            <li>Generate Report</li> */}
           </ul>
         </li>
         <li>About us</li>
