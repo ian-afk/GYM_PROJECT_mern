@@ -1,30 +1,30 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function Nav() {
   return (
     <nav>
       <ul>
         <li>
-          <Link to={'/'}>Home</Link>
+          <NavLink to={'/'}>Home</NavLink>
         </li>
         <li>Profile</li>
         <li>
           Operations
           <ul>
             <li>
-              <Link to={'/employees'}>Employees</Link>
+              <NavLink to="/employees">Employees</NavLink>
             </li>
             <li>
-              <Link to={'/clients'}>Clients</Link>
+              <NavLink to={'/clients'}>Clients</NavLink>
             </li>
             <li>
-              <Link to={'/trainers'}>Trainers</Link>
+              <NavLink to={'/trainers'}>Trainers</NavLink>
             </li>
             <li>
-              <Link to={'/schedules'}>Schedules</Link>
+              <NavLink to={'/schedules'}>Schedules</NavLink>
             </li>
             <li>
-              <Link to={'/gymbranches'}>Gym branches</Link>
+              <NavLink to={'/gymbranches'}>Gym branches</NavLink>
             </li>
             {/* <li>Members</li>
             <li>Payments</li>

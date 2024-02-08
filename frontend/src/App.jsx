@@ -14,17 +14,22 @@ import Nav from './components/Nav';
 import NotFound from './components/NotFoundPage';
 import EmployeeCreate from './pages/Employee/EmployeeCreate';
 import ClientList from './pages/client/ClientList';
+import ClientPage from './pages/client/ClientPage';
 import ClientView from './pages/client/ClientView';
 import ClientCreate from './pages/client/ClientCreate';
+import TrainerPage from './pages/trainer/TrainerPage';
 import TrainerList from './pages/trainer/TrainerList';
 import TrainerView from './pages/trainer/TrainerView';
 import TrainerCreate from './pages/trainer/TrainerCreate';
+import SchedulePage from './pages/schedule/SchedulePage';
 import ScheduleList from './pages/schedule/ScheduleList';
 import ScheduleCreate from './pages/schedule/ScheduleCreate';
 import ScheduleView from './pages/schedule/ScheduleView';
+import GymPage from './pages/gymbranches/GymPage';
 import GymList from './pages/gymbranches/GymList';
 import GymView from './pages/gymbranches/GymView';
 import GymCreate from './pages/gymbranches/GymCreate';
+import EmployeePage from './pages/Employee/EmployeePage';
 
 export default function App() {
   const AppLayout = () => (
@@ -39,25 +44,36 @@ export default function App() {
       <Route element={<AppLayout />}>
         <Route path="/" element={<Home />}></Route>
 
-        <Route path="/employees" element={<EmployeeList />}></Route>
-        <Route path="/employees/:id" element={<EmployeeView />}></Route>
-        <Route path="/employees/create" element={<EmployeeCreate />}></Route>
+        <Route path="employees" element={<EmployeePage />}>
+          <Route index element={<EmployeeList />} />
+          <Route path="create" element={<EmployeeCreate />} />
+          <Route path=":id" element={<EmployeeView />} />
+        </Route>
 
-        <Route path="/clients" element={<ClientList />}></Route>
-        <Route path="/clients/:id" element={<ClientView />}></Route>
-        <Route path="/clients/create" element={<ClientCreate />}></Route>
+        <Route path="/clients" element={<ClientPage />}>
+          <Route index element={<ClientList />} />
+          <Route path="/clients/:id" element={<ClientView />} />
+          <Route path="/clients/create" element={<ClientCreate />} />
+        </Route>
 
-        <Route path="/trainers" element={<TrainerList />}></Route>
-        <Route path="/trainers/:id" element={<TrainerView />}></Route>
-        <Route path="/trainers/create" element={<TrainerCreate />}></Route>
+        <Route path="/trainers" element={<TrainerPage />}>
+          <Route index element={<TrainerList />} />
+          <Route path="/trainers/:id" element={<TrainerView />} />
+          <Route path="/trainers/create" element={<TrainerCreate />} />
+        </Route>
 
-        <Route path="/schedules" element={<ScheduleList />}></Route>
-        <Route path="/schedules/:id" element={<ScheduleView />}></Route>
-        <Route path="/schedules/create" element={<ScheduleCreate />}></Route>
+        <Route path="/schedules" element={<SchedulePage />}>
+          <Route index element={<ScheduleList />} />
+          <Route path="/schedules/:id" element={<ScheduleView />} />
+          <Route path="/schedules/create" element={<ScheduleCreate />} />
+        </Route>
 
-        <Route path="/gymbranches" element={<GymList />}></Route>
-        <Route path="/gymbranches/create" element={<GymCreate />}></Route>
-        <Route path="/gymbranches/:id" element={<GymView />}></Route>
+        <Route path="/gymbranches" element={<GymPage />}>
+          <Route index element={<GymList />} />
+          <Route path="/gymbranches/create" element={<GymCreate />} />
+          <Route path="/gymbranches/:id" element={<GymView />} />
+        </Route>
+
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )
