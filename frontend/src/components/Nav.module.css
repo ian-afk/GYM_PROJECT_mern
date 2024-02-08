@@ -1,0 +1,28 @@
+.nav ul {
+  display: flex;
+  background-color: #9eafdd;
+  /* gap: 20px; */
+  justify-content: space-between;
+  list-style: none;
+}
+
+.nav a:link,
+.nav a:visited {
+  text-decoration: none;
+}
+.nav li + .active {
+  text-decoration: underline;
+}
+.nav a:global(.active) {
+  text-decoration: underline;
+  background-color: green;
+}
+
+.nav ul > li {
+  display: block;
+  list-style: none;
+}
+
+.nav > ul > li:nth-child(3) > ul > a {
+  color: green;
+}

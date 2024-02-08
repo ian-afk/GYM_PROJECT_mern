@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAPIList } from '../../hooks/useAPIList';
 import RequestOptions from '../../utils/requestClass';
 export default function EmployeeList() {
