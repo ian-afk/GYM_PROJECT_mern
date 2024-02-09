@@ -1,81 +1,82 @@
+import styles from './Main.module.css';
 export default function Main() {
   return (
     <>
-      <main>
-        <section className="section-about">
-          <div className="center-text">
-            <h2 className="heading-secondary">
+      <main className={styles.main}>
+        <section className={styles['section-about']}>
+          <div className={styles['center-text']}>
+            <h2 className={styles['heading-secondary']}>
               Exciting Body transformation journey
             </h2>
           </div>
-          <div className="row">
-            <div className="col-1-of-2">
-              <h3 className="heading-tertiary">
+          <div className={styles['row']}>
+            <div className={styles['col-1-of-2']}>
+              <h3 className={styles['heading-tertiary']}>
                 You're going to love the progress
               </h3>
-              <p className="paragraph">
+              <p className={styles['paragraph']}>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
                 aliquid laudantium asperiores autem excepturi, harum{' '}
               </p>
-              <h3 className="heading-tertiary">
+              <h3 className={styles['heading-tertiary']}>
                 You will see progress day by day
               </h3>
-              <p className="paragraph">
+              <p className={styles['paragraph']}>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi
                 laboriosam, eos totam aspernatur sit odio. Voluptates,{' '}
               </p>
               <a href="#">Learn more &rarr;</a>
             </div>
-            <div className="col-1-of-2">
-              <div className="composition">
+            <div className={styles['col-1-of-2']}>
+              <div className={styles['composition']}>
                 <img
                   src="/before_after/male.PNG"
                   alt="male1"
-                  className="composition__photo composition__photo--p1"
+                  className={`${styles['composition__photo']} ${styles['composition__photo--p1']}`}
                 />
                 <img
                   src="/before_after/female.PNG"
                   alt="male1"
-                  className="composition__photo composition__photo--p2"
+                  className={`${styles['composition__photo']} ${styles['composition__photo--p2']}`}
                 />
                 <img
                   src="/before_after/male2.PNG"
                   alt="male1"
-                  className="composition__photo composition__photo--p3"
+                  className={`${styles['composition__photo']} ${styles['composition__photo--p3']}`}
                 />
                 <img
                   src="/before_after/female2.PNG"
                   alt="male1"
-                  className="composition__photo composition__photo--p4"
+                  className={`${styles['composition__photo']} ${styles['composition__photo--p4']}`}
                 />
               </div>
             </div>
           </div>
         </section>
-        <section className="section-features">
-          <div className="row">
-            <div className="col-1-of-4">
+        <section className={styles['section-features']}>
+          <div className={styles['features-row']}>
+            <div className={styles['col-1-of-4']}>
               <h3>Lifestyle</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
                 aperiam. Eum nulla, reiciendis velit
               </p>
             </div>
-            <div className="col-1-of-4">
+            <div className={styles['col-1-of-4']}>
               <h3>Body Building</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
                 aperiam. Eum nulla, reiciendis velit
               </p>
             </div>
-            <div className="col-1-of-4">
+            <div className={styles['col-1-of-4']}>
               <h3>Weight Lifting</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
                 aperiam. Eum nulla, reiciendis velit
               </p>
             </div>
-            <div className="col-1-of-4">
+            <div className={styles['col-1-of-4']}>
               <h3>Sports</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,

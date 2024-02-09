@@ -1,3 +1,6 @@
+.nav {
+  margin: 20px;
+}
 .nav ul {
   display: flex;
   background-color: #9eafdd;
@@ -23,6 +26,6 @@
   list-style: none;
 }
 
-.nav > ul > li:nth-child(3) > ul > a {
+/* .nav > ul > li:nth-child(3) > ul > a {
   color: green;
-}
+} */
