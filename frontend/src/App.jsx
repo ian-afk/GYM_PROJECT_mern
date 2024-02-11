@@ -30,6 +30,8 @@ import GymList from './pages/gymbranches/GymList';
 import GymView from './pages/gymbranches/GymView';
 import GymCreate from './pages/gymbranches/GymCreate';
 import EmployeePage from './pages/Employee/EmployeePage';
+import AuthPage from './pages/auth/AuthPage';
+import Login from './pages/auth/Login';
 
 export default function App() {
   const AppLayout = () => (
@@ -74,6 +76,8 @@ export default function App() {
           <Route path="/gymbranches/:id" element={<GymView />} />
         </Route>
 
+        <Route path="/user" element={<AuthPage />}></Route>
+        <Route path="/user/login" element={<Login />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )
