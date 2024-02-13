@@ -1,23 +1,25 @@
 import { Link } from 'react-router-dom';
 import { useAPIList } from '../../hooks/useAPIList';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
 export default function EmployeeList() {
   // const [employees, setEmployees] = useState([]);
   // const [loading, setLoading] = useState(false);
 
+  const { token, isLoggedIn } = useAuth();
   const path = `employees`;
   const {
     data: employees,
     setData: setEmployees,
     isLoading,
     url,
-  } = useAPIList(path);
+  } = useAPIList(path, token);
 
   function handleDelete(id) {
     const confirmed = window.confirm('Are you sure you want to delete?');
 
     const empUrl = `${url}/${id}`;
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
 
     async function deleteEmployee() {
       const res = await fetch(empUrl, request.options);

@@ -32,11 +32,13 @@ import GymCreate from './pages/gymbranches/GymCreate';
 import EmployeePage from './pages/Employee/EmployeePage';
 import AuthPage from './pages/auth/AuthPage';
 import Login from './pages/auth/Login';
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
   const AppLayout = () => (
     <>
       <Nav />
+
       <Outlet />
     </>
   );
@@ -76,15 +78,17 @@ export default function App() {
           <Route path="/gymbranches/:id" element={<GymView />} />
         </Route>
 
-        <Route path="/user" element={<AuthPage />}></Route>
-        <Route path="/user/login" element={<Login />}></Route>
+        <Route path="/users" element={<AuthPage />}></Route>
+        <Route path="/users/login" element={<Login />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )
   );
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   );
 }
