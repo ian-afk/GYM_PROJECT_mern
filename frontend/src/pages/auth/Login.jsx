@@ -1,6 +1,19 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 
+const initialState = {
+  email: '',
+  password: '',
+  isLoading: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'login':
+      return;
+  }
+}
 export default function Login() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [user, setUser] = useState({
     email: '',
     password: '',
