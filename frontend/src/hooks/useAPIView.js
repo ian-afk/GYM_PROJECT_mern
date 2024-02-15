@@ -40,7 +40,7 @@ export function useAPIView(path, token = '', setIsLoggedIn) {
     return function () {
       controller.abort();
     };
-  }, [newPath, url]);
+  }, [newPath, url, setIsLoggedIn]);
 
   return { data, setData, isLoading, url, init, setInit, message };
 }

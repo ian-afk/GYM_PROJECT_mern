@@ -37,6 +37,6 @@ export function useAPIList(path, token = '', setIsLoggedIn) {
     }
 
     getAllData();
-  }, [path, token, url]);
+  }, [path, token, url, setIsLoggedIn]);
   return { data, setData, isLoading, url, message };
 }
