@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import RequestOptions from '../utils/requestClass';
 
-export function useAPIList(path, token = '') {
+export function useAPIList(path, token = '', setIsLoggedIn) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const url = `${import.meta.env.VITE_API_URL}/${path}`;
 
@@ -14,10 +15,19 @@ export function useAPIList(path, token = '') {
         setIsLoading(true);
         const res = await fetch(url, request.options);
         const json = await res.json();
-        console.log('hello im still in the');
+
         console.log(json);
-        setData(json[path]);
-        setIsLoading(false);
+        if (json.status === 'fail') {
+          console.log('im here');
+          setData([]);
+          setIsLoading(false);
+          setIsLoggedIn(false);
+          setMessage(json.message);
+          console.log(json.message);
+        } else {
+          setData(json[path]);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log('hello');
         console.log(error);
@@ -28,5 +38,5 @@ export function useAPIList(path, token = '') {
 
     getAllData();
   }, [path, token, url]);
-  return { data, setData, isLoading, url };
+  return { data, setData, isLoading, url, message };
 }

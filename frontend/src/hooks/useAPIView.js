@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import RequestOptions from '../utils/requestClass';
 
-export function useAPIView(path) {
+export function useAPIView(path, token = '', setIsLoggedIn) {
   const [data, setData] = useState({});
   const [init, setInit] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const url = `${import.meta.env.VITE_API_URL}/${path}`;
   const newPath = path.split('/')[0];
@@ -13,11 +14,19 @@ export function useAPIView(path) {
     const controller = new AbortController();
     async function getData() {
       try {
-        const request = new RequestOptions('GET');
+        const request = new RequestOptions('GET', token);
         setIsLoading(true);
 
         const res = await fetch(url, request.options);
         const json = await res.json();
+        console.log(json);
+        if (json.status === 'fail') {
+          setData([]);
+          setInit([]);
+          setIsLoading(false);
+          setIsLoggedIn(false);
+          setMessage(json.message);
+        }
         setData(json[newPath]);
         setInit(json[newPath]);
         setIsLoading(false);
@@ -33,7 +42,7 @@ export function useAPIView(path) {
     };
   }, [newPath, url]);
 
-  return { data, setData, isLoading, url, init, setInit };
+  return { data, setData, isLoading, url, init, setInit, message };
 }
 
 export default useAPIView;

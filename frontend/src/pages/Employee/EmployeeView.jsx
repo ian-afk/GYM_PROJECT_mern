@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
 import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 export default function EmployeeView() {
   const [disabled, setDisabled] = useState(true);
@@ -10,6 +12,7 @@ export default function EmployeeView() {
   const { id } = useParams();
 
   const path = `employees/${id}`;
+  const { token, isLoggedIn, setIsLoggedIn } = useAuth();
   const {
     data: employee,
     setData: setEmployee,
@@ -17,7 +20,8 @@ export default function EmployeeView() {
     setInit,
     isLoading,
     url,
-  } = useAPIView(path);
+    message,
+  } = useAPIView(path, token, setIsLoggedIn);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -88,91 +92,100 @@ export default function EmployeeView() {
 
   return (
     <>
-      <h1>Employee Details</h1>
-      {isLoading ? (
-        <h3>Loading...</h3>
+      {!isLoggedIn ? (
+        <NotLoggedIn message={message} />
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={employee.firstName}
-            disabled={disabled}
-            onChange={handleChange}
-          />
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={employee.lastName}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Birth date</label>
-          <input
-            type="date"
-            name="birthDate"
-            value={employee.birthDate}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <label>Age</label>
-          <input
-            type="number"
-            name="age"
-            min={18}
-            max={50}
-            value={employee.age}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Gender</label>
-          <select
-            value={employee.gender}
-            name="gender"
-            onChange={handleChange}
-            disabled={disabled}
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          <br />
-          <label>Address</label>
-          <input
-            type="text"
-            value={employee.address}
-            name="address"
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            value={employee.email}
-            onChange={handleChange}
-            disabled={disabled}
-          />
+        <>
+          <h1>Employee Details</h1>
+          {isLoading ? (
+            <h3>Loading...</h3>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={employee.firstName}
+                disabled={disabled}
+                onChange={handleChange}
+              />
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={employee.lastName}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Birth date</label>
+              <input
+                type="date"
+                name="birthDate"
+                value={employee.birthDate}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <label>Age</label>
+              <input
+                type="number"
+                name="age"
+                min={18}
+                max={50}
+                value={employee.age}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Gender</label>
+              <select
+                value={employee.gender}
+                name="gender"
+                onChange={handleChange}
+                disabled={disabled}
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <br />
+              <label>Address</label>
+              <input
+                type="text"
+                value={employee.address}
+                name="address"
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                value={employee.email}
+                onChange={handleChange}
+                disabled={disabled}
+              />
 
-          {!disabled && <button type="submit">Save</button>}
-          <>
-            <button type="button" onClick={handleEdit}>
-              {disabled ? 'Edit' : 'Cancel'}
-            </button>
-            {disabled && (
-              <button type="button" onClick={() => handleDelete(employee._id)}>
-                Delete
-              </button>
-            )}
-            <LinkButtonComponent path={'/employees'}>
-              Back to list
-            </LinkButtonComponent>
-          </>
-        </form>
+              {!disabled && <button type="submit">Save</button>}
+              <>
+                <button type="button" onClick={handleEdit}>
+                  {disabled ? 'Edit' : 'Cancel'}
+                </button>
+                {disabled && (
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(employee._id)}
+                  >
+                    Delete
+                  </button>
+                )}
+                <LinkButtonComponent path={'/employees'}>
+                  Back to list
+                </LinkButtonComponent>
+              </>
+            </form>
+          )}
+        </>
       )}
     </>
   );
