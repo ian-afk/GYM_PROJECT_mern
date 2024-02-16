@@ -48,7 +48,7 @@ export default function EmployeeView() {
       address: employee.address,
       email: employee.email,
     };
-    const request = new RequestOptions('PATCH', '', body);
+    const request = new RequestOptions('PATCH', token, body);
     const url = `${import.meta.env.VITE_API_URL}/employees/${id}`;
 
     async function postEmployee() {
@@ -75,7 +75,7 @@ export default function EmployeeView() {
 
   function handleDelete() {
     const confirmed = window.confirm('Are you sure you want to delete?');
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
 
     async function deleteEmp() {
       const res = await fetch(url, request.options);

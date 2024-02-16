@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
 
 export default function EmployeeCreate() {
   const [employee, setEmployee] = useState({
@@ -13,6 +14,7 @@ export default function EmployeeCreate() {
     email: '',
   });
 
+  const { token, isLoggedIn, setToken, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
   function handleChange(e) {
     const { name, value } = e.target;
@@ -34,7 +36,7 @@ export default function EmployeeCreate() {
       address: employee.address,
       email: employee.email,
     };
-    const request = new RequestOptions('POST', '', body);
+    const request = new RequestOptions('POST', token, body);
 
     async function createEmployee() {
       const res = await fetch(url, request.postOptions);
