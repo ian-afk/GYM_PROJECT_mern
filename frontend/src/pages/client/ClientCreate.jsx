@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ClientCreate() {
   const [client, setClient] = useState({
@@ -14,6 +15,7 @@ export default function ClientCreate() {
   });
 
   const navigate = useNavigate();
+  const { token, setIsToken, isLoggedIn, setIsLoggedIn } = useAuth();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -34,7 +36,7 @@ export default function ClientCreate() {
       contactNo: client.contactNo,
     };
 
-    const request = new RequestOptions('POST', '', body);
+    const request = new RequestOptions('POST', token, body);
 
     async function postClient() {
       const res = await fetch(url, request.postOptions);

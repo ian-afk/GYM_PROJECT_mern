@@ -5,6 +5,7 @@ import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
 
 export default function ClientView() {
+  const { token, setIsToken, isLoggedIn, setIsLoggedIn } = useAuth();
   const [disabled, setDisabled] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ export default function ClientView() {
     url,
     init,
     setInit,
-  } = useAPIView(path);
+    message,
+  } = useAPIView(path, token, setIsLoggedIn);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -34,7 +36,7 @@ export default function ClientView() {
   function handleDelete() {
     const confirm = window.confirm('Are you sure you want to delete?');
 
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
     async function deleteClient() {
       const res = await fetch(url, request.options);
       const json = await res.json();
@@ -57,7 +59,7 @@ export default function ClientView() {
       address: client.address,
       email: client.email,
     };
-    const request = new RequestOptions('PATCH', '', body);
+    const request = new RequestOptions('PATCH', token, body);
 
     async function postEmployee() {
       const res = await fetch(url, request.postOptions);

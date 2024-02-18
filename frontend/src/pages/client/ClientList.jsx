@@ -3,18 +3,20 @@ import { useAPIList } from '../../hooks/useAPIList';
 import RequestOptions from '../../utils/requestClass';
 
 export default function ClientList() {
+  const { token, setIsToken, isLoggedIn, setIsLoggedIn } = useAuth();
   const path = `clients`;
   const {
     data: clients,
     setData: setClients,
     isLoading,
     url,
-  } = useAPIList(path);
+    message,
+  } = useAPIList(path, token, setIsLoggedIn);
 
   function handleDelete(id) {
     const confirm = window.confirm('Are you sure you want to delete?');
 
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
     const clientUrl = `${url}/${id}`;
 
     async function deleteClient() {
