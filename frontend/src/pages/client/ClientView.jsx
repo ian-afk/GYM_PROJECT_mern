@@ -3,9 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
 import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 export default function ClientView() {
-  const { token, setIsToken, isLoggedIn, setIsLoggedIn } = useAuth();
+  const { token, isLoggedIn, setIsLoggedIn } = useAuth();
   const [disabled, setDisabled] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -78,81 +80,87 @@ export default function ClientView() {
   }
   return (
     <>
-      <h1>Client Details</h1>
-
-      {isLoading ? (
-        <p>Loading...</p>
+      {!isLoggedIn ? (
+        <NotLoggedIn message={message} />
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={client.firstName}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={client.lastName}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Age</label>
-          <input
-            type="number"
-            name="age"
-            value={client.age}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Gender</label>
-          <select
-            value={client.gender}
-            name="gender"
-            onChange={handleChange}
-            disabled={disabled}
-            required
-          >
-            <option value="male">MALE</option>
-            <option value="female">FEMALE</option>
-          </select>
-          <br />
-          <label>Address</label>
-          <input
-            type="text"
-            value={client.address}
-            name="gymLocation.address"
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            value={client.email}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          {!disabled && <button type="submit">Save</button>}
-          <button type="button" onClick={() => handleEdit()}>
-            {disabled ? 'Edit' : 'Cancel'}
-          </button>
-          {disabled && (
-            <button type="button" onClick={() => handleDelete(client._id)}>
-              Delete
-            </button>
+        <>
+          <h1>Client Details</h1>
+
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={client.firstName}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={client.lastName}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Age</label>
+              <input
+                type="number"
+                name="age"
+                value={client.age}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Gender</label>
+              <select
+                value={client.gender}
+                name="gender"
+                onChange={handleChange}
+                disabled={disabled}
+                required
+              >
+                <option value="male">MALE</option>
+                <option value="female">FEMALE</option>
+              </select>
+              <br />
+              <label>Address</label>
+              <input
+                type="text"
+                value={client.address}
+                name="gymLocation.address"
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                value={client.email}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              {!disabled && <button type="submit">Save</button>}
+              <button type="button" onClick={() => handleEdit()}>
+                {disabled ? 'Edit' : 'Cancel'}
+              </button>
+              {disabled && (
+                <button type="button" onClick={() => handleDelete(client._id)}>
+                  Delete
+                </button>
+              )}
+              <LinkButtonComponent path={'/clients'}>
+                Back to list
+              </LinkButtonComponent>
+            </form>
           )}
-          <LinkButtonComponent path={'/clients'}>
-            Back to list
-          </LinkButtonComponent>
-        </form>
+        </>
       )}
     </>
   );
