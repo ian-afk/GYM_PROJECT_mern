@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useAPIList } from '../../hooks/useAPIList';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 export default function TrainerList() {
+  const { token, isLoggedIn, setIsLoggedIn } = useAuth();
   const path = `trainers`;
   const {
     data: trainers,
     setData: setTrainers,
     isLoading,
     url,
-  } = useAPIList(path);
+    message,
+  } = useAPIList(path, token, setIsLoggedIn);
 
   function handleDelete(id) {
     const confirm = window.confirm('Are you sure you want to delete?');
@@ -29,38 +33,44 @@ export default function TrainerList() {
   }
   return (
     <>
-      <h1>Trainer List</h1>
-      {isLoading ? (
-        <h2>Loading...</h2>
+      {!isLoggedIn ? (
+        <NotLoggedIn message={message} />
       ) : (
         <>
-          <Link to={'/trainers/create'}>Create Trainer</Link>
-          <table>
-            <thead>
-              <tr>
-                <th>Trainer</th>
-                <th>Experties</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {trainers.map((trainer) => (
-                <tr key={trainer._id}>
-                  <td>{trainer.employees[0].fullName}</td>
-                  <td>{trainer.experties}</td>
-                  <td>
-                    <Link to={`/trainers/${trainer._id}`}>View</Link>
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(trainer._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <h1>Trainer List</h1>
+          {isLoading ? (
+            <h2>Loading...</h2>
+          ) : (
+            <>
+              <Link to={'/trainers/create'}>Create Trainer</Link>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Trainer</th>
+                    <th>Experties</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {trainers.map((trainer) => (
+                    <tr key={trainer._id}>
+                      <td>{trainer.employees[0].fullName}</td>
+                      <td>{trainer.experties}</td>
+                      <td>
+                        <Link to={`/trainers/${trainer._id}`}>View</Link>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(trainer._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
         </>
       )}
     </>

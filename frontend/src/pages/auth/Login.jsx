@@ -31,10 +31,13 @@ export default function Login() {
       const json = await res.json();
 
       console.log(json);
-      alert(json.message);
-      setToken(json.token);
-      setIsLoggedIn(() => (json.status === 'success' ? true : false));
-      navigate(`/`);
+      if (json.status === 'fail') alert(json.message);
+      else {
+        alert(json.message);
+        setToken(json.token);
+        setIsLoggedIn(() => (json.status === 'success' ? true : false));
+        navigate(`/`);
+      }
     };
     login();
   }

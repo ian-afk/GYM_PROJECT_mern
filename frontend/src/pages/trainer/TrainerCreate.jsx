@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 export default function TrainerCreate() {
+  const { token, isLoggedIn } = useAuth();
   const [trainer, setTrainer] = useState({
     employee: '',
     experties: '',
   });
+  const [message, setMessage] = useState('');
   const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
   function setUrl(url) {
@@ -15,12 +19,13 @@ export default function TrainerCreate() {
   }
   useEffect(() => {
     const url = setUrl('employees');
-    const request = new RequestOptions('GET');
+    const request = new RequestOptions('GET', token);
 
     async function getEmployees() {
       const res = await fetch(url, request.options);
       const json = await res.json();
-      setEmployees(json.employees);
+      if (json.status === 'fail') setMessage(json.message);
+      else setEmployees(json.employees);
     }
 
     getEmployees();
@@ -38,7 +43,7 @@ export default function TrainerCreate() {
       employee: trainer.employee,
       experties: trainer.experties,
     };
-    const request = new RequestOptions('POST', '', body);
+    const request = new RequestOptions('POST', token, body);
     async function postTrainer() {
       const res = await fetch(url, request.postOptions);
       const json = await res.json();
@@ -50,28 +55,34 @@ export default function TrainerCreate() {
   }
   return (
     <>
-      <h1>Create Trainer</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Trainer</label>
-        <select name="employee" onChange={handleChange}>
-          <option value="">Select Trainer</option>
-          {employees.map((emp) => (
-            <option key={emp._id} value={emp._id}>
-              {emp.firstName} {emp.lastName}
-            </option>
-          ))}
-        </select>
-        <br />
-        <label>Experties</label>
-        <input
-          type="text"
-          name="experties"
-          value={trainer.experties}
-          onChange={handleChange}
-        />
-        <button type="submit">Save</button>
-        <Link to={'/trainers'}>Back to List</Link>
-      </form>
+      {!isLoggedIn ? (
+        <NotLoggedIn message={message} />
+      ) : (
+        <>
+          <h1>Create Trainer</h1>
+          <form onSubmit={handleSubmit}>
+            <label>Trainer</label>
+            <select name="employee" onChange={handleChange}>
+              <option value="">Select Trainer</option>
+              {employees.map((emp) => (
+                <option key={emp._id} value={emp._id}>
+                  {emp.firstName} {emp.lastName}
+                </option>
+              ))}
+            </select>
+            <br />
+            <label>Experties</label>
+            <input
+              type="text"
+              name="experties"
+              value={trainer.experties}
+              onChange={handleChange}
+            />
+            <button type="submit">Save</button>
+            <Link to={'/trainers'}>Back to List</Link>
+          </form>
+        </>
+      )}
     </>
   );
 }
