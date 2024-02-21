@@ -31,7 +31,7 @@ const gymbranchSchema = new mongoose.Schema(
       address: String,
       description: String,
     },
-    employees: [
+    employee: [
       {
         type: mongoose.Schema.ObjectId,
         ref: 'Employee',
@@ -48,7 +48,7 @@ const gymbranchSchema = new mongoose.Schema(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 gymbranchSchema.pre(/^find/, function (next) {
@@ -68,6 +68,12 @@ gymbranchSchema.pre(/^find/, function (next) {
 
 //   next();
 // });
+
+gymbranchSchema.virtual('employees', {
+  ref: 'Employee',
+  foreignField: '_id',
+  localField: 'employee',
+});
 
 const GymBranch = mongoose.model('gymbranches', gymbranchSchema);
 
