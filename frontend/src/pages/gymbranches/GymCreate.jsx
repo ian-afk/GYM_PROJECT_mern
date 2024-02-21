@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
 
 export default function GymCreate() {
+  const { token, isLoggedIn, setIsLoggedIn } = useAuth();
   const [gymbranch, setGymbranch] = useState({
     gymLevel: '',
     address: '',
@@ -41,7 +43,7 @@ export default function GymCreate() {
       employees: [],
     };
     const url = `${import.meta.env.VITE_API_URL}/gymbranches/`;
-    const request = new RequestOptions('POST', '', body);
+    const request = new RequestOptions('POST', token, body);
     async function postGymbranch() {
       const res = await fetch(url, request.postOptions);
       const json = await res.json();

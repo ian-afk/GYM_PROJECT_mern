@@ -3,9 +3,12 @@ import useAPIView from '../../hooks/useAPIView';
 import { useState } from 'react';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 export default function GymView() {
   const [disabled, setDisabled] = useState(true);
+  const { token, isLoggedIn, setIsLoggedIn } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
   const path = `gymbranches/${id}`;
@@ -16,7 +19,8 @@ export default function GymView() {
     setInit,
     isLoading,
     url,
-  } = useAPIView(path);
+    message,
+  } = useAPIView(path, token, setIsLoggedIn);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -38,7 +42,7 @@ export default function GymView() {
   function handleDelete() {
     const confirm = window.confirm('Are you sure you want to delete');
 
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
     async function deleteGym() {
       const res = await fetch(url, request.options);
       const json = await res.json();
@@ -58,7 +62,7 @@ export default function GymView() {
       gymLevel: gymbranches.gymLevel,
       gymLocation: { address: gymbranches.gymLocation.address },
     };
-    const request = new RequestOptions('PATCH', '', body);
+    const request = new RequestOptions('PATCH', token, body);
     async function postGymbranch() {
       const res = await fetch(url, request.postOptions);
       const json = await res.json();
@@ -79,60 +83,74 @@ export default function GymView() {
   }
   return (
     <>
-      <h1>Gym Details</h1>
-      {isLoading ? (
-        <h3>Loading...</h3>
+      {!isLoggedIn ? (
+        <NotLoggedIn message={message} />
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>Gym Name</label>
-          <input type="text" name="gymName" value={gymbranches.name} disabled />
-          <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            value={gymbranches.email}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          <label>Gym Manager</label>
-          {/* <select>
+        <>
+          <h1>Gym Details</h1>
+          {isLoading ? (
+            <h3>Loading...</h3>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <label>Gym Name</label>
+              <input
+                type="text"
+                name="gymName"
+                value={gymbranches.name}
+                disabled
+              />
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                value={gymbranches.email}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              <label>Gym Manager</label>
+              {/* <select>
             <option value={gymbranches.employees[]}></option>
             <option value=''></option>
             <option value=''></option>
             <option value=''></option>
           </select> */}
-          <label>Gym Level</label>
-          <input
-            type="text"
-            name="gymLevel"
-            value={gymbranches.gymLevel}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <p>Location :</p>
-          <label>Address</label>
-          <input
-            type="text"
-            name="address"
-            value={gymbranches?.gymLocation?.address ?? ''}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-          <br />
-          {!disabled && <button type="submit">Save</button>}
-          <button type="button" onClick={handleEdit}>
-            {disabled ? 'Edit' : 'Cancel'}
-          </button>
-          {disabled && (
-            <button type="button" onClick={() => handleDelete(gymbranches._id)}>
-              Delete
-            </button>
+              <label>Gym Level</label>
+              <input
+                type="text"
+                name="gymLevel"
+                value={gymbranches.gymLevel}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <p>Location :</p>
+              <label>Address</label>
+              <input
+                type="text"
+                name="address"
+                value={gymbranches?.gymLocation?.address ?? ''}
+                onChange={handleChange}
+                disabled={disabled}
+              />
+              <br />
+              {!disabled && <button type="submit">Save</button>}
+              <button type="button" onClick={handleEdit}>
+                {disabled ? 'Edit' : 'Cancel'}
+              </button>
+              {disabled && (
+                <button
+                  type="button"
+                  onClick={() => handleDelete(gymbranches._id)}
+                >
+                  Delete
+                </button>
+              )}
+              <LinkButtonComponent path={'/gymbranches'}>
+                Back to list
+              </LinkButtonComponent>
+            </form>
           )}
-          <LinkButtonComponent path={'/gymbranches'}>
-            Back to list
-          </LinkButtonComponent>
-        </form>
+        </>
       )}
     </>
   );
