@@ -6,14 +6,15 @@ import {
   getAllGymBranches,
   getGymBranch,
 } from '../controller/gymbranchController.js';
+import { protect } from '../controller/authenticationController.js';
 
 const router = express.Router();
 
-router.route('/').get(getAllGymBranches).post(createGym);
+router.route('/').get(protect, getAllGymBranches).post(protect, createGym);
 router
   .route('/:id')
-  .get(getGymBranch)
-  .patch(editGymBranch)
-  .delete(deleteGymBranch);
+  .get(protect, getGymBranch)
+  .patch(protect, editGymBranch)
+  .delete(protect, deleteGymBranch);
 
 export default router;
