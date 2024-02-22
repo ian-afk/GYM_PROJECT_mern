@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
+import styles from './GymCreate.module.css';
 
 export default function GymCreate() {
   const { token, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -12,20 +13,45 @@ export default function GymCreate() {
     gymLocation: {
       address: '',
     },
-    employees: '',
+    employee: '',
   });
+  const [employees, setEmployees] = useState([]);
+  const [initEmp, setInitEmp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  function setUrl(url) {
+    const newUrl = `${import.meta.env.VITE_API_URL}/${url}`;
+    return newUrl;
+  }
+  useEffect(() => {
+    const url = setUrl('employees');
+    const request = new RequestOptions('GET', token);
+    async function getEmployees() {
+      const res = await fetch(url, request.options);
+      const json = await res.json();
 
+      console.log(json);
+      if (json.status === 'fail') setMessage(json.message);
+      else setEmployees(json.employees);
+    }
+
+    getEmployees();
+  }, []);
   function handleChange(e) {
-    const { name, value } = e.target;
+    console.log(e.target);
+    const { name, value, dataValue } = e.target;
+    console.log(value, name, dataValue);
     setGymbranch((prev) => {
       const newGym = { ...prev };
       if (name === 'address') {
         newGym.gymLocation = { [name]: value };
         return newGym;
       }
+      // if (name === 'employee') {
+      //   console.log(name);
+      //   newGym[name] = 'a';
+      // }
 
       return { ...prev, [name]: value };
     });
@@ -40,7 +66,7 @@ export default function GymCreate() {
       gymLocation: {
         address: gymbranch.gymLocation.address,
       },
-      employees: [],
+      employee: gymbranch.employee,
     };
     const url = `${import.meta.env.VITE_API_URL}/gymbranches/`;
     const request = new RequestOptions('POST', token, body);
@@ -63,10 +89,34 @@ export default function GymCreate() {
       ) : (
         <form onSubmit={handleSubmit}>
           <label>Manager</label>
-          <select>
-            <option>TEST</option>
-            <option>TEST2</option>
-          </select>
+          <input
+            type="text"
+            name="employee5"
+            onChange={(e) => setInitEmp(e.target.value)}
+          />
+          <div className={styles.dropdown}>
+            {employees
+              .filter((emp) => {
+                const searchEmp = initEmp.toLowerCase();
+                const fullName = emp.fullName.toLowerCase();
+
+                return searchEmp && fullName.startsWith(searchEmp);
+              })
+              .map((emp) => (
+                <p
+                  className={styles.dropdownRow}
+                  key={emp._id}
+                  onClick={() =>
+                    setGymbranch((prev) => ({
+                      ...prev,
+                      [gymbranch.employee]: emp._id,
+                    }))
+                  }
+                >
+                  {emp.fullName}
+                </p>
+              ))}
+          </div>
           <br />
           <label htmlFor="">Gym Level</label>
           <select

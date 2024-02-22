@@ -3,7 +3,6 @@ import { useAPIList } from '../../hooks/useAPIList';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
 import RequestOptions from '../../utils/requestClass';
-import { useEffect } from 'react';
 
 export default function GymList() {
   const { token, isLoggedIn, setIsLoggedIn } = useAuth();
