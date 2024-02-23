@@ -91,33 +91,41 @@ export default function GymCreate() {
           <label>Manager</label>
           <input
             type="text"
-            name="employee5"
+            name="employee"
+            value={initEmp}
             onChange={(e) => setInitEmp(e.target.value)}
+            className={styles.searchEmp}
           />
           <div className={styles.dropdown}>
-            {employees
-              .filter((emp) => {
-                const searchEmp = initEmp.toLowerCase();
-                const fullName = emp.fullName.toLowerCase();
+            <div className={styles.firstDiv}>
+              {employees
+                .filter((emp) => {
+                  const searchEmp = initEmp.toLowerCase();
+                  const fullName = emp.fullName.toLowerCase();
 
-                return searchEmp && fullName.startsWith(searchEmp);
-              })
-              .map((emp) => (
-                <p
-                  className={styles.dropdownRow}
-                  key={emp._id}
-                  onClick={() =>
-                    setGymbranch((prev) => ({
-                      ...prev,
-                      [gymbranch.employee]: emp._id,
-                    }))
-                  }
-                >
-                  {emp.fullName}
-                </p>
-              ))}
+                  return (
+                    searchEmp &&
+                    fullName.startsWith(searchEmp) &&
+                    fullName !== searchEmp
+                  );
+                })
+                .map((emp) => (
+                  <div
+                    key={emp._id}
+                    onClick={() => {
+                      console.log('got clicked');
+                      setInitEmp(emp.fullName);
+                      setGymbranch((prev) => ({
+                        ...prev,
+                        employee: emp._id,
+                      }));
+                    }}
+                  >
+                    <p className={styles.dropdownRow}>{emp.fullName}</p>
+                  </div>
+                ))}
+            </div>
           </div>
-          <br />
           <label htmlFor="">Gym Level</label>
           <select
             name="gymLevel"

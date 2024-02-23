@@ -1,13 +1,24 @@
+.searchEmp {
+  position: relative;
+}
 .dropdown {
   display: flex;
   flex-direction: column;
 }
 
+.dropdown .firstDiv {
+  position: absolute;
+  z-index: 999;
+  height: auto;
+  width: 153px;
+  background: #fff;
+  border: 1px solid black;
+  left: 3.3%;
+}
 .dropdownRow {
   display: inline-block;
   cursor: pointer;
   text-align: start;
   margin: 2px 0;
-  z-index: -1;
   background-color: #fff;
 }
