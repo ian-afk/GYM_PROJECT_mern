@@ -57,7 +57,7 @@ export default function GymList() {
                     <tr key={gymb._id}>
                       <td>{gymb.name}</td>
                       <td>{gymb.email}</td>
-                      <td>{gymb.employee}</td>
+                      <td>{gymb.employees[0]?.fullName ?? gymb.employee}</td>
                       <td>
                         <Link to={`/${path}/${gymb._id}`}>View</Link>
                         <button
