@@ -12,6 +12,7 @@ export default function TrainerCreate() {
   });
   const [message, setMessage] = useState('');
   const [employees, setEmployees] = useState([]);
+  const [initEmp, setInitEmp] = useState('');
   const navigate = useNavigate();
   function setUrl(url) {
     const newUrl = `${import.meta.env.VITE_API_URL}/${url}`;
@@ -36,6 +37,9 @@ export default function TrainerCreate() {
     setTrainer((prev) => ({ ...prev, [name]: value }));
   }
 
+  function handleChangeEmp(e) {
+    setInitEmp(e.target.value);
+  }
   function handleSubmit(e) {
     e.preventDefault();
     const url = setUrl('trainers');
@@ -62,14 +66,33 @@ export default function TrainerCreate() {
           <h1>Create Trainer</h1>
           <form onSubmit={handleSubmit}>
             <label>Trainer</label>
-            <select name="employee" onChange={handleChange}>
+            <input
+              type="text"
+              name="employee"
+              value={initEmp}
+              onChange={handleChangeEmp}
+            />
+            <div>
+              {employees.map((emp) => (
+                <div
+                  key={emp._id}
+                  onClick={() => {
+                    setInitEmp(emp.fullName);
+                    setTrainer((prev) => ({ ...prev, employee: emp._id }));
+                  }}
+                >
+                  <p key={emp._id}>{emp.fullName}</p>
+                </div>
+              ))}
+            </div>
+            {/* <select name="employee" onChange={handleChange}>
               <option value="">Select Trainer</option>
               {employees.map((emp) => (
                 <option key={emp._id} value={emp._id}>
                   {emp.firstName} {emp.lastName}
                 </option>
               ))}
-            </select>
+            </select> */}
             <br />
             <label>Experties</label>
             <input
