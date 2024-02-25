@@ -1,0 +1,44 @@
+.container {
+  margin: 20px;
+}
+
+.employee {
+  position: relative;
+}
+
+.employeeList {
+  position: absolute;
+  margin-left: 52px;
+  background: #fff;
+  width: 151px;
+  border: 1px black solid;
+}
+
+.employeeList.hidden {
+  display: none;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+input {
+  margin-left: 10px;
+}
+
+form {
+  height: 200px;
+  width: 300px;
+}
+
+form input:nth-child(2) {
+  margin-left: 16px;
+  margin-bottom: 4px;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 10px 0 0;
+}

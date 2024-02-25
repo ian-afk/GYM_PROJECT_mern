@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import styles from './TrainerCreate.module.css';
 
 export default function TrainerCreate() {
   const { token, isLoggedIn } = useAuth();
@@ -13,6 +14,7 @@ export default function TrainerCreate() {
   const [message, setMessage] = useState('');
   const [employees, setEmployees] = useState([]);
   const [initEmp, setInitEmp] = useState('');
+  const [toggle, setToggle] = useState(true);
   const navigate = useNavigate();
   function setUrl(url) {
     const newUrl = `${import.meta.env.VITE_API_URL}/${url}`;
@@ -59,33 +61,57 @@ export default function TrainerCreate() {
   }
   return (
     <>
-      {!isLoggedIn ? (
-        <NotLoggedIn message={message} />
-      ) : (
-        <>
-          <h1>Create Trainer</h1>
-          <form onSubmit={handleSubmit}>
-            <label>Trainer</label>
-            <input
-              type="text"
-              name="employee"
-              value={initEmp}
-              onChange={handleChangeEmp}
-            />
-            <div>
-              {employees.map((emp) => (
-                <div
-                  key={emp._id}
-                  onClick={() => {
-                    setInitEmp(emp.fullName);
-                    setTrainer((prev) => ({ ...prev, employee: emp._id }));
-                  }}
-                >
-                  <p key={emp._id}>{emp.fullName}</p>
-                </div>
-              ))}
-            </div>
-            {/* <select name="employee" onChange={handleChange}>
+      <div className={styles.container}>
+        {!isLoggedIn ? (
+          <NotLoggedIn message={message} />
+        ) : (
+          <>
+            <h1>Create Trainer</h1>
+            <form onSubmit={handleSubmit}>
+              <label className={styles.label}>Trainer</label>
+              <input
+                type="text"
+                name="employee"
+                value={initEmp}
+                onChange={handleChangeEmp}
+                className={styles.employee}
+                onClick={() => setToggle(!toggle)}
+              />
+              <div
+                className={`${styles.employeeList} ${
+                  toggle ? styles.hidden : ''
+                }`}
+
+                // onClick={() => setToggle(true)}
+                // onMouseEnter={() => setToggle(false)}
+                // onMouseLeave={() => setToggle(true)}
+              >
+                {employees
+                  .filter((item) => {
+                    const searchItem = initEmp.toLowerCase();
+                    const initName = item.fullName.toLowerCase();
+
+                    if (!toggle && searchItem === '') return item;
+                    return (
+                      searchItem &&
+                      initName.startsWith(searchItem) &&
+                      initName !== searchItem
+                    );
+                  })
+                  .map((emp) => (
+                    <div
+                      key={emp._id}
+                      onClick={() => {
+                        setToggle(true);
+                        setInitEmp(emp.fullName);
+                        setTrainer((prev) => ({ ...prev, employee: emp._id }));
+                      }}
+                    >
+                      <p key={emp._id}>{emp.fullName}</p>
+                    </div>
+                  ))}
+              </div>
+              {/* <select name="employee" onChange={handleChange}>
               <option value="">Select Trainer</option>
               {employees.map((emp) => (
                 <option key={emp._id} value={emp._id}>
@@ -93,19 +119,24 @@ export default function TrainerCreate() {
                 </option>
               ))}
             </select> */}
-            <br />
-            <label>Experties</label>
-            <input
-              type="text"
-              name="experties"
-              value={trainer.experties}
-              onChange={handleChange}
-            />
-            <button type="submit">Save</button>
-            <Link to={'/trainers'}>Back to List</Link>
-          </form>
-        </>
-      )}
+              <br />
+              <label>Experties</label>
+              <input
+                type="text"
+                name="experties"
+                value={trainer.experties}
+                onChange={handleChange}
+                onFocus={() => setToggle(true)}
+                onBlur={() => setToggle(true)}
+              />
+              <div className={styles.btn}>
+                <button type="submit">Save</button>
+                <Link to={'/trainers'}>Back to List</Link>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
     </>
   );
 }
