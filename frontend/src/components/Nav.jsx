@@ -10,14 +10,16 @@ export default function Nav() {
         <li>
           <NavLink to={'/'}>Home</NavLink>
         </li>
-        <li>Profile</li>
         <li
           onClick={() => setOperation(!operation)}
-          className={operation ? 'active' : ''}
+          // className={operation ? `${styles.active}` : ''}
         >
           Operations
         </li>
-        <ul style={{ display: operation ? '' : 'none' }}>
+        <ul
+          className={styles.operations}
+          style={{ display: operation ? '' : 'none' }}
+        >
           <li>
             <NavLink to="/employees">Employees</NavLink>
           </li>
@@ -37,8 +39,16 @@ export default function Nav() {
             <li>Payments</li>
             <li>Generate Report</li> */}
         </ul>
+        <li>Profile</li>
+      </ul>
+      <ul>
         <li>About us</li>
         <li>Contact us</li>
+        <li>
+          <NavLink to={'users/login'}>Login</NavLink>
+        </li>
+        <li>Register</li>
+        <li>Logout</li>
       </ul>
     </nav>
   );

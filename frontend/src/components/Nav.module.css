@@ -1,21 +1,43 @@
 .nav {
   margin: 20px;
-}
-.nav ul {
   display: flex;
-  background-color: #9eafdd;
-  /* gap: 20px; */
   justify-content: space-between;
-  list-style: none;
 }
 
+.nav > ul {
+  padding: 0;
+  margin: 0;
+  width: 700px;
+  display: flex;
+  gap: 5px;
+}
+
+.nav ul:nth-child(2) {
+  justify-content: flex-end;
+}
+
+.operations {
+  display: flex;
+  gap: 5px;
+}
+
+li {
+  cursor: pointer;
+}
 .nav a:link,
 .nav a:visited {
   text-decoration: none;
 }
+
+.active {
+  text-decoration: underline;
+  background-color: green;
+}
+
 .nav li + .active {
   text-decoration: underline;
 }
+
 .nav a:global(.active) {
   text-decoration: underline;
   background-color: green;
