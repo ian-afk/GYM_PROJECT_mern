@@ -37,7 +37,7 @@ import { AuthProvider } from './context/AuthContext';
 export default function App() {
   const AppLayout = () => (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <Outlet />
     </>

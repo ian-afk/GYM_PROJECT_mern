@@ -1,53 +1,46 @@
 .nav {
-  margin: 20px;
   display: flex;
   justify-content: space-between;
+  flex: 1;
 }
 
-.nav > ul {
-  padding: 0;
+.nav ul {
+  list-style: none;
   margin: 0;
-  width: 700px;
+  padding: 0;
+
   display: flex;
-  gap: 5px;
+  gap: 16px;
 }
 
-.nav ul:nth-child(2) {
-  justify-content: flex-end;
-}
-
-.operations {
-  display: flex;
-  gap: 5px;
-}
-
-li {
+.nav ul li {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  padding: 6px;
   cursor: pointer;
 }
-.nav a:link,
-.nav a:visited {
+
+.nav a {
   text-decoration: none;
 }
-
-.active {
-  text-decoration: underline;
-  background-color: green;
-}
-
-.nav li + .active {
-  text-decoration: underline;
+.nav a:visited {
+  color: #e6e6e6;
 }
 
 .nav a:global(.active) {
   text-decoration: underline;
-  background-color: green;
+  color: darkslategrey;
+  font-size: 20px;
 }
 
-.nav ul > li {
-  display: block;
-  list-style: none;
+.nav ul li:hover {
+  color: #b9b6b6;
+  text-decoration: underline;
 }
 
-/* .nav > ul > li:nth-child(3) > ul > a {
-  color: green;
-} */
+.secondaryButton {
+  border: 2px lightgrey solid;
+  padding: 6px;
+  border-radius: 6px;
+}

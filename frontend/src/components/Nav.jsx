@@ -45,9 +45,9 @@ export default function Nav() {
         <li>About us</li>
         <li>Contact us</li>
         <li>
-          <NavLink to={'users/login'}>Login</NavLink>
+          <NavLink to={'/users/login'}>Sign in</NavLink>
         </li>
-        <li>Register</li>
+        <li className={styles.secondaryButton}>Sign up</li>
         <li>Logout</li>
       </ul>
     </nav>
