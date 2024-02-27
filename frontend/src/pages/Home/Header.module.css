@@ -3,27 +3,22 @@
 }
 
 .header {
-  height: 95vh;
+  height: 85vh;
   background-image: linear-gradient(
       to right bottom,
       rgba(214, 215, 226, 0.527),
-      rgba(107, 144, 180, 0.507)
+      rgba(17, 38, 59, 0.507)
     ),
     url('../public/bg-el-amagros-el.jpg');
   background-size: cover;
   background-position: top;
   position: relative;
-  margin: 20px 20px 0 20px;
-}
-
-.logo-box {
-  position: absolute;
-  top: 20px;
-  left: 40px;
+  /* margin: 20px 20px 0 20px; */
+  text-align: center;
 }
 
 .logo {
-  height: 120px;
+  height: 100px;
 }
 
 .text-box {
@@ -53,4 +48,11 @@
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 10px;
+}
+
+.logo-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px 0 16px;
 }

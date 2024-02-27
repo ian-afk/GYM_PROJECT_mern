@@ -1,9 +1,11 @@
+import Nav from '../../components/Nav';
 import styles from './Header.module.css';
 export default function Header() {
   return (
     <header className={styles.header}>
-      <div className={styles['logo-box']}>
-        <img src="first proto2.png" alt="logo" className={styles.logo} />
+      <div className={styles['logo-links']}>
+        <img src="first-proto-white.png" alt="logo" className={styles.logo} />
+        <Nav className={styles['logo-box']} />
       </div>
       <div className={styles['text-box']}>
         <h1 className={styles['heading-primary']}>
