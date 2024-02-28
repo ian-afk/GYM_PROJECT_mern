@@ -1,9 +1,18 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.css';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+{
+  /* <i class="fa-solid fa-user"></i> */
+}
 export default function Nav() {
   const [operation, setOperation] = useState(false);
+  const [profile, setProfile] = useState(false);
+  const { isLoggedIn } = useAuth();
 
+  console.log(isLoggedIn);
   return (
     <nav className={styles.nav}>
       <ul>
@@ -39,16 +48,29 @@ export default function Nav() {
             <li>Payments</li>
             <li>Generate Report</li> */}
         </ul>
-        <li>Profile</li>
       </ul>
       <ul>
         <li>About us</li>
         <li>Contact us</li>
-        <li>
-          <NavLink to={'/users/login'}>Sign in</NavLink>
-        </li>
-        <li className={styles.secondaryButton}>Sign up</li>
-        <li>Logout</li>
+        {!isLoggedIn ? (
+          <>
+            <li>
+              <NavLink to={'/users/login'}>Sign in</NavLink>
+            </li>
+            <li className={styles.secondaryButton}>Sign up</li>
+          </>
+        ) : (
+          <li>
+            <FontAwesomeIcon
+              icon={faUser}
+              onClick={() => setProfile(!profile)}
+            />
+          </li>
+        )}
+        <ul style={{ display: profile ? '' : 'none' }}>
+          <li>Profile</li>
+          <li>Logout</li>
+        </ul>
       </ul>
     </nav>
   );

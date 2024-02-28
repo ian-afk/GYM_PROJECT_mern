@@ -44,3 +44,21 @@
   padding: 6px;
   border-radius: 6px;
 }
+
+.nav ul:nth-child(2) {
+  position: relative;
+}
+.nav ul:nth-child(2) ul {
+  display: block;
+  background-color: #b9b6b6;
+  position: absolute;
+  width: 100px;
+  top: 28px;
+  left: 134px;
+
+  border-radius: 5px;
+}
+
+.nav ul ul li:hover {
+  color: white;
+}
