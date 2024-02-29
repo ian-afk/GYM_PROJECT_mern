@@ -14,6 +14,9 @@ export default function Header() {
             Exceeds your limitation
           </span>
         </h1>
+        <a className={styles.btn} href="#">
+          Discover our Offer
+        </a>
       </div>
     </header>
   );

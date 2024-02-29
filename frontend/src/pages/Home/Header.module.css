@@ -29,6 +29,25 @@
   text-align: center;
 }
 
+.text-box a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  background-color: #fff;
+  padding: 16px;
+  border: none;
+  border-radius: 24px;
+}
+
+/* .text-box a:hover {
+  transform: translateY(-3px);
+}
+
+.text-box a::hover::after {
+  transform: scaleX(1.5) scaleY(1.6);
+  opacity: 0;
+} */
+
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
