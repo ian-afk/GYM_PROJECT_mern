@@ -3,7 +3,7 @@ export default function Main() {
   return (
     <>
       <main className={styles.main}>
-        <section className={styles['section-about']}>
+        <section className={styles['section-about']} id="section-about">
           <div className={styles['center-text']}>
             <h2 className={styles['heading-secondary']}>
               Exciting Body transformation journey
@@ -12,18 +12,18 @@ export default function Main() {
           <div className={styles['row']}>
             <div className={styles['col-1-of-2']}>
               <h3 className={styles['heading-tertiary']}>
-                You're going to love the progress
+                You&apos;re going to love the progress
               </h3>
               <p className={styles['paragraph']}>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                aliquid laudantium asperiores autem excepturi, harum{' '}
+                aliquid laudantium asperiores autem excepturi, harum
               </p>
               <h3 className={styles['heading-tertiary']}>
                 You will see progress day by day
               </h3>
               <p className={styles['paragraph']}>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi
-                laboriosam, eos totam aspernatur sit odio. Voluptates,{' '}
+                laboriosam, eos totam aspernatur sit odio. Voluptates,
               </p>
               <a href="#">Learn more &rarr;</a>
             </div>
