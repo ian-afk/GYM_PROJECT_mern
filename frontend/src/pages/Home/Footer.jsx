@@ -1,6 +1,7 @@
+import styles from './Footer.module.css';
 export default function Footer() {
   return (
-    <footer>
+    <footer className={styles.footer}>
       <p>
         © Copyright 2023 El Amagros EL, Inc.All rights reserved. Various
         trademarks held by their respective owners. <u>elAmagrosel.com</u>{' '}
@@ -8,13 +9,29 @@ export default function Footer() {
       </p>
       <nav>
         <ul>
-          <li>Legal</li>
-          <li>Terms of Service</li>
-          <li>Privacy Information</li>
-          <li>Responsible Disclosure</li>
-          <li>Trust</li>
-          <li>Contact</li>
-          <li>Cookie Preferencess</li>
+          <li>
+            <a href="#">Legal</a>
+          </li>
+          <li>
+            <a href="#">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#">Privacy Information</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="#">Responsible Disclosure</a>
+          </li>
+          <li>
+            <a href="#">Trust</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+          <li>
+            <a href="#">Cookie Preferencess</a>
+          </li>
         </ul>
       </nav>
     </footer>

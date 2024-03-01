@@ -1,0 +1,31 @@
+.footer {
+  padding: 14px 30px;
+  border-top: 1px #8b8b8b solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: #1b3161;
+  color: white;
+}
+
+.footer nav {
+  display: flex;
+}
+
+.footer nav ul {
+  list-style: none;
+  padding: 10px;
+}
+
+.footer nav ul li {
+  padding-left: 12px;
+  padding-bottom: 5px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
