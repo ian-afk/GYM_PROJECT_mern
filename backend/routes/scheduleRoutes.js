@@ -6,14 +6,14 @@ import {
   getAllSchedules,
   getSchedule,
 } from '../controller/scheduleController.js';
-
+import { protect } from '../controller/authenticationController.js';
 const router = express.Router();
 
-router.route('/').get(getAllSchedules).post(createSchedule);
+router.route('/').get(protect, getAllSchedules).post(protect, createSchedule);
 router
   .route('/:id')
-  .get(getSchedule)
-  .patch(editSchedule)
-  .delete(deleteSchedule);
+  .get(protect, getSchedule)
+  .patch(protect, editSchedule)
+  .delete(protect, deleteSchedule);
 
 export default router;
