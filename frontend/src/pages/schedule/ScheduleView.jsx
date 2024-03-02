@@ -3,8 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LinkButtonComponent from '../../components/LinkButtonComponent';
 import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 export default function ScheduleView() {
+  const { token, isLoggedIn, setIsLoggedIn } = useAuth();
   const [isDisabled, setIsDisabled] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,7 +20,8 @@ export default function ScheduleView() {
     setInit,
     isLoading,
     url,
-  } = useAPIView(path);
+    message,
+  } = useAPIView(path, token, setIsLoggedIn);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -32,7 +36,7 @@ export default function ScheduleView() {
   function handleDelete() {
     const confirmed = window.confirm('Are you sure you want to delete?');
 
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
     async function deleteSchedule() {
       const res = await fetch(url, request.options);
       const json = await res.json();
@@ -51,7 +55,7 @@ export default function ScheduleView() {
       timeStart: schedule.timeStart,
       timeEnd: schedule.timeEnd,
     };
-    const request = new RequestOptions('PATCH', '', body);
+    const request = new RequestOptions('PATCH', token, body);
 
     async function postSchedule() {
       const res = await fetch(url, request.postOptions);
@@ -71,40 +75,44 @@ export default function ScheduleView() {
   }
   return (
     <>
-      <h2>Schedule Details</h2>
-      {isLoading ? (
-        <h3>Loading...</h3>
+      {!isLoggedIn ? (
+        <NotLoggedIn message={message} />
       ) : (
         <>
-          <form onSubmit={handleSubmit}>
-            <label>Date</label>
-            <input
-              type="date"
-              name="dateStart"
-              value={schedule.dateStart}
-              onChange={handleChange}
-              disabled={isDisabled}
-            />
-            <br />
-            <label>From</label>
-            <input
-              type="text"
-              name="timeStart"
-              onChange={handleChange}
-              value={schedule.timeStart}
-              disabled={isDisabled}
-            />
-            <br />
-            <label>To</label>
-            <input
-              type="text"
-              name="timeEnd"
-              onChange={handleChange}
-              value={schedule.timeEnd}
-              disabled={isDisabled}
-            />
-            <br />
-            {/* <label>Trainer</label>
+          <h2>Schedule Details</h2>
+          {isLoading ? (
+            <h3>Loading...</h3>
+          ) : (
+            <>
+              <form onSubmit={handleSubmit}>
+                <label>Date</label>
+                <input
+                  type="date"
+                  name="dateStart"
+                  value={schedule.dateStart}
+                  onChange={handleChange}
+                  disabled={isDisabled}
+                />
+                <br />
+                <label>From</label>
+                <input
+                  type="text"
+                  name="timeStart"
+                  onChange={handleChange}
+                  value={schedule.timeStart}
+                  disabled={isDisabled}
+                />
+                <br />
+                <label>To</label>
+                <input
+                  type="text"
+                  name="timeEnd"
+                  onChange={handleChange}
+                  value={schedule.timeEnd}
+                  disabled={isDisabled}
+                />
+                <br />
+                {/* <label>Trainer</label>
         <select
           name="trainer"
           onChange={handleChange}
@@ -113,32 +121,34 @@ export default function ScheduleView() {
         >
           <option value={schedule.trainer}>{schedule.trainer}</option>
         </select> */}
-            {!isDisabled && <button type="submit">Save</button>}
-            <button type="button" onClick={() => handleEdit()}>
-              {isDisabled ? 'Edit' : 'Cancel'}
-            </button>
-            {isDisabled && (
-              <button type="button" onClick={handleDelete}>
-                Delete
-              </button>
-            )}
-            <LinkButtonComponent path={'/schedules'}>
-              Back to list
-            </LinkButtonComponent>
-          </form>
-          <hr />
-          <table>
-            <thead>
-              <tr>
-                <th>Clients Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Client test</td>
-              </tr>
-            </tbody>
-          </table>
+                {!isDisabled && <button type="submit">Save</button>}
+                <button type="button" onClick={() => handleEdit()}>
+                  {isDisabled ? 'Edit' : 'Cancel'}
+                </button>
+                {isDisabled && (
+                  <button type="button" onClick={handleDelete}>
+                    Delete
+                  </button>
+                )}
+                <LinkButtonComponent path={'/schedules'}>
+                  Back to list
+                </LinkButtonComponent>
+              </form>
+              <hr />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Clients Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Client test</td>
+                  </tr>
+                </tbody>
+              </table>
+            </>
+          )}
         </>
       )}
     </>

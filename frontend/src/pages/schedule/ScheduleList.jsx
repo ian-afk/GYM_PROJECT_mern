@@ -18,7 +18,7 @@ export default function ScheduleList() {
   function handleDelete(id) {
     const confirmed = window.confirm('Are you sure you want to delete?');
     const schedUrl = `${url}/${id}`;
-    const request = new RequestOptions('DELETE');
+    const request = new RequestOptions('DELETE', token);
 
     async function deleteSchedule() {
       const res = await fetch(schedUrl, request.options);

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RequestOptions from '../../utils/requestClass';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ScheduleCreate() {
+  const { token, isLoggedIn, setToken, setIsLoggedIn } = useAuth();
   const [schedule, setSchedule] = useState({
     startDate: '',
     timeStart: '',
@@ -29,7 +31,7 @@ export default function ScheduleCreate() {
       timeStart: schedule.timeStart,
       timeEnd: schedule.timeEnd,
     };
-    const request = new RequestOptions('POST', '', body);
+    const request = new RequestOptions('POST', token, body);
 
     async function postSchedule() {
       const res = await fetch(url, request.postOptions);
