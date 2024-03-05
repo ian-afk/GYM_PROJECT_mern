@@ -55,28 +55,28 @@ export default function Main() {
         </section>
         <section className={styles['section-features']}>
           <div className={styles['features-row']}>
-            <div className={styles['col-1-of-4']}>
+            <div className={styles['cards']}>
               <h3>Lifestyle</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
                 aperiam. Eum nulla, reiciendis velit
               </p>
             </div>
-            <div className={styles['col-1-of-4']}>
+            <div className={styles['cards']}>
               <h3>Body Building</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
                 aperiam. Eum nulla, reiciendis velit
               </p>
             </div>
-            <div className={styles['col-1-of-4']}>
+            <div className={styles['cards']}>
               <h3>Weight Lifting</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
                 aperiam. Eum nulla, reiciendis velit
               </p>
             </div>
-            <div className={styles['col-1-of-4']}>
+            <div className={styles['cards']}>
               <h3>Sports</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet,
