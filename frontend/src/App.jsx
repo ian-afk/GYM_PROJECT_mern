@@ -10,7 +10,6 @@ import Home from './pages/Home/Home';
 
 import EmployeeList from './pages/Employee/EmployeeList';
 import EmployeeView from './pages/Employee/EmployeeView';
-import Nav from './components/Nav';
 import NotFound from './components/NotFoundPage';
 import EmployeeCreate from './pages/Employee/EmployeeCreate';
 import ClientList from './pages/client/ClientList';
@@ -78,8 +77,9 @@ export default function App() {
           <Route path="/gymbranches/:id" element={<GymView />} />
         </Route>
 
-        <Route path="/users" element={<AuthPage />}></Route>
-        <Route path="/users/login" element={<Login />}></Route>
+        <Route path="/users" element={<AuthPage />}>
+          <Route path="/users/login" element={<Login />}></Route>
+        </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     )

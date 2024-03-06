@@ -1,0 +1,14 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginForm input {
+  margin: 0;
+  padding: 0;
+}
+
+.loginForm input:nth-child(2) {
+  margin: 0;
+  padding: 0;
+}
