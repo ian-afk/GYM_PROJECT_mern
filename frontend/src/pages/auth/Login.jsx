@@ -52,7 +52,6 @@ export default function Login() {
           value={user.email}
           onChange={handleChange}
         />
-        <br />
         <label>Password</label>
         <input
           type="password"

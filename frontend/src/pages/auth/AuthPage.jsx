@@ -5,7 +5,7 @@ export default function AuthPage() {
   return (
     <div className={styles.loginContainer}>
       <Nav />
-      <Outlet />
+      <Outlet className={styles.loginFormContainer} />
     </div>
   );
 }

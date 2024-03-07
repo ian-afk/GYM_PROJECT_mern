@@ -2,3 +2,9 @@
   padding: 24px;
   background-color: #929292;
 }
+
+.loginContainer .loginFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
