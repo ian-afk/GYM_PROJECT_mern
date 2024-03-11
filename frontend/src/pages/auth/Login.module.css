@@ -1,8 +1,9 @@
 .loginForm {
-  border: 2px solid rgb(66, 84, 95);
+  border: 2px solid #42545f;
   border-radius: 12px;
   margin: 24px auto;
   padding: 14px;
+  color: #fff;
 
   display: flex;
   flex-direction: column;
@@ -12,9 +13,19 @@
 .loginForm input {
   margin: 0;
   padding: 0;
+
+  border: none;
+  border-radius: 5px;
 }
 
 .loginForm input:nth-child(2) {
   margin: 0;
   padding: 0;
+}
+
+.loginForm button {
+  border-style: 1px solid #42545f;
+
+  border-radius: 5px;
+  padding: 4px;
 }
