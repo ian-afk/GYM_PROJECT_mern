@@ -133,13 +133,12 @@
 }
 
 .section-features {
+  height: 400px;
   margin-top: 20px;
-  height: 300px;
   margin: 34px auto;
 }
 .features-row {
-  height: 400px;
-
+  padding-top: 18px;
   display: flex;
   justify-content: center;
   gap: 24px;
@@ -147,7 +146,7 @@
 }
 
 .cards {
-  height: 200px;
+  height: 300px;
   width: 240px;
   border: 2px solid black;
   border-radius: 12px;
@@ -162,4 +161,34 @@
 
 .cards h3 {
   height: 200px;
+}
+
+/* VISION */
+
+.vision {
+  height: 600px;
+  padding-top: 52px;
+  background-color: #f7f7f7;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vision div {
+  width: 70%;
+  text-align: center;
+  padding: 12px;
+  line-height: 22px;
+  margin: 26px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+}
+
+.vision div p {
+  width: 50%;
+  font-size: 18px;
 }

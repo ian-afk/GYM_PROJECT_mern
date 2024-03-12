@@ -85,6 +85,27 @@ export default function Main() {
             </div>
           </div>
         </section>
+        <section className={styles.vision}>
+          <div>
+            <h2>We bring Clients and Trainers together</h2>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Perspiciatis, labore corrupti necessitatibus suscipit ipsum cumque
+              rem exercitationem ullam sunt, voluptatum temporibus distinctio.
+              Eius deleniti aperiam animi sunt tenetur, quisquam est.
+            </p>
+          </div>
+          <div>
+            <h2>
+              Learn skills that you can apply in your life even after your
+              subscription
+            </h2>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Perspiciatis, labore corrupti necessitatibus
+            </p>
+          </div>
+        </section>
       </main>
     </>
   );
