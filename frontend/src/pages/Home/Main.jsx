@@ -105,6 +105,32 @@ export default function Main() {
               Perspiciatis, labore corrupti necessitatibus
             </p>
           </div>
+          <div className={styles.skills}>
+            <div className="cards">
+              <div>img</div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                nam quaerat rerum
+              </p>
+              <a href="#">Start Learning</a>
+            </div>
+            <div className="cards">
+              <div>img</div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                nam quaerat rerum
+              </p>
+              <a href="#">Start Learning</a>
+            </div>
+            <div className="cards">
+              <div>img</div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
+                nam quaerat rerum
+              </p>
+              <a href="#">Start Learning</a>
+            </div>
+          </div>
         </section>
       </main>
     </>
