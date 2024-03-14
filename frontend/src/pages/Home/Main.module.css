@@ -197,5 +197,17 @@
   width: 80%;
 
   display: flex;
+  justify-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.vision .skills .cards {
+  text-align: start;
+  height: 400px;
+  padding: 24px;
+  flex: 0 1 300px;
+
+  display: flex;
+  align-items: flex-start;
 }

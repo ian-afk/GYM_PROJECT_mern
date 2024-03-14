@@ -106,7 +106,7 @@ export default function Main() {
             </p>
           </div>
           <div className={styles.skills}>
-            <div className="cards">
+            <div className={styles.cards}>
               <div>img</div>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
@@ -114,7 +114,7 @@ export default function Main() {
               </p>
               <a href="#">Start Learning</a>
             </div>
-            <div className="cards">
+            <div className={styles.cards}>
               <div>img</div>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
@@ -122,7 +122,7 @@ export default function Main() {
               </p>
               <a href="#">Start Learning</a>
             </div>
-            <div className="cards">
+            <div className={styles.cards}>
               <div>img</div>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
