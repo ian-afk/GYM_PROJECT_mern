@@ -5,7 +5,6 @@
 .section-about {
   background-color: #f7f7f7;
   padding: 100px 0;
-  height: 500px;
 }
 .center-text {
   text-align: center;
@@ -166,7 +165,6 @@
 /* VISION */
 
 .vision {
-  height: 1000px;
   padding-top: 52px;
   background-color: #f7f7f7;
 
