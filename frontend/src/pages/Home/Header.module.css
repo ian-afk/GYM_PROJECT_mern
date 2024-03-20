@@ -52,7 +52,7 @@
   color: #fff;
   text-transform: uppercase;
 
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .heading-primary-main {
@@ -60,13 +60,22 @@
   font-size: 58px;
   font-weight: 400;
   letter-spacing: 50px;
+
+  animation-name: movesInLeft;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
 }
 
 .heading-primary-sub {
+  margin-top: 12px;
   display: block;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 10px;
+
+  animation-name: movesInRight;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
 }
 
 .logo-links {
@@ -74,4 +83,58 @@
   align-items: center;
   gap: 16px;
   padding: 0 16px 0 16px;
+}
+
+.btn--main {
+  display: block;
+  margin: 10px auto;
+  width: 300px;
+  animation-name: movesInTop;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+}
+/* add animation for h1 */
+
+@keyframes movesInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-15rem);
+  }
+
+  80% {
+    transform: translateX(1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes movesInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(15rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes movesInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(15rem);
+  }
+  80% {
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }

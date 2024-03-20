@@ -14,7 +14,7 @@ export default function Header() {
             Exceeds your limitation
           </span>
         </h1>
-        <a className={styles.btn} href="#">
+        <a className={styles['btn--main']} href="#">
           Discover our Offer
         </a>
       </div>
