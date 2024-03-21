@@ -132,10 +132,14 @@
 }
 
 .section-features {
+  transform: skewY(-7deg);
   background-color: #be4f4f;
-  min-height: 500px;
+  min-height: 600px;
+  margin-top: -3rem;
 }
 .features-row {
+  margin-top: 5rem;
+  transform: skewY(7deg);
   display: flex;
   justify-content: center;
   padding: 34px;
@@ -145,9 +149,10 @@
 }
 
 .cards {
+  margin-top: 6rem;
   height: 300px;
   width: 240px;
-  border: 2px solid #b88585;
+  border: 4px solid #b88585;
   border-radius: 12px;
   padding: 12px;
   color: #fff;
@@ -159,6 +164,11 @@
   justify-content: center;
 }
 
+.cards:hover {
+  transform: translateY(-18px);
+  transition: 0.3s ease-in-out;
+  box-shadow: 9px 18px 12px -5px #6d5757;
+}
 .cards h3 {
   height: 200px;
 }
