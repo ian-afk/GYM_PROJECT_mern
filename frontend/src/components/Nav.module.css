@@ -67,3 +67,14 @@
 .nav ul ul li:hover {
   color: white;
 }
+
+@media (max-width: 750px) {
+  .nav ul:first-child {
+    display: flex;
+    margin: auto;
+  }
+
+  .nav ul:nth-child(2) {
+    display: none;
+  }
+}
