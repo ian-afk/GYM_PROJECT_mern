@@ -97,8 +97,8 @@ export default function Main() {
           </div>
           <div>
             <h2>
-              Learn skills that you can apply in your life even after your
-              subscription
+              Learn skills that you can apply in your daily life even when
+              you&#39;re not in the gym
             </h2>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -112,7 +112,7 @@ export default function Main() {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
                 nam quaerat rerum
               </p>
-              <a href="#">Start Learning</a>
+              <a href="#">Start Learning &rarr;</a>
             </div>
             <div className={styles.cards}>
               <div>img</div>
@@ -120,7 +120,7 @@ export default function Main() {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
                 nam quaerat rerum
               </p>
-              <a href="#">Start Learning</a>
+              <a href="#">Start Learning &rarr;</a>
             </div>
             <div className={styles.cards}>
               <div>img</div>
@@ -128,7 +128,7 @@ export default function Main() {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
                 nam quaerat rerum
               </p>
-              <a href="#">Start Learning</a>
+              <a href="#">Start Learning &rarr;</a>
             </div>
           </div>
         </section>
