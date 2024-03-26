@@ -132,6 +132,20 @@ export default function Main() {
             </div>
           </div>
         </section>
+        <section className="contact-me">
+          <form action="#">
+            <label htmlFor="firstName">First Name</label>
+            <input type="text" id="firstName" />
+            <br />
+            <label htmlFor="firstName">First Name</label>
+            <input type="text" id="lastName" />
+            <br />
+            <label htmlFor="email">Email</label>
+            <input type="text" />
+            <br />
+            <input type="submit" />
+          </form>
+        </section>
       </main>
     </>
   );
