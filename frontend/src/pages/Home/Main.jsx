@@ -137,12 +137,15 @@ export default function Main() {
             <label htmlFor="firstName">First Name</label>
             <input type="text" id="firstName" />
             <br />
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="firstName">Last Name</label>
             <input type="text" id="lastName" />
             <br />
             <label htmlFor="email">Email</label>
             <input type="text" />
             <br />
+            <textarea name="comment" id="" cols="30" rows="10">
+              Contact me
+            </textarea>
             <input type="submit" />
           </form>
         </section>
