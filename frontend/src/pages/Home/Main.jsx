@@ -132,22 +132,44 @@ export default function Main() {
             </div>
           </div>
         </section>
-        <section className="contact-me">
-          <form action="#">
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" id="firstName" />
-            <br />
-            <label htmlFor="firstName">Last Name</label>
-            <input type="text" id="lastName" />
-            <br />
-            <label htmlFor="email">Email</label>
-            <input type="text" />
-            <br />
-            <textarea name="comment" id="" cols="30" rows="10">
-              Contact me
-            </textarea>
-            <input type="submit" />
-          </form>
+        <section className={styles['contact-us']}>
+          <div>
+            <div>
+              <h2>Contact Us</h2>
+            </div>
+            <form action="#">
+              <label htmlFor="firstName">First Name</label>
+              <input type="text" id="firstName" />
+              <label htmlFor="lastName">Last Name</label>
+              <input type="text" id="lastName" />
+              <label htmlFor="email">Email</label>
+              <input type="email" />
+              <label htmlFor="comment">Comment</label>
+              <textarea
+                name="comment"
+                id="comment"
+                cols="30"
+                rows="10"
+              ></textarea>
+              <input type="submit" className={styles.btn} />
+            </form>
+          </div>
+          <div>
+            <div>
+              <h2>Sigup</h2>
+            </div>
+            <form action="#">
+              <label htmlFor="#">First Name</label>
+              <input type="text" />
+              <label htmlFor="#">Last Name</label>
+              <input type="text" />
+              <label htmlFor="#">Email</label>
+              <input type="email" />
+              <label htmlFor="#">Password</label>
+              <input type="password" />
+              <input type="submit" className={styles.btn} />
+            </form>
+          </div>
         </section>
       </main>
     </>

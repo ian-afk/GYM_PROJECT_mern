@@ -249,3 +249,30 @@
   background-color: #b88585;
   color: white;
 }
+
+.contact-us {
+  height: 40vh;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0 150px;
+  gap: 20px;
+}
+
+.contact-us div h1 {
+  font-size: 400px;
+}
+
+.contact-us label {
+  display: block;
+}
+
+.contact-us input,
+.contact-us input:nth-child(2) {
+  margin: 0;
+}
+
+.contact-us .btn {
+  display: block;
+}
