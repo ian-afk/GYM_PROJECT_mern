@@ -258,10 +258,16 @@
   align-items: center;
   margin: 100px 0 150px;
   gap: 20px;
+  flex-direction: column;
 }
 
-.contact-us div h1 {
-  font-size: 400px;
+.contact-us .contactForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-us div h3 {
+  font-size: 26px;
 }
 
 .contact-us label {
@@ -271,6 +277,13 @@
 .contact-us input,
 .contact-us input:nth-child(2) {
   margin: 0;
+}
+
+.contact-us input:focus,
+.contact-us input:nth-child(2):focus {
+  margin: 0;
+  transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 .contact-us .btn {

@@ -133,42 +133,51 @@ export default function Main() {
           </div>
         </section>
         <section className={styles['contact-us']}>
-          <div>
-            <div>
-              <h2>Contact Us</h2>
-            </div>
-            <form action="#">
-              <label htmlFor="firstName">First Name</label>
-              <input type="text" id="firstName" />
-              <label htmlFor="lastName">Last Name</label>
-              <input type="text" id="lastName" />
-              <label htmlFor="email">Email</label>
-              <input type="email" />
-              <label htmlFor="comment">Comment</label>
-              <textarea
-                name="comment"
-                id="comment"
-                cols="30"
-                rows="10"
-              ></textarea>
-              <input type="submit" className={styles.btn} />
-            </form>
+          <div className={styles.contactHeader}>
+            <h2>Contact Us</h2>
+            <p>
+              Interested? Sign up now! Do you have any question? Send as your
+              inquiries in contact section.
+            </p>
           </div>
-          <div>
+          <div className={styles.contactForm}>
             <div>
-              <h2>Sigup</h2>
+              <div>
+                <h3>Contact Us</h3>
+              </div>
+              <form action="#">
+                <label htmlFor="firstName">First Name</label>
+                <input type="text" id="firstName" />
+                <label htmlFor="lastName">Last Name</label>
+                <input type="text" id="lastName" />
+                <label htmlFor="email">Email</label>
+                <input type="email" />
+                <label htmlFor="comment">Comment</label>
+                <textarea
+                  name="comment"
+                  id="comment"
+                  cols="30"
+                  rows="10"
+                ></textarea>
+                <input type="submit" className={styles.btn} />
+              </form>
             </div>
-            <form action="#">
-              <label htmlFor="#">First Name</label>
-              <input type="text" />
-              <label htmlFor="#">Last Name</label>
-              <input type="text" />
-              <label htmlFor="#">Email</label>
-              <input type="email" />
-              <label htmlFor="#">Password</label>
-              <input type="password" />
-              <input type="submit" className={styles.btn} />
-            </form>
+            <div>
+              <div>
+                <h3>Sigup</h3>
+              </div>
+              <form action="#">
+                <label htmlFor="#">First Name</label>
+                <input type="text" />
+                <label htmlFor="#">Last Name</label>
+                <input type="text" />
+                <label htmlFor="#">Email</label>
+                <input type="email" />
+                <label htmlFor="#">Password</label>
+                <input type="password" />
+                <input type="submit" className={styles.btn} />
+              </form>
+            </div>
           </div>
         </section>
       </main>
