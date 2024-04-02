@@ -266,6 +266,12 @@
   margin: 14px;
 }
 
+.contact-us .contactFormContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .contact-us .contactForm {
   display: flex;
   justify-content: center;

@@ -142,54 +142,64 @@ export default function Main() {
               inquiries in contact section.
             </p>
           </div>
-          <button onClick={() => setContact(!contact)}>
-            <span>Contact Us</span>/<span>Signup</span>
-          </button>
-          <div className={styles.contactForm}>
-            {contact ? (
-              <>
-                <div>
+          <div className={styles.contactFormContainer}>
+            <button onClick={() => setContact(!contact)}>
+              <span>Contact Us</span>/<span>Signup</span>
+            </button>
+            <div className={styles.contactForm}>
+              {contact ? (
+                <>
+                  {' '}
+                  <p>Do you have any question? </p>
+                </>
+              ) : (
+                <>Join our environment with your own comfort!</>
+              )}
+              {contact ? (
+                <>
                   <div>
-                    <h3>Contact Us</h3>
+                    <div>
+                      <h3>Contact Us</h3>
+                    </div>
+                    <form action="#">
+                      <label htmlFor="firstName">First Name</label>
+                      <input type="text" id="firstName" />
+                      <label htmlFor="lastName">Last Name</label>
+                      <input type="text" id="lastName" />
+                      <label htmlFor="email">Email</label>
+                      <input type="email" />
+                      <label htmlFor="comment">Comment</label>
+                      <textarea
+                        name="comment"
+                        id="comment"
+                        cols="30"
+                        rows="10"
+                      ></textarea>
+                      <input type="submit" className={styles.btn} />
+                    </form>
                   </div>
-                  <form action="#">
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" />
-                    <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName" />
-                    <label htmlFor="email">Email</label>
-                    <input type="email" />
-                    <label htmlFor="comment">Comment</label>
-                    <textarea
-                      name="comment"
-                      id="comment"
-                      cols="30"
-                      rows="10"
-                    ></textarea>
-                    <input type="submit" className={styles.btn} />
-                  </form>
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
+                </>
+              ) : (
+                <>
                   <div>
-                    <h3>Sigup</h3>
+                    <div>
+                      <h3>Sigup</h3>
+                    </div>
+                    <form action="#">
+                      <label htmlFor="#">First Name</label>
+                      <input type="text" />
+                      <label htmlFor="#">Last Name</label>
+                      <input type="text" />
+                      <label htmlFor="#">Email</label>
+                      <input type="email" />
+                      <label htmlFor="#">Password</label>
+                      <input type="password" />
+                      <input type="submit" className={styles.btn} />
+                    </form>
                   </div>
-                  <form action="#">
-                    <label htmlFor="#">First Name</label>
-                    <input type="text" />
-                    <label htmlFor="#">Last Name</label>
-                    <input type="text" />
-                    <label htmlFor="#">Email</label>
-                    <input type="email" />
-                    <label htmlFor="#">Password</label>
-                    <input type="password" />
-                    <input type="submit" className={styles.btn} />
-                  </form>
-                </div>
-              </>
-            )}
+                </>
+              )}
+            </div>
           </div>
         </section>
       </main>
