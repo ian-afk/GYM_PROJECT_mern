@@ -253,7 +253,6 @@
 .contact-us {
   padding-top: 20px;
   display: flex;
-  justify-content: center;
   align-items: center;
   margin: 100px 0 150px;
   gap: 20px;
@@ -270,14 +269,37 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 40vw;
+  padding: 14px;
+  /* background-color: #be4f4f; */
+  height: auto;
+}
+
+.contact-us .btn-contactText {
+  align-self: center;
+  padding: 24px;
 }
 
 .contact-us .contactForm {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
+.contact-us .contactText {
+  align-self: center;
+}
+
+.contact-us .btnActive {
+  background-color: #be4f4f;
+}
+
+/* .contact-us .formContainer {
+} */
+
+.contact-us .formContainer form {
+  width: 100%;
+}
 .contact-us div h3 {
   font-size: 26px;
 }

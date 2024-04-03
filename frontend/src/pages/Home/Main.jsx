@@ -137,67 +137,64 @@ export default function Main() {
         <section className={styles['contact-us']}>
           <div className={styles.contactHeader}>
             <h2>Contact Us</h2>
-            <p>
-              Interested? Sign up now! Do you have any question? Send as your
-              inquiries in contact section.
-            </p>
           </div>
           <div className={styles.contactFormContainer}>
-            <button onClick={() => setContact(!contact)}>
-              <span>Contact Us</span>/<span>Signup</span>
-            </button>
+            <div
+              className={`${styles.btn} ${styles['btn-contactText']}`}
+              onClick={() => setContact(!contact)}
+            >
+              <span className={contact && styles.btnActive}>Contact Us</span>/
+              <span className={!contact && styles.btnActive}>Signup</span>
+            </div>
             <div className={styles.contactForm}>
               {contact ? (
-                <>
-                  {' '}
+                <div className={styles.contactText}>
                   <p>Do you have any question? </p>
-                </>
+                </div>
               ) : (
-                <>Join our environment with your own comfort!</>
+                <div className={styles.contactText}>
+                  Join our environment with your own comfort!
+                </div>
               )}
               {contact ? (
-                <>
+                <div className={styles.formContainer}>
                   <div>
-                    <div>
-                      <h3>Contact Us</h3>
-                    </div>
-                    <form action="#">
-                      <label htmlFor="firstName">First Name</label>
-                      <input type="text" id="firstName" />
-                      <label htmlFor="lastName">Last Name</label>
-                      <input type="text" id="lastName" />
-                      <label htmlFor="email">Email</label>
-                      <input type="email" />
-                      <label htmlFor="comment">Comment</label>
-                      <textarea
-                        name="comment"
-                        id="comment"
-                        cols="30"
-                        rows="10"
-                      ></textarea>
-                      <input type="submit" className={styles.btn} />
-                    </form>
+                    <h3>Contact Us</h3>
                   </div>
-                </>
+                  <form action="#">
+                    <label htmlFor="firstName">First Name</label>
+                    <input type="text" id="firstName" />
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" id="lastName" />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" />
+                    <label htmlFor="comment">Comment</label>
+                    <textarea
+                      name="comment"
+                      id="comment"
+                      cols="30"
+                      rows="10"
+                    ></textarea>
+                    <input type="submit" className={styles.btn} />
+                  </form>
+                </div>
               ) : (
-                <>
+                <div>
                   <div>
-                    <div>
-                      <h3>Sigup</h3>
-                    </div>
-                    <form action="#">
-                      <label htmlFor="#">First Name</label>
-                      <input type="text" />
-                      <label htmlFor="#">Last Name</label>
-                      <input type="text" />
-                      <label htmlFor="#">Email</label>
-                      <input type="email" />
-                      <label htmlFor="#">Password</label>
-                      <input type="password" />
-                      <input type="submit" className={styles.btn} />
-                    </form>
+                    <h3>Sigup</h3>
                   </div>
-                </>
+                  <form action="#">
+                    <label htmlFor="#">First Name</label>
+                    <input type="text" />
+                    <label htmlFor="#">Last Name</label>
+                    <input type="text" />
+                    <label htmlFor="#">Email</label>
+                    <input type="email" />
+                    <label htmlFor="#">Password</label>
+                    <input type="password" />
+                    <input type="submit" className={styles.btn} />
+                  </form>
+                </div>
               )}
             </div>
           </div>
