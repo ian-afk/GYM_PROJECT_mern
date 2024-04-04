@@ -143,8 +143,15 @@ export default function Main() {
               className={`${styles.btn} ${styles['btn-contactText']}`}
               onClick={() => setContact(!contact)}
             >
-              <span className={contact && styles.btnActive}>Contact Us</span>/
-              <span className={!contact && styles.btnActive}>Signup</span>
+              <span className={contact && `${styles.btnActive} ${styles.left}`}>
+                Contact Us
+              </span>
+              <span style={{ backgroundColor: '#be4f4f' }}>/</span>
+              <span
+                className={contact ? '' : `${styles.btnActive} ${styles.right}`}
+              >
+                Signup
+              </span>
             </div>
             <div className={styles.contactForm}>
               {contact ? (

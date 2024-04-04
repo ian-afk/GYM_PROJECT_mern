@@ -290,8 +290,25 @@
   align-self: center;
 }
 
-.contact-us .btnActive {
-  background-color: #be4f4f;
+.contact-us .btnActive.right {
+  background: linear-gradient(to left, #fff 50%, #be4f4f 50%) right;
+  transition: 0.5s ease-out;
+  background-size: 200%;
+  background-position: left;
+}
+
+/* .contact-us .btnActive.right:hover {
+  background: linear-gradient(to left, #fff 50%, #be4f4f 50%) right;
+  transition: 0.5s ease-in;
+  background-size: 200%;
+  background-position: left;
+} */
+
+.contact-us .btnActive.left {
+  background: linear-gradient(to right, #fff 50%, #be4f4f 50%) left;
+  transition: 0.5s ease-out;
+  background-size: 200%;
+  background-position: right;
 }
 
 /* .contact-us .formContainer {
