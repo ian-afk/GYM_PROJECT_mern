@@ -137,7 +137,7 @@
 
 .section-features {
   transform: skewY(-7deg);
-  background-color: #be4f4f;
+  background-color: #c74b4b;
   min-height: 600px;
   margin-top: -9rem;
 }
@@ -254,9 +254,11 @@
   padding-top: 20px;
   display: flex;
   align-items: center;
-  margin: 100px 0 150px;
+  margin: 100px 300px 150px;
   gap: 20px;
   flex-direction: column;
+  color: #be4f4f;
+  border: 2px solid black;
 }
 
 .contact-us .contactHeader h2 {
@@ -271,51 +273,81 @@
   flex-direction: column;
   width: 40vw;
   padding: 14px;
-  /* background-color: #be4f4f; */
+  /* background-color: #c74b4b; */
   height: auto;
 }
 
 .contact-us .btn-contactText {
   align-self: center;
-  padding: 24px;
+  margin-bottom: 14px;
+  /* padding: 24px;
+  border-radius: 5px;
+  cursor: pointer; */
 }
 
 .contact-us .contactForm {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  height: 360px;
+  color: #666565;
 }
 
 .contact-us .contactText {
   align-self: center;
 }
 
-.contact-us .btnActive.right {
-  background: linear-gradient(to left, #fff 50%, #be4f4f 50%) right;
-  transition: 0.5s ease-out;
-  background-size: 200%;
-  background-position: left;
+.contact-us .btn-contactText {
+  padding: 14px 0;
+  background: #c74b4b;
+  display: inline-block;
+  border-radius: 12px;
 }
 
-/* .contact-us .btnActive.right:hover {
-  background: linear-gradient(to left, #fff 50%, #be4f4f 50%) right;
-  transition: 0.5s ease-in;
-  background-size: 200%;
-  background-position: left;
-} */
+.contact-us .btn-contactText:hover {
+  cursor: pointer;
+}
 
-.contact-us .btnActive.left {
-  background: linear-gradient(to right, #fff 50%, #be4f4f 50%) left;
+.contact-us .btn-contactText h3 .left,
+.contact-us .btn-contactText h3 .right {
+  background: #fff;
+  margin: 8px;
+  border-radius: 12px;
+  padding: 5px;
+}
+.contact-us .btn-contactText .btnActive.left {
+  background: linear-gradient(-90deg, #c74b4b 50%, #fff 50%);
   transition: 0.5s ease-out;
   background-size: 200%;
   background-position: right;
+  color: #fff;
 }
 
+.contact-us .btn-contactText h3 .right {
+  background-position: right;
+}
+
+.contact-us .btn-contactText .btnActive.right {
+  background: linear-gradient(-450deg, #fff 50%, #c74b4b 50%);
+  transition: 0.5s ease-out;
+  background-size: 200%;
+  background-position: left;
+  color: #c74b4b;
+}
+
+/* .contact-us .btnActive.right {
+  background: linear-gradient(to left, #fff 50%, #c74b4b 50%) right;
+  transition: 0.5s ease-out;
+  background-size: 200%;
+  background-position: left;
+  color: #fff;
+} */
 /* .contact-us .formContainer {
 } */
 
 .contact-us .formContainer form {
   width: 100%;
+  height: auto;
 }
 .contact-us div h3 {
   font-size: 26px;

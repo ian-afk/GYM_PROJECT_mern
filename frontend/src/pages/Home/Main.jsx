@@ -135,23 +135,27 @@ export default function Main() {
           </div>
         </section>
         <section className={styles['contact-us']}>
-          <div className={styles.contactHeader}>
-            <h2>Contact Us</h2>
-          </div>
           <div className={styles.contactFormContainer}>
-            <div
-              className={`${styles.btn} ${styles['btn-contactText']}`}
-              onClick={() => setContact(!contact)}
-            >
-              <span className={contact && `${styles.btnActive} ${styles.left}`}>
-                Contact Us
-              </span>
-              <span style={{ backgroundColor: '#be4f4f' }}>/</span>
-              <span
-                className={contact ? '' : `${styles.btnActive} ${styles.right}`}
-              >
-                Signup
-              </span>
+            <div className={`${styles.btn} ${styles['btn-contactText']}`}>
+              <h3 onClick={() => setContact(!contact)}>
+                <span
+                  className={`${styles.left} ${
+                    contact && `${styles.btnActive}`
+                  }`}
+                >
+                  Contact us
+                </span>
+                <span style={{ backgroundColor: '#be4f4f', color: '#fff' }}>
+                  /
+                </span>
+                <span
+                  className={`${styles.right} ${
+                    contact ? '' : `${styles.btnActive} `
+                  }`}
+                >
+                  Signup
+                </span>
+              </h3>
             </div>
             <div className={styles.contactForm}>
               {contact ? (
