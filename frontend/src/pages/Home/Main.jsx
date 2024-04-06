@@ -164,7 +164,7 @@ export default function Main() {
                 </div>
               ) : (
                 <div className={styles.contactText}>
-                  Join our environment with your own comfort!
+                  Join our environment with <br></br>your own comfort!
                 </div>
               )}
               {contact ? (
