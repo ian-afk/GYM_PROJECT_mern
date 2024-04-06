@@ -190,7 +190,7 @@ export default function Main() {
                   </form>
                 </div>
               ) : (
-                <div>
+                <div className={`${styles.formContainer} ${styles.signup}`}>
                   <div>
                     <h3>Sigup</h3>
                   </div>

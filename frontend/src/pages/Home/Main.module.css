@@ -1,5 +1,6 @@
 .main {
   /* margin: 0px 20px 20px 20px; */
+  background: #f7f7f7;
 }
 
 .section-about {
@@ -258,7 +259,10 @@
   gap: 20px;
   flex-direction: column;
   color: #be4f4f;
-  border: 2px solid black;
+  border-radius: 12px;
+  background-image: url('../../../public/pexels-leon-ardho-1552245.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
 .contact-us .contactHeader h2 {
@@ -271,7 +275,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 40vw;
+  width: 100%;
   padding: 14px;
   /* background-color: #c74b4b; */
   height: auto;
@@ -287,14 +291,15 @@
 
 .contact-us .contactForm {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 60px;
   flex-wrap: wrap;
   height: 360px;
-  color: #666565;
+  color: #dbdbdb;
 }
 
 .contact-us .contactText {
-  align-self: center;
+  margin-top: 120px;
 }
 
 .contact-us .btn-contactText {
@@ -346,17 +351,23 @@
 } */
 
 .contact-us .formContainer form {
-  width: 100%;
   height: auto;
 }
 .contact-us div h3 {
   font-size: 26px;
 }
 
-.contact-us label {
+.contact-us .formContainer form label {
   display: block;
 }
 
+.contact-us .formContainer.signup label {
+  margin: 4px 0 4px;
+}
+
+.contact-us .formContainer.signup .btn {
+  margin-top: 8px;
+}
 .contact-us input,
 .contact-us input:nth-child(2) {
   margin: 0;
