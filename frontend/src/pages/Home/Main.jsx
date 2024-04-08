@@ -89,7 +89,9 @@ export default function Main() {
         </section>
         <section className={styles.vision}>
           <div>
-            <h2>We bring Clients and Trainers together</h2>
+            <h2 className={styles['heading-secondary']}>
+              We bring Clients and Trainers together
+            </h2>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Perspiciatis, labore corrupti necessitatibus suscipit ipsum cumque
@@ -98,7 +100,7 @@ export default function Main() {
             </p>
           </div>
           <div>
-            <h2>
+            <h2 className={styles['heading-secondary']}>
               Learn skills that you can apply in your daily life even when
               you&#39;re not in the gym
             </h2>
