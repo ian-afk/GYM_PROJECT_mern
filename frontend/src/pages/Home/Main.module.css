@@ -305,7 +305,7 @@
   color: #dbdbdb;
 }
 
-@media screen and (max-width: 1175px) {
+@media screen and (max-width: 1230px) {
   .contact-us {
     height: 700px;
     gap: 20px;
