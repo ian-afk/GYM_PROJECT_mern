@@ -305,6 +305,26 @@
   color: #dbdbdb;
 }
 
+@media screen and (max-width: 1175px) {
+  .contact-us {
+    height: 700px;
+    gap: 20px;
+  }
+
+  .contact-us .contactText {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contact-us .formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
 .contact-us .contactText {
   margin-top: 120px;
   text-align: center;
