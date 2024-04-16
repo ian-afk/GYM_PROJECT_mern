@@ -1,3 +1,11 @@
+.authPage {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  background: #929292;
+  justify-content: space-between;
+}
+
 .loginContainer {
   padding: 24px;
   background-color: #929292;
