@@ -3,6 +3,7 @@ import RequestOptions from '../../utils/requestClass';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Login.module.css';
+import Logo from '../../components/Logo';
 export default function Login() {
   const [user, setUser] = useState({
     email: '',
@@ -44,23 +45,26 @@ export default function Login() {
   }
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.loginForm}>
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Login</button>
-      </form>
+      <div>
+        <Logo />
+        <form onSubmit={handleSubmit} className={styles.loginForm}>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </>
   );
 }

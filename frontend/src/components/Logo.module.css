@@ -1,0 +1,8 @@
+.imgHolder {
+  width: 100%;
+  text-align: center;
+}
+.imgHolder img {
+  height: 125px;
+  margin: 0 auto;
+}
