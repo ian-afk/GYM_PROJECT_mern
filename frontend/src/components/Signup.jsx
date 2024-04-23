@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RequestOptions from '../utils/requestClass';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,14 @@ function Signup({ style }) {
   });
 
   const navigate = useNavigate();
-  const { setToken, setIsLoggedIn } = useAuth();
+  const { setToken, setIsLoggedIn, isLoggedIn } = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    if (loggedIn) {
+      window.scrollTo(0, 0);
+    }
+  }, [loggedIn]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -44,7 +51,7 @@ function Signup({ style }) {
         alert(json.message);
         setToken(json.token);
         setIsLoggedIn(true);
-        navigate(`/`);
+        setLoggedIn(true);
       }
     };
 
@@ -57,6 +64,7 @@ function Signup({ style }) {
     });
 
     login();
+    setLoggedIn(false);
   };
   return (
     <>
