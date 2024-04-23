@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import styles from './Main.module.css';
+import Signup from '../../components/signup';
 export default function Main() {
   const [contact, setContact] = useState(true);
+  const [signup, setSignup] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
   return (
     <>
       <main className={styles.main}>
@@ -193,20 +200,7 @@ export default function Main() {
                 </div>
               ) : (
                 <div className={`${styles.formContainer} ${styles.signup}`}>
-                  <div>
-                    <h3>Sigup</h3>
-                  </div>
-                  <form action="#">
-                    <label htmlFor="#">First Name</label>
-                    <input type="text" />
-                    <label htmlFor="#">Last Name</label>
-                    <input type="text" />
-                    <label htmlFor="#">Email</label>
-                    <input type="email" />
-                    <label htmlFor="#">Password</label>
-                    <input type="password" />
-                    <input type="submit" className={styles.btn} />
-                  </form>
+                  <Signup style={styles.btn} />
                 </div>
               )}
             </div>
