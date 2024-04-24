@@ -32,6 +32,7 @@ import EmployeePage from './pages/Employee/EmployeePage';
 import AuthPage from './pages/auth/AuthPage';
 import Login from './pages/auth/Login';
 import { AuthProvider } from './context/AuthContext';
+import SignupPage from './pages/auth/SignupPage';
 
 export default function App() {
   const AppLayout = () => (
@@ -79,6 +80,7 @@ export default function App() {
 
         <Route path="/users" element={<AuthPage />}>
           <Route path="/users/login" element={<Login />}></Route>
+          <Route path="/users/signup" element={<SignupPage />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>

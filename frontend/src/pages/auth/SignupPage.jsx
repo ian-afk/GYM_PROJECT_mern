@@ -1,0 +1,11 @@
+import Signup from '../../components/signup';
+
+function SignupPage() {
+  return (
+    <div>
+      <Signup />
+    </div>
+  );
+}
+
+export default SignupPage;

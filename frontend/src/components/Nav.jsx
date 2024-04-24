@@ -57,7 +57,9 @@ export default function Nav() {
             <li>
               <NavLink to={'/users/login'}>Sign in</NavLink>
             </li>
-            <li className={styles.secondaryButton}>Sign up</li>
+            <li className={styles.secondaryButton}>
+              <NavLink to={'/users/signup'}>Sign up</NavLink>
+            </li>
           </>
         ) : (
           <li>
