@@ -1,0 +1,55 @@
+.clientView h1 {
+  color: #eeeeee;
+  margin-bottom: 24px;
+}
+
+.clientView form label {
+  display: inline-block;
+  font-weight: bold;
+  width: 120px;
+  color: #eeeeee;
+  margin: 7px;
+}
+
+.clientView form input:nth-child(2) {
+  margin: 0;
+}
+
+.clientView form input {
+  margin: 0;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.clientView form input:focus {
+  border: none;
+}
+
+.clientView form .btn-primary,
+.clientView form .btn-secondary {
+  margin: 4px;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+.clientView form .btn-primary:hover,
+.clientView form .btn-secondary:hover {
+  border: 1px solid #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.clientView form .btn-primary:hover {
+  color: #fff;
+  border: 1px solid #71acd3;
+  background-color: #71acd3;
+}
+
+.clientView form .btn-secondary:hover {
+  color: #fff;
+  border: 1px solid #b60202;
+  background-color: #b60202;
+}

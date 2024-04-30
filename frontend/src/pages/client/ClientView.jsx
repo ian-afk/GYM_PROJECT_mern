@@ -5,6 +5,7 @@ import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import styles from './ClientView.module.css';
 
 export default function ClientView() {
   const { token, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -83,26 +84,28 @@ export default function ClientView() {
       {!isLoggedIn ? (
         <NotLoggedIn message={message} />
       ) : (
-        <>
+        <div className={styles.clientView}>
           <h1>Client Details</h1>
 
           {isLoading ? (
             <p>Loading...</p>
           ) : (
             <form onSubmit={handleSubmit}>
-              <label>First Name</label>
+              <label htmlFor="firstName">First Name</label>
               <input
                 type="text"
                 name="firstName"
+                id="firstName"
                 value={client.firstName}
                 onChange={handleChange}
                 disabled={disabled}
               />
               <br />
-              <label>Last Name</label>
+              <label htmlFor="lastName">Last Name</label>
               <input
                 type="text"
                 name="lastName"
+                id="lastName"
                 value={client.lastName}
                 onChange={handleChange}
                 disabled={disabled}
@@ -147,11 +150,19 @@ export default function ClientView() {
                 disabled={disabled}
               />
               {!disabled && <button type="submit">Save</button>}
-              <button type="button" onClick={() => handleEdit()}>
+              <button
+                className={styles['btn-primary']}
+                type="button"
+                onClick={() => handleEdit()}
+              >
                 {disabled ? 'Edit' : 'Cancel'}
               </button>
               {disabled && (
-                <button type="button" onClick={() => handleDelete(client._id)}>
+                <button
+                  className={styles['btn-secondary']}
+                  type="button"
+                  onClick={() => handleDelete(client._id)}
+                >
                   Delete
                 </button>
               )}
@@ -160,7 +171,7 @@ export default function ClientView() {
               </LinkButtonComponent>
             </form>
           )}
-        </>
+        </div>
       )}
     </>
   );
