@@ -1,0 +1,55 @@
+.employeeView h1 {
+  color: #eeeeee;
+  margin-bottom: 24px;
+}
+
+.employeeView form label {
+  display: inline-block;
+  font-weight: bold;
+  width: 120px;
+  color: #eeeeee;
+  margin: 7px;
+}
+
+.employeeView form input:nth-child(2) {
+  margin: 0;
+}
+
+.employeeView form input {
+  margin: 0;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.employeeView form input:focus {
+  border: none;
+}
+
+.employeeView form .btn-primary,
+.employeeView form .btn-secondary {
+  margin: 4px;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+.employeeView form .btn-primary:hover,
+.employeeView form .btn-secondary:hover {
+  border: 1px solid #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.employeeView form .btn-primary:hover {
+  color: #fff;
+  border: 1px solid #71acd3;
+  background-color: #71acd3;
+}
+
+.employeeView form .btn-secondary:hover {
+  color: #fff;
+  border: 1px solid #b60202;
+  background-color: #b60202;
+}

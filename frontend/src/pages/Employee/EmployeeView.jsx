@@ -5,6 +5,7 @@ import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import styles from './EmployeeView.module.css';
 
 export default function EmployeeView() {
   const [disabled, setDisabled] = useState(true);
@@ -95,7 +96,7 @@ export default function EmployeeView() {
       {!isLoggedIn ? (
         <NotLoggedIn message={message} />
       ) : (
-        <>
+        <div className={styles.employeeView}>
           <h1>Employee Details</h1>
           {isLoading ? (
             <h3>Loading...</h3>
@@ -168,11 +169,16 @@ export default function EmployeeView() {
 
               {!disabled && <button type="submit">Save</button>}
               <>
-                <button type="button" onClick={handleEdit}>
+                <button
+                  className={styles['btn-primary']}
+                  type="button"
+                  onClick={handleEdit}
+                >
                   {disabled ? 'Edit' : 'Cancel'}
                 </button>
                 {disabled && (
                   <button
+                    className={styles['btn-secondary']}
                     type="button"
                     onClick={() => handleDelete(employee._id)}
                   >
@@ -185,7 +191,7 @@ export default function EmployeeView() {
               </>
             </form>
           )}
-        </>
+        </div>
       )}
     </>
   );
