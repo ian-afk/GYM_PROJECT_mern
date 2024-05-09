@@ -5,6 +5,7 @@ import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import styles from './TrainerView.module.css';
 
 export default function TrainerView() {
   const { token, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -72,7 +73,7 @@ export default function TrainerView() {
       {!isLoggedIn ? (
         <NotLoggedIn message={message} />
       ) : (
-        <>
+        <div className={styles.trainerView}>
           <h1>Trainer Details</h1>
           {isLoading ? (
             <p>Loading...</p>
@@ -99,11 +100,19 @@ export default function TrainerView() {
                 disabled={isDisabled}
               />
               {!isDisabled && <button type="submit">Save</button>}
-              <button type="button" onClick={handleEdit}>
+              <button
+                className={styles['btn-primary']}
+                type="button"
+                onClick={handleEdit}
+              >
                 {isDisabled ? 'Edit' : 'Cancel'}
               </button>
               {isDisabled && (
-                <button type="button" onClick={handleDelete}>
+                <button
+                  className={styles['btn-secondary']}
+                  type="button"
+                  onClick={handleDelete}
+                >
                   Delete
                 </button>
               )}
@@ -112,7 +121,7 @@ export default function TrainerView() {
               </LinkButtonComponent>
             </form>
           )}
-        </>
+        </div>
       )}
     </>
   );
