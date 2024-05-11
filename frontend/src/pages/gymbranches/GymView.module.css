@@ -1,0 +1,55 @@
+.gymbranchView h1 {
+  color: #eeeeee;
+  margin-bottom: 24px;
+}
+
+.gymbranchView form label {
+  display: inline-block;
+  font-weight: bold;
+  width: 120px;
+  color: #eeeeee;
+  margin: 7px;
+}
+
+.gymbranchView form input:nth-child(2) {
+  margin: 0;
+}
+
+.gymbranchView form input {
+  margin: 0;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.gymbranchView form input:focus {
+  border: none;
+}
+
+.gymbranchView form .btn-primary,
+.gymbranchView form .btn-secondary {
+  margin: 4px;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+.gymbranchView form .btn-primary:hover,
+.gymbranchView form .btn-secondary:hover {
+  border: 1px solid #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.gymbranchView form .btn-primary:hover {
+  color: #fff;
+  border: 1px solid #71acd3;
+  background-color: #71acd3;
+}
+
+.gymbranchView form .btn-secondary:hover {
+  color: #fff;
+  border: 1px solid #b60202;
+  background-color: #b60202;
+}
