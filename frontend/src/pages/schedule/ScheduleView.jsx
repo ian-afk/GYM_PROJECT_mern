@@ -5,6 +5,7 @@ import useAPIView from '../../hooks/useAPIView';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import styles from './ScheduleView.module.css';
 
 export default function ScheduleView() {
   const { token, isLoggedIn, setIsLoggedIn } = useAuth();
@@ -78,8 +79,8 @@ export default function ScheduleView() {
       {!isLoggedIn ? (
         <NotLoggedIn message={message} />
       ) : (
-        <>
-          <h2>Schedule Details</h2>
+        <div className={styles.scheduleView}>
+          <h1>Schedule Details</h1>
           {isLoading ? (
             <h3>Loading...</h3>
           ) : (
@@ -122,11 +123,19 @@ export default function ScheduleView() {
           <option value={schedule.trainer}>{schedule.trainer}</option>
         </select> */}
                 {!isDisabled && <button type="submit">Save</button>}
-                <button type="button" onClick={() => handleEdit()}>
+                <button
+                  className={styles['btn-primary']}
+                  type="button"
+                  onClick={() => handleEdit()}
+                >
                   {isDisabled ? 'Edit' : 'Cancel'}
                 </button>
                 {isDisabled && (
-                  <button type="button" onClick={handleDelete}>
+                  <button
+                    className={styles['btn-secondary']}
+                    type="button"
+                    onClick={handleDelete}
+                  >
                     Delete
                   </button>
                 )}
@@ -149,7 +158,7 @@ export default function ScheduleView() {
               </table>
             </>
           )}
-        </>
+        </div>
       )}
     </>
   );

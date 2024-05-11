@@ -1,0 +1,55 @@
+.scheduleView h1 {
+  color: #eeeeee;
+  margin-bottom: 24px;
+}
+
+.scheduleView form label {
+  display: inline-block;
+  font-weight: bold;
+  width: 120px;
+  color: #eeeeee;
+  margin: 7px;
+}
+
+.scheduleView form input:nth-child(2) {
+  margin: 0;
+}
+
+.scheduleView form input {
+  margin: 0;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.scheduleView form input:focus {
+  border: none;
+}
+
+.scheduleView form .btn-primary,
+.scheduleView form .btn-secondary {
+  margin: 4px;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+.scheduleView form .btn-primary:hover,
+.scheduleView form .btn-secondary:hover {
+  border: 1px solid #ffffff;
+  color: #000000;
+  cursor: pointer;
+}
+
+.scheduleView form .btn-primary:hover {
+  color: #fff;
+  border: 1px solid #71acd3;
+  background-color: #71acd3;
+}
+
+.scheduleView form .btn-secondary:hover {
+  color: #fff;
+  border: 1px solid #b60202;
+  background-color: #b60202;
+}
