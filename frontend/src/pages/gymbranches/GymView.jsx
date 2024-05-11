@@ -5,6 +5,7 @@ import LinkButtonComponent from '../../components/LinkButtonComponent';
 import RequestOptions from '../../utils/requestClass';
 import { useAuth } from '../../context/AuthContext';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import styles from './GymView.module.css';
 
 export default function GymView() {
   const [disabled, setDisabled] = useState(true);
@@ -86,7 +87,7 @@ export default function GymView() {
       {!isLoggedIn ? (
         <NotLoggedIn message={message} />
       ) : (
-        <>
+        <div className={styles.gymbranchView}>
           <h1>Gym Details</h1>
           {isLoading ? (
             <h3>Loading...</h3>
@@ -109,12 +110,13 @@ export default function GymView() {
               />
               <br />
               <label>Gym Manager</label>
-              {/* <select>
-            <option value={gymbranches.employees[]}></option>
-            <option value=''></option>
-            <option value=''></option>
-            <option value=''></option>
-          </select> */}
+              <select>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+              <br />
               <label>Gym Level</label>
               <input
                 type="text"
@@ -123,7 +125,7 @@ export default function GymView() {
                 onChange={handleChange}
                 disabled={disabled}
               />
-              <p>Location :</p>
+              <br />
               <label>Address</label>
               <input
                 type="text"
@@ -134,11 +136,16 @@ export default function GymView() {
               />
               <br />
               {!disabled && <button type="submit">Save</button>}
-              <button type="button" onClick={handleEdit}>
+              <button
+                className={styles['btn-primary']}
+                type="button"
+                onClick={handleEdit}
+              >
                 {disabled ? 'Edit' : 'Cancel'}
               </button>
               {disabled && (
                 <button
+                  className={styles['btn-secondary']}
                   type="button"
                   onClick={() => handleDelete(gymbranches._id)}
                 >
@@ -150,7 +157,7 @@ export default function GymView() {
               </LinkButtonComponent>
             </form>
           )}
-        </>
+        </div>
       )}
     </>
   );
