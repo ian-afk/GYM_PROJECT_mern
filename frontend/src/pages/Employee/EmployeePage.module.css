@@ -1,4 +1,13 @@
+.empPageContainer {
+  height: 100vh;
+  background-color: #728488;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .empContainer {
   padding: 24px;
-  background-color: #929292;
+  /* height: 100vh; */
 }
