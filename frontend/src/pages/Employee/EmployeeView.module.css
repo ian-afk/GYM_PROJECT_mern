@@ -34,22 +34,47 @@
   background-color: transparent;
   color: #eeeeee;
 }
+.employeeView form .btn-primary,
+.employeeView form .btn-secondary {
+  margin-top: 20px;
+  width: 70px;
+}
+.employeeView form .btn-primary {
+  border: 2px solid #71acd3;
+  color: #71acd3;
+}
+
+.employeeView form .btn-secondary {
+  border: 2px solid #b60202;
+  color: #b60202;
+}
+
+.employeeView form .btn-back {
+  margin-top: 8px;
+  display: block;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.employeeView form .btn-backlink {
+  color: #fff;
+}
 
 .employeeView form .btn-primary:hover,
 .employeeView form .btn-secondary:hover {
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
   color: #000000;
   cursor: pointer;
 }
 
 .employeeView form .btn-primary:hover {
   color: #fff;
-  border: 1px solid #71acd3;
+  border: 2px solid #71acd3;
   background-color: #71acd3;
 }
 
 .employeeView form .btn-secondary:hover {
   color: #fff;
-  border: 1px solid #b60202;
+  border: 2px solid #b60202;
   background-color: #b60202;
 }

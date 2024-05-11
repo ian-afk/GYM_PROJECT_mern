@@ -185,9 +185,14 @@ export default function EmployeeView() {
                     Delete
                   </button>
                 )}
-                <LinkButtonComponent path={'/employees'}>
-                  Back to list
-                </LinkButtonComponent>
+                <div className={styles['btn-back']}>
+                  <LinkButtonComponent
+                    path={'/employees'}
+                    classNam={styles['btn-backlink']}
+                  >
+                    &larr; Back to list
+                  </LinkButtonComponent>
+                </div>
               </>
             </form>
           )}
